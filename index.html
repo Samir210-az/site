@@ -858,7 +858,7 @@
     <li><a href="#haqqimizda">Haqqımızda</a></li>
     <li><a href="#xidmetler">Xidmətlər</a></li>
     <li><a href="#emekdaslar">Əməkdaşlar</a></li>
-    <li><a href="#xeberler">Xəbərlər</a></li>
+    <li><a href="#xeberler" class="nav-news-link" id="nav-news-link">Xəbərlər<span class="news-badge" id="news-badge"></span></a></li>
     <li><a href="#elaqe">Əlaqə</a></li>
   </ul>
   <button class="burger" id="burger" aria-label="Menyu">
@@ -872,7 +872,7 @@
   <a href="#haqqimizda" onclick="closeMobile()">Haqqımızda</a>
   <a href="#xidmetler" onclick="closeMobile()">Xidmətlər</a>
   <a href="#emekdaslar" onclick="closeMobile()">Əməkdaşlar</a>
-  <a href="#xeberler" onclick="closeMobile()">Xəbərlər</a>
+  <a href="#xeberler" onclick="closeMobile()" style="position:relative;" id="mob-news-link">Xəbərlər<span class="news-badge" id="mob-news-badge" style="top:-4px;right:-4px;"></span></a>
   <a href="#elaqe" onclick="closeMobile()">Əlaqə</a>
 </div>
 
@@ -1461,6 +1461,10 @@ loadData();
 renderNews();
 renderTeam();
 document.getElementById('about-text').textContent = data.about;
+updateNewsBadge();
+// Start observing news section for auto-mark-seen
+const newsSect = document.getElementById('xeberler');
+if(newsSect) newsObserver.observe(newsSect);
 </script>
 </body>
 </html>
