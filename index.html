@@ -24,7 +24,8 @@
   }
 
   * { margin:0; padding:0; box-sizing:border-box; }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; overflow-x: hidden; }
+  body { overflow-x: hidden; }
 
   body {
     font-family: 'Nunito', sans-serif;
@@ -143,6 +144,7 @@
     display: flex; align-items: center;
     padding: 90px 5% 60px;
     overflow: hidden;
+    max-width: 100vw;
   }
 
   .hero-office-bg {
@@ -170,10 +172,11 @@
     border-radius: 50%;
     opacity: 0.12;
     animation: floatBubble linear infinite;
+    pointer-events: none;
   }
-  .bubble:nth-child(1) { width:180px;height:180px;background:var(--gold);top:10%;right:12%;animation-duration:8s; }
-  .bubble:nth-child(2) { width:120px;height:120px;background:var(--red);top:60%;right:25%;animation-duration:11s;animation-delay:-3s; }
-  .bubble:nth-child(3) { width:80px;height:80px;background:var(--gold-light);top:30%;right:5%;animation-duration:9s;animation-delay:-5s; }
+  .bubble:nth-child(1) { width:160px;height:160px;background:var(--gold);top:10%;right:8%;animation-duration:8s; }
+  .bubble:nth-child(2) { width:100px;height:100px;background:var(--red);top:60%;right:20%;animation-duration:11s;animation-delay:-3s; }
+  .bubble:nth-child(3) { width:70px;height:70px;background:var(--gold-light);top:30%;right:2%;animation-duration:9s;animation-delay:-5s; }
   @keyframes floatBubble {
     0%,100% { transform: translateY(0) rotate(0deg); }
     50% { transform: translateY(-20px) rotate(10deg); }
@@ -362,10 +365,11 @@
   @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
   .about-deco-ring {
     position: absolute;
-    width: 320px; height: 320px;
+    width: 300px; height: 300px;
     border: 2px dashed rgba(201,168,76,0.2);
     border-radius: 50%;
     animation: rotateSlow 25s linear infinite;
+    max-width: 100%;
   }
   @keyframes rotateSlow { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
 
@@ -740,6 +744,9 @@
     .contact-grid { grid-template-columns:1fr; gap:36px; }
     .admin-form .form-row { grid-template-columns:1fr; }
   }
+  @media(min-width:481px) {
+    .nav-title-text { display:block !important; }
+  }
   @media(max-width:680px) {
     .nav-links { display:none; }
     .burger { display:flex; }
@@ -750,6 +757,87 @@
     .admin-tabs { flex-wrap:wrap; border-radius:16px; }
     .admin-tab { font-size:12px; padding:9px 16px; }
   }
+
+  /* ===== SERVICE POPUP ===== */
+  .service-card { cursor: pointer; }
+  
+  #service-popup-overlay {
+    display: none; position: fixed; inset: 0; z-index: 8000;
+    background: rgba(44,24,16,0.6);
+    backdrop-filter: blur(8px);
+    align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  #service-popup-overlay.open { display: flex; }
+
+  .service-popup {
+    background: white;
+    border-radius: 24px;
+    padding: 0;
+    width: 100%; max-width: 520px;
+    box-shadow: 0 24px 60px rgba(44,24,16,0.2);
+    border: 1.5px solid rgba(201,168,76,0.2);
+    overflow: hidden;
+    animation: popupIn 0.3s cubic-bezier(0.34,1.56,0.64,1) both;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  @keyframes popupIn {
+    from { opacity:0; transform:scale(0.85) translateY(20px); }
+    to { opacity:1; transform:scale(1) translateY(0); }
+  }
+  .popup-header {
+    background: linear-gradient(135deg, var(--warm2), var(--warm3));
+    padding: 32px 32px 24px;
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+    position: relative;
+  }
+  .popup-icon { font-size: 52px; display: block; margin-bottom: 12px; }
+  .popup-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px; color: var(--deep); font-weight: 700;
+  }
+  .popup-close {
+    position: absolute; top: 16px; right: 16px;
+    width: 36px; height: 36px; border-radius: 50%;
+    background: rgba(44,24,16,0.08);
+    border: none; cursor: pointer;
+    font-size: 18px; color: var(--text2);
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .popup-close:hover { background: rgba(44,24,16,0.15); transform: scale(1.1); }
+  .popup-body { padding: 28px 32px 32px; }
+  .popup-body p {
+    font-size: 15px; color: var(--text2);
+    line-height: 1.8; font-weight: 500; margin-bottom: 20px;
+  }
+  .popup-features {
+    list-style: none;
+    display: flex; flex-direction: column; gap: 10px;
+    margin-bottom: 24px;
+  }
+  .popup-features li {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 14px; color: var(--text2); font-weight: 600; line-height: 1.5;
+  }
+  .popup-features li::before {
+    content: '✦';
+    color: var(--gold-dark); font-size: 11px;
+    margin-top: 3px; flex-shrink: 0;
+  }
+  .popup-cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
+    color: white; padding: 13px 26px; border-radius: 50px;
+    text-decoration: none; font-weight: 800; font-size: 13px;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    transition: all 0.3s;
+    box-shadow: 0 4px 16px rgba(201,168,76,0.35);
+  }
+  .popup-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,168,76,0.45); }
+
 </style>
 </head>
 <body>
@@ -763,7 +851,7 @@
     <img src="logo.png" alt="AN Logo" id="nav-logo-img"
          onerror="this.style.display='none';document.getElementById('nav-logo-fb').style.display='flex'">
     <div class="nav-logo-text" id="nav-logo-fb">AN</div>
-    <span style="font-family:'Playfair Display',serif;font-size:12px;font-weight:700;color:var(--gold-dark);max-width:150px;line-height:1.3;">AN Psixoloji Dəstək və Reabilitasiya Mərkəzi</span>
+    <span style="font-family:'Playfair Display',serif;font-size:11px;font-weight:700;color:var(--gold-dark);max-width:130px;line-height:1.3;display:none;" class="nav-title-text">AN Psixoloji Dəstək</span>
   </a>
   <ul class="nav-links">
     <li><a href="#hero">Ana Səhifə</a></li>
@@ -852,12 +940,12 @@
     <div class="gold-line" style="margin:14px auto 0;"></div>
   </div>
   <div class="services-grid" style="margin-top:36px;">
-    <div class="service-card reveal"><span class="service-icon">🧠</span><h3>Psixoloq</h3><p>Uşaqların emosional, davranış və inkişaf problemlərinin diaqnostikası və müalicəsi.</p></div>
-    <div class="service-card reveal"><span class="service-icon">🗣️</span><h3>Loqoped</h3><p>Nitq, dil və ünsiyyət pozuntularının korreksiyası üzrə ixtisaslaşmış terapiya.</p></div>
-    <div class="service-card reveal"><span class="service-icon">🧩</span><h3>Psixo-pedaqoq</h3><p>Xüsusi tədris metodları ilə uşağın öyrənmə potensialının açılması.</p></div>
-    <div class="service-card reveal"><span class="service-icon">👂</span><h3>Duyu Bütünləmə</h3><p>Sensor emal pozuntularının müalicəsi, hiss sisteminin harmonik inkişafı.</p></div>
-    <div class="service-card reveal"><span class="service-icon">🦋</span><h3>Erqoterapiya</h3><p>Gündəlik həyat bacarıqlarının inkişafı, əl-göz koordinasiyası terapiyası.</p></div>
-    <div class="service-card reveal" style="border-color:rgba(201,168,76,0.3);background:linear-gradient(135deg,#FFFBF0,white);"><span class="service-icon">🌟</span><h3>Erkən İnkişaf Qrupu</h3><p>2–6 yaşlı uşaqlar üçün mütəxəssislər tərəfindən aparılan inkişaf proqramları.</p></div>
+    <div class="service-card reveal" onclick="openService(0)"><span class="service-icon">🧠</span><h3>Psixoloq</h3><p>Uşaqların emosional, davranış və inkişaf problemlərinin diaqnostikası və müalicəsi.</p></div>
+    <div class="service-card reveal" onclick="openService(1)"><span class="service-icon">🗣️</span><h3>Loqoped</h3><p>Nitq, dil və ünsiyyət pozuntularının korreksiyası üzrə ixtisaslaşmış terapiya.</p></div>
+    <div class="service-card reveal" onclick="openService(2)"><span class="service-icon">🧩</span><h3>Psixo-pedaqoq</h3><p>Xüsusi tədris metodları ilə uşağın öyrənmə potensialının açılması.</p></div>
+    <div class="service-card reveal" onclick="openService(3)"><span class="service-icon">👂</span><h3>Duyu Bütünləmə</h3><p>Sensor emal pozuntularının müalicəsi, hiss sisteminin harmonik inkişafı.</p></div>
+    <div class="service-card reveal" onclick="openService(4)"><span class="service-icon">🦋</span><h3>Erqoterapiya</h3><p>Gündəlik həyat bacarıqlarının inkişafı, əl-göz koordinasiyası terapiyası.</p></div>
+    <div class="service-card reveal" onclick="openService(5)" style="border-color:rgba(201,168,76,0.3);background:linear-gradient(135deg,#FFFBF0,white);"><span class="service-icon">🌟</span><h3>Erkən İnkişaf Qrupu</h3><p>2–6 yaşlı uşaqlar üçün mütəxəssislər tərəfindən aparılan inkişaf proqramları.</p></div>
   </div>
 </section>
 
@@ -926,6 +1014,23 @@
     <span class="footer-credit">by <a href="https://instagram.com/s_akhundoff" target="_blank">@s_akhundoff</a></span>
   </div>
 </footer>
+
+
+<!-- SERVICE POPUP -->
+<div id="service-popup-overlay" onclick="closePopup(event)">
+  <div class="service-popup" id="service-popup">
+    <div class="popup-header">
+      <button class="popup-close" onclick="closePopupDirect()">✕</button>
+      <span class="popup-icon" id="popup-icon"></span>
+      <h2 id="popup-title"></h2>
+    </div>
+    <div class="popup-body">
+      <p id="popup-desc"></p>
+      <ul class="popup-features" id="popup-features"></ul>
+      <a href="#elaqe" class="popup-cta" onclick="closePopupDirect()">📞 Əlaqə Saxlayın</a>
+    </div>
+  </div>
+</div>
 
 <!-- ADMIN LOGIN -->
 <div id="admin-overlay">
@@ -1248,6 +1353,108 @@ const revealObs = new IntersectionObserver(entries=>{
   entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
 },{threshold:0.1});
 document.querySelectorAll('.reveal').forEach(el=>revealObs.observe(el));
+
+
+// ===== SERVICE POPUP DATA =====
+const services = [
+  {
+    icon: '🧠',
+    title: 'Psixoloq',
+    desc: 'Psixoloqlarımız uşaqların emosional, davranış və inkişaf problemlərini müasir metodlarla qiymətləndirir və müalicə edir. Hər uşaq üçün fərdi terapiya planı hazırlanır.',
+    features: [
+      'Davranış problemlərinin qiymətləndirilməsi və korreksiyası',
+      'Narahatlıq, depressiya və fobiyaların müalicəsi',
+      'Autizm spektr pozuntusu (ASD) üzrə dəstək',
+      'DEHB (diqqət çatışmazlığı) terapiyası',
+      'Valideyn-uşaq münasibətlərinin inkişafı',
+      'Fərdi və qrup terapiya seansları'
+    ]
+  },
+  {
+    icon: '🗣️',
+    title: 'Loqoped',
+    desc: 'Loqopedlərimiz uşaqlarda nitq, dil və ünsiyyət pozuntularını erkən mərhələdə aşkarlayır və ixtisaslaşmış terapiya ilə düzəldir. Hər uşağın nitq inkişafı izlənilir.',
+    features: [
+      'Gecikmiş nitq inkişafının korreksiyası',
+      'Səs tələffüzü pozuntularının müalicəsi',
+      'Kəkələmə terapiyası',
+      'Dil anlama və ifadəetmə bacarıqlarının inkişafı',
+      'Udma pozuntularının müalicəsi (dispepsiya)',
+      'AAC (alternativ ünsiyyət) sistemlərinin tətbiqi'
+    ]
+  },
+  {
+    icon: '🧩',
+    title: 'Psixo-pedaqoq',
+    desc: 'Psixo-pedaqoqlarımız xüsusi ehtiyaclı uşaqların öyrənmə potensialını açmaq üçün fərdi tədris metodları hazırlayır və tətbiq edir.',
+    features: [
+      'Öyrənmə çətinliklərinin diaqnostikası',
+      'Fərdi tədris proqramlarının (IEP) hazırlanması',
+      'Oxu və yazı bacarıqlarının inkişafı',
+      'Disleksiya, diskalküliya dəstəyi',
+      'Məktəb hazırlığı proqramları',
+      'Müəllim və valideynlərə metodiki dəstək'
+    ]
+  },
+  {
+    icon: '👂',
+    title: 'Duyu Bütünləmə',
+    desc: 'Duyu bütünləmə terapiyası sensor emal pozuntuları olan uşaqlara hiss sistemlərini harmonik şəkildə inkişaf etdirməyə kömək edir.',
+    features: [
+      'Sensor emal pozuntularının qiymətləndirilməsi',
+      'Toxunma, hərəkət, tarazlıq hisslərinin inkişafı',
+      'Sensor həssaslığının normallaşdırılması',
+      'Gündəlik həyata uyğunlaşmanın artırılması',
+      'Xüsusi sensor otaqda terapiya seansları',
+      'Ev proqramlarının hazırlanması'
+    ]
+  },
+  {
+    icon: '🦋',
+    title: 'Erqoterapiya',
+    desc: 'Erqoterapevtlərimiz uşaqların gündəlik həyat bacarıqlarını inkişaf etdirməsinə, müstəqilliyini artırmasına kömək edir.',
+    features: [
+      'Xırda motor bacarıqlarının inkişafı',
+      'Əl-göz koordinasiyasının gücləndirilməsi',
+      'Özünə qulluq bacarıqlarının öyrədilməsi',
+      'Məktəb bacarıqları (yazı tutmaq, kəsmək)',
+      'Oyun vasitəsilə terapiya',
+      'Adaptiv avadanlıq və yardımçı cihazların tətbiqi'
+    ]
+  },
+  {
+    icon: '🌟',
+    title: 'Erkən İnkişaf Qrupu',
+    desc: '2–6 yaşlı uşaqlar üçün mütəxəssislər tərəfindən aparılan erkən inkişaf proqramları uşağın bütün sahələrdə optimal inkişafını təmin edir.',
+    features: [
+      '2–6 yaş arası uşaqlar üçün xüsusi proqram',
+      'Nitq, idrak, sosial-emosional inkişaf',
+      'Kiçik qrup formatında (3–5 uşaq)',
+      'Həftəlik proqres izlənməsi',
+      'Valideynlərə ev tapşırıqları və tövsiyələr',
+      'Mütəxəssislərarası komanda yanaşması'
+    ]
+  }
+];
+
+function openService(idx) {
+  const s = services[idx];
+  document.getElementById('popup-icon').textContent = s.icon;
+  document.getElementById('popup-title').textContent = s.title;
+  document.getElementById('popup-desc').textContent = s.desc;
+  document.getElementById('popup-features').innerHTML = s.features.map(f=>`<li>${f}</li>`).join('');
+  document.getElementById('service-popup-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closePopup(e) {
+  if (e.target === document.getElementById('service-popup-overlay')) closePopupDirect();
+}
+function closePopupDirect() {
+  document.getElementById('service-popup-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+// Close popup on Escape
+document.addEventListener('keydown', e => { if(e.key==='Escape') closePopupDirect(); });
 
 // ===== INIT =====
 loadData();
