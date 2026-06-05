@@ -24,7 +24,7 @@
   }
 
   * { margin:0; padding:0; box-sizing:border-box; }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; overflow-x: hidden; }
 
   body {
     font-family: 'Nunito', sans-serif;
@@ -529,15 +529,8 @@
     transform: translateY(-4px);
     box-shadow: 0 14px 36px rgba(44,24,16,0.1);
   }
-  .news-media { width:100%; height:200px; object-fit:cover; display:block; }
-  .news-media-placeholder {
-    width:100%; height:200px;
-    background: linear-gradient(135deg, var(--warm2), var(--warm3));
-    display:flex; align-items:center; justify-content:center;
-    font-size: 48px;
-  }
-  .news-video-wrap { position:relative; width:100%; height:200px; overflow:hidden; }
-  .news-video-wrap iframe { width:100%; height:100%; border:none; }
+  /* news-media: overridden below */
+  /* news-media-placeholder & video: overridden below */
   .news-body { padding: 22px; }
   .news-date { font-size:11px; color:var(--gold-dark); font-weight:800; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:8px; }
   .news-card h3 { font-family:'Playfair Display',serif; font-size:18px; color:var(--deep); margin-bottom:8px; line-height:1.3; }
@@ -767,10 +760,10 @@
   @keyframes badgePop { from{transform:scale(0);opacity:0} to{transform:scale(1);opacity:1} }
 
   /* News image 16:9 */
-  .news-media { width:100%; aspect-ratio:16/9; object-fit:cover; display:block; }
-  .news-media-placeholder { width:100%; aspect-ratio:16/9; background:linear-gradient(135deg,var(--warm2),var(--warm3)); display:flex; align-items:center; justify-content:center; font-size:48px; }
-  .news-video-wrap { position:relative; width:100%; aspect-ratio:16/9; overflow:hidden; }
-  .news-video-wrap iframe { width:100%; height:100%; border:none; position:absolute; top:0; left:0; }
+  .news-media { width:100%; height:220px; object-fit:cover; display:block; }
+  .news-media-placeholder { width:100%; height:220px; background:linear-gradient(135deg,var(--warm2),var(--warm3)); display:flex; align-items:center; justify-content:center; font-size:48px; }
+  .news-video-wrap { position:relative; width:100%; height:220px; overflow:hidden; }
+  .news-video-wrap iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:none; }
 
   /* Team avatar photo support */
   .team-avatar { overflow: hidden; }
@@ -819,6 +812,64 @@
   /* Admin list actions */
   .list-actions { display:flex; gap:8px; flex-shrink:0; }
 
+
+  /* SERVICE POPUP */
+  #svc-overlay {
+    display: none; position: fixed; inset: 0; z-index: 8000;
+    background: rgba(44,24,16,0.65); backdrop-filter: blur(8px);
+    align-items: center; justify-content: center; padding: 20px;
+  }
+  #svc-overlay.open { display: flex; }
+  .svc-popup {
+    background: white; border-radius: 24px; width: 100%; max-width: 520px;
+    box-shadow: 0 24px 60px rgba(44,24,16,0.25);
+    border: 1.5px solid rgba(201,168,76,0.2); overflow: hidden;
+    animation: svcIn 0.3s cubic-bezier(0.34,1.56,0.64,1) both;
+    max-height: 90vh; overflow-y: auto;
+  }
+  @keyframes svcIn { from{opacity:0;transform:scale(0.85) translateY(20px)} to{opacity:1;transform:scale(1) translateY(0)} }
+  .svc-head {
+    background: linear-gradient(135deg, var(--warm2), var(--warm3));
+    padding: 30px 32px 22px; border-bottom: 1px solid rgba(201,168,76,0.15); position: relative;
+  }
+  .svc-icon { font-size: 52px; display: block; margin-bottom: 12px; }
+  .svc-head h2 { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--deep); font-weight: 700; }
+  .svc-close {
+    position: absolute; top: 14px; right: 14px; width: 36px; height: 36px;
+    border-radius: 50%; background: rgba(44,24,16,0.08); border: none; cursor: pointer;
+    font-size: 18px; color: var(--text2); display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s; -webkit-tap-highlight-color: transparent;
+  }
+  .svc-close:hover { background: rgba(44,24,16,0.15); transform: scale(1.1); }
+  .svc-body { padding: 26px 32px 30px; }
+  .svc-body p { font-size: 15px; color: var(--text2); line-height: 1.8; font-weight: 500; margin-bottom: 18px; }
+  .svc-feats { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 22px; }
+  .svc-feats li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--text2); font-weight: 600; line-height: 1.5; }
+  .svc-feats li::before { content: '✦'; color: var(--gold-dark); font-size: 11px; margin-top: 3px; flex-shrink: 0; }
+  .svc-cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
+    color: white; padding: 13px 26px; border-radius: 50px; text-decoration: none;
+    font-weight: 800; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase;
+    transition: all 0.3s; box-shadow: 0 4px 16px rgba(201,168,76,0.35);
+  }
+  .svc-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,168,76,0.45); }
+
+
+  /* News badge — fixed header position */
+  .news-badge-fixed {
+    display: none;
+    background: #e74c3c; color: #fff;
+    font-size: 10px; font-weight: 900;
+    min-width: 18px; height: 18px; border-radius: 9px;
+    align-items: center; justify-content: center;
+    padding: 0 5px; line-height: 1;
+    animation: badgePop2 0.3s cubic-bezier(0.34,1.56,0.64,1);
+    vertical-align: middle; margin-left: 4px;
+  }
+  .news-badge-fixed.show { display: inline-flex; }
+  @keyframes badgePop2 { from{transform:scale(0);opacity:0} to{transform:scale(1);opacity:1} }
+
 </style>
 </head>
 <body>
@@ -839,7 +890,7 @@
     <li><a href="#haqqimizda">Haqqımızda</a></li>
     <li><a href="#xidmetler">Xidmətlər</a></li>
     <li><a href="#emekdaslar">Əməkdaşlar</a></li>
-    <li class="nav-news-wrap"><a href="#xeberler" id="nav-xeber-link">Xəbərlər<span class="news-badge" id="news-badge"></span></a></li>
+    <li><a href="#xeberler" id="nav-xeber-link">Xəbərlər <span class="news-badge-fixed" id="news-badge"></span></a></li>
     <li><a href="#elaqe">Əlaqə</a></li>
   </ul>
   <button class="burger" id="burger" aria-label="Menyu">
@@ -853,7 +904,7 @@
   <a href="#haqqimizda" onclick="closeMobile()">Haqqımızda</a>
   <a href="#xidmetler" onclick="closeMobile()">Xidmətlər</a>
   <a href="#emekdaslar" onclick="closeMobile()">Əməkdaşlar</a>
-  <a href="#xeberler" onclick="closeMobile();markSeen()" style="position:relative;">Xəbərlər<span class="news-badge" id="mob-news-badge" style="top:-4px;right:-4px;"></span></a>
+  <a href="#xeberler" onclick="closeMobile();markSeen()">Xəbərlər <span class="news-badge-fixed" id="mob-news-badge"></span></a>
   <a href="#elaqe" onclick="closeMobile()">Əlaqə</a>
 </div>
 
@@ -921,12 +972,12 @@
     <div class="gold-line" style="margin:14px auto 0;"></div>
   </div>
   <div class="services-grid" style="margin-top:36px;">
-    <div class="service-card reveal"><span class="service-icon">🧠</span><h3>Psixoloq</h3><p>Uşaqların emosional, davranış və inkişaf problemlərinin diaqnostikası və müalicəsi.</p></div>
-    <div class="service-card reveal"><span class="service-icon">🗣️</span><h3>Loqoped</h3><p>Nitq, dil və ünsiyyət pozuntularının korreksiyası üzrə ixtisaslaşmış terapiya.</p></div>
-    <div class="service-card reveal"><span class="service-icon">🧩</span><h3>Psixo-pedaqoq</h3><p>Xüsusi tədris metodları ilə uşağın öyrənmə potensialının açılması.</p></div>
-    <div class="service-card reveal"><span class="service-icon">👂</span><h3>Duyu Bütünləmə</h3><p>Sensor emal pozuntularının müalicəsi, hiss sisteminin harmonik inkişafı.</p></div>
-    <div class="service-card reveal"><span class="service-icon">🦋</span><h3>Erqoterapiya</h3><p>Gündəlik həyat bacarıqlarının inkişafı, əl-göz koordinasiyası terapiyası.</p></div>
-    <div class="service-card reveal" style="border-color:rgba(201,168,76,0.3);background:linear-gradient(135deg,#FFFBF0,white);"><span class="service-icon">🌟</span><h3>Erkən İnkişaf Qrupu</h3><p>2–6 yaşlı uşaqlar üçün mütəxəssislər tərəfindən aparılan inkişaf proqramları.</p></div>
+    <div class="service-card reveal" onclick="openSvc(0)"><span class="service-icon">🧠</span><h3>Psixoloq</h3><p>Uşaqların emosional, davranış və inkişaf problemlərinin diaqnostikası və müalicəsi.</p></div>
+    <div class="service-card reveal" onclick="openSvc(1)"><span class="service-icon">🗣️</span><h3>Loqoped</h3><p>Nitq, dil və ünsiyyət pozuntularının korreksiyası üzrə ixtisaslaşmış terapiya.</p></div>
+    <div class="service-card reveal" onclick="openSvc(2)"><span class="service-icon">🧩</span><h3>Psixo-pedaqoq</h3><p>Xüsusi tədris metodları ilə uşağın öyrənmə potensialının açılması.</p></div>
+    <div class="service-card reveal" onclick="openSvc(3)"><span class="service-icon">👂</span><h3>Duyu Bütünləmə</h3><p>Sensor emal pozuntularının müalicəsi, hiss sisteminin harmonik inkişafı.</p></div>
+    <div class="service-card reveal" onclick="openSvc(4)"><span class="service-icon">🦋</span><h3>Erqoterapiya</h3><p>Gündəlik həyat bacarıqlarının inkişafı, əl-göz koordinasiyası terapiyası.</p></div>
+    <div class="service-card reveal" onclick="openSvc(5)" style="border-color:rgba(201,168,76,0.3);background:linear-gradient(135deg,#FFFBF0,white);"><span class="service-icon">🌟</span><h3>Erkən İnkişaf Qrupu</h3><p>2–6 yaşlı uşaqlar üçün mütəxəssislər tərəfindən aparılan inkişaf proqramları.</p></div>
   </div>
 </section>
 
@@ -1005,6 +1056,23 @@
     <div class="edit-btns">
       <button class="btn-gold" style="border:none;cursor:pointer;font-family:'Nunito',sans-serif;" onclick="saveEditModal()">Yadda Saxla</button>
       <button class="edit-cancel" onclick="closeEditModal()">Ləğv Et</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- SERVICE POPUP -->
+<div id="svc-overlay" onclick="if(event.target===this)closeSvc()">
+  <div class="svc-popup">
+    <div class="svc-head">
+      <button class="svc-close" onclick="closeSvc()">✕</button>
+      <span class="svc-icon" id="svc-icon"></span>
+      <h2 id="svc-title"></h2>
+    </div>
+    <div class="svc-body">
+      <p id="svc-desc"></p>
+      <ul class="svc-feats" id="svc-feats"></ul>
+      <a href="#elaqe" class="svc-cta" onclick="closeSvc()">📞 Əlaqə Saxlayın</a>
     </div>
   </div>
 </div>
@@ -1362,15 +1430,11 @@ document.querySelectorAll('.reveal').forEach(el=>revealObs.observe(el));
 function updateNewsBadge() {
   const seen = parseInt(localStorage.getItem('an_news_seen')||'0');
   const unseen = Math.max(0, data.news.length - seen);
-  const b = document.getElementById('news-badge');
-  const mb = document.getElementById('mob-news-badge') || null;
-  if (unseen > 0) {
-    if(b){ b.textContent=unseen; b.classList.add('show'); }
-    if(mb){ mb.textContent=unseen; mb.classList.add('show'); }
-  } else {
-    if(b) b.classList.remove('show');
-    if(mb) mb.classList.remove('show');
-  }
+  [document.getElementById('news-badge'), document.getElementById('mob-news-badge')].forEach(b=>{
+    if(!b) return;
+    if(unseen > 0){ b.textContent=unseen; b.classList.add('show'); }
+    else { b.classList.remove('show'); }
+  });
 }
 function markSeen() {
   localStorage.setItem('an_news_seen', String(data.news.length));
@@ -1487,9 +1551,34 @@ function escHtml(s) {
 document.addEventListener('keydown', e=>{
   if(e.key==='Escape') {
     closeEditModal();
-    document.getElementById('service-popup-overlay') && document.getElementById('service-popup-overlay').classList.remove('open');
+    const so=document.getElementById('svc-overlay'); if(so) so.classList.remove('open');
   }
 });
+
+
+// ===== SERVICE POPUP =====
+const SVCS = [
+  {icon:'🧠',title:'Psixoloq',desc:'Psixoloqlarımız uşaqların emosional, davranış və inkişaf problemlərini müasir metodlarla qiymətləndirir. Hər uşaq üçün fərdi terapiya planı hazırlanır.',feats:['Davranış problemlərinin qiymətləndirilməsi','Narahatlıq, depressiya, fobiyaların müalicəsi','Autizm spektr pozuntusu (ASD) dəstəyi','DEHB terapiyası','Valideyn-uşaq münasibətlərinin inkişafı','Fərdi və qrup terapiya seansları']},
+  {icon:'🗣️',title:'Loqoped',desc:'Loqopedlərimiz nitq, dil və ünsiyyət pozuntularını erkən mərhələdə aşkarlayır və ixtisaslaşmış terapiya ilə düzəldir.',feats:['Gecikmiş nitq inkişafının korreksiyası','Səs tələffüzü pozuntularının müalicəsi','Kəkələmə terapiyası','Dil anlama və ifadəetmə bacarıqları','Udma pozuntularının müalicəsi','AAC sistemlərinin tətbiqi']},
+  {icon:'🧩',title:'Psixo-pedaqoq',desc:'Xüsusi ehtiyaclı uşaqların öyrənmə potensialını açmaq üçün fərdi tədris metodları hazırlayıb tətbiq edirik.',feats:['Öyrənmə çətinliklərinin diaqnostikası','Fərdi tədris proqramları (IEP)','Oxu və yazı bacarıqlarının inkişafı','Disleksiya, diskalküliya dəstəyi','Məktəb hazırlığı proqramları','Valideyn və müəllimə metodiki dəstək']},
+  {icon:'👂',title:'Duyu Bütünləmə',desc:'Sensor emal pozuntuları olan uşaqlara hiss sistemlərini harmonik inkişaf etdirməyə kömək edirik.',feats:['Sensor emal pozuntularının qiymətləndirilməsi','Toxunma, hərəkət, tarazlıq hisslərinin inkişafı','Sensor həssaslığının normallaşdırılması','Gündəlik həyata uyğunlaşmanın artırılması','Xüsusi sensor otaqda terapiya','Ev proqramlarının hazırlanması']},
+  {icon:'🦋',title:'Erqoterapiya',desc:'Uşaqların gündəlik həyat bacarıqlarını inkişaf etdirməsinə və müstəqilliyini artırmasına kömək edirik.',feats:['Xırda motor bacarıqlarının inkişafı','Əl-göz koordinasiyasının gücləndirilməsi','Özünə qulluq bacarıqlarının öyrədilməsi','Məktəb bacarıqları (yazı, kəsmək)','Oyun vasitəsilə terapiya','Adaptiv avadanlıqların tətbiqi']},
+  {icon:'🌟',title:'Erkən İnkişaf Qrupu',desc:'2–6 yaşlı uşaqlar üçün mütəxəssislər tərəfindən aparılan erkən inkişaf proqramları uşağın bütün sahələrdə optimal inkişafını təmin edir.',feats:['2–6 yaş arası xüsusi proqram','Nitq, idrak, sosial-emosional inkişaf','Kiçik qrup formatı (3–5 uşaq)','Həftəlik proqres izlənməsi','Valideynlərə ev tapşırıqları','Komanda yanaşması']}
+];
+
+function openSvc(i) {
+  const s = SVCS[i];
+  document.getElementById('svc-icon').textContent = s.icon;
+  document.getElementById('svc-title').textContent = s.title;
+  document.getElementById('svc-desc').textContent = s.desc;
+  document.getElementById('svc-feats').innerHTML = s.feats.map(f=>`<li>${f}</li>`).join('');
+  document.getElementById('svc-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeSvc() {
+  document.getElementById('svc-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
 
 // ===== INIT =====
 loadData();
