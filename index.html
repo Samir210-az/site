@@ -1294,25 +1294,7 @@ function getYTEmbed(url) {
 }
 
 // ===== NEWS =====
-function addNews() {
-  const title = document.getElementById('news-title').value.trim();
-  if (!title) { alert('Başlıq daxil edin!'); return; }
-  const img = uploadedImg || document.getElementById('news-img-url').value.trim();
-  data.news.unshift({
-    id: Date.now(), title,
-    text: document.getElementById('news-text').value.trim(),
-    img, video: document.getElementById('news-video').value.trim(),
-    date: new Date().toLocaleDateString('az-AZ',{day:'2-digit',month:'long',year:'numeric'})
-  });
-  saveData();
-  ['news-title','news-text','news-img-url','news-video'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('news-img-preview').innerHTML='';
-  document.getElementById('news-img-file').value='';
-  uploadedImg='';
-  showSuccess('news-success');
-  renderAdminNews();
-  updateNewsBadge();
-}
+function addNews() {}
 function deleteNews(id) {
   if (!confirm('Xəbəri silmək istəyirsiniz?')) return;
   data.news = data.news.filter(n=>n.id!==id);
@@ -1359,19 +1341,7 @@ function prevTeamPhoto(input) {
   };
   r.readAsDataURL(input.files[0]);
 }
-function addTeam() {
-  const name=document.getElementById('team-name').value.trim();
-  const role=document.getElementById('team-role').value.trim();
-  if (!name||!role) { alert('Ad və vəzifə daxil edin!'); return; }
-  data.team.push({ id:Date.now(), name, role, bio:document.getElementById('team-bio').value.trim(), photo:_teamPhoto });
-  saveData();
-  ['team-name','team-role','team-bio'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('team-photo-file').value='';
-  document.getElementById('team-photo-prev').innerHTML='';
-  _teamPhoto='';
-  showSuccess('team-success');
-  renderAdminTeam();
-}
+function addTeam() {}
 function deleteTeam(id) {
   if (!confirm('Əməkdaşı silmək istəyirsiniz?')) return;
   data.team=data.team.filter(t=>t.id!==id);
@@ -1411,10 +1381,7 @@ function renderTeam() {
 }
 
 // ===== ABOUT =====
-function saveAbout() {
-  data.about=document.getElementById('about-edit').value.trim();
-  saveData(); showSuccess('about-success');
-}
+function saveAbout() {}
 
 // ===== CONTACT =====
 function sendWhatsapp() {
