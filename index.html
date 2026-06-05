@@ -1049,7 +1049,10 @@
       <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
       @an_psixologiyamerkezi
     </a>
-    <span class="footer-credit">by <a href="https://instagram.com/s_akhundoff" target="_blank">@s_akhundoff</a></span>
+    <a href="https://instagram.com/s_akhundoff" target="_blank" class="footer-insta">
+      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+      @s_akhundoff
+    </a>
   </div>
 </footer>
 
@@ -1143,7 +1146,9 @@
         </div>
         <label>Qısa Məlumat</label>
         <textarea id="team-bio" style="height:80px" placeholder="Əməkdaş haqqında qısa məlumat..."></textarea>
-        <label>Foto (istəyə bağlı)</label>
+        <label>Foto URL (imgbb.com və ya başqa link)</label>
+        <input type="text" id="team-photo-url" placeholder="https://... foto linki">
+        <label>Foto (fayldan seç)</label>
         <input type="file" id="team-photo-file" accept="image/*" onchange="prevTeamPhoto(this)" style="padding:8px;font-size:13px;background:var(--warm1);border:1.5px solid rgba(201,168,76,.2);border-radius:10px;width:100%;cursor:pointer;">
         <div id="team-photo-prev" style="margin-top:8px;"></div>
         <button class="btn-gold" onclick="addTeam()">Əlavə Et</button>
@@ -1336,6 +1341,7 @@ function prevTeamPhoto(input) {
   const r=new FileReader();
   r.onload=e=>{
     _teamPhoto=e.target.result;
+    window._teamPhotoB64=e.target.result;
     document.getElementById('team-photo-prev').innerHTML=
       `<img src="${_teamPhoto}" style="width:70px;height:70px;border-radius:50%;object-fit:cover;border:3px solid rgba(201,168,76,.4);margin-top:6px;">`;
   };
@@ -1595,7 +1601,7 @@ updateNewsBadge();
   function renderAdminTeam(l){const el=document.getElementById('admin-team-list');if(!el)return;if(!l.length){el.innerHTML='<p style="color:var(--gray);font-size:13px;">Hələlik əməkdaş yoxdur.</p>';return;}el.innerHTML=l.map(t=>`<div class="admin-list-item"><div class="adm-mini-av">${t.photo?`<img src="${t.photo}" alt="">`:t.name?t.name.charAt(0):''}</div><div class="admin-list-item-info" style="flex:1"><h4>${t.name||''}</h4><p>${t.role||''}</p></div><div class="list-actions"><button class="btn-admin" onclick="window.__et('${t.id}')" style="background:rgba(201,168,76,.15);border-color:rgba(201,168,76,.4);color:var(--gold-dark);">✏️</button><button class="btn-admin danger" onclick="window.__dt('${t.id}')">🗑️</button></div></div>`).join('');}
 
   window.addNews=function(){const t=document.getElementById('news-title').value.trim();if(!t){alert('Başlıq daxil edin!');return;}const img=document.getElementById('news-img-url')?document.getElementById('news-img-url').value.trim():'';push(ref(db,'xeberler'),{title:t,text:document.getElementById('news-text').value.trim(),img,video:document.getElementById('news-video').value.trim(),date:new Date().toLocaleDateString('az-AZ',{day:'2-digit',month:'long',year:'numeric'}),ts:Date.now()}).then(()=>{['news-title','news-text','news-img-url','news-video'].forEach(i=>{const el=document.getElementById(i);if(el)el.value='';});const s=document.getElementById('news-success');if(s){s.style.display='block';setTimeout(()=>s.style.display='none',3000);}});};
-  window.addTeam=function(){const n=document.getElementById('team-name').value.trim(),r=document.getElementById('team-role').value.trim();if(!n||!r){alert('Ad və vəzifə daxil edin!');return;}push(ref(db,'emekdaslar'),{name:n,role:r,bio:document.getElementById('team-bio').value.trim(),photo:'',ts:Date.now()}).then(()=>{['team-name','team-role','team-bio'].forEach(i=>{const el=document.getElementById(i);if(el)el.value='';});const s=document.getElementById('team-success');if(s){s.style.display='block';setTimeout(()=>s.style.display='none',3000);}});};
+  window.addTeam=function(){const n=document.getElementById('team-name').value.trim(),r=document.getElementById('team-role').value.trim();if(!n||!r){alert('Ad və vəzifə daxil edin!');return;}const urlPhoto=document.getElementById('team-photo-url')?document.getElementById('team-photo-url').value.trim():'';const photo=urlPhoto||window._teamPhotoB64||'';push(ref(db,'emekdaslar'),{name:n,role:r,bio:document.getElementById('team-bio').value.trim(),photo:photo,ts:Date.now()}).then(()=>{['team-name','team-role','team-bio','team-photo-url'].forEach(i=>{const el=document.getElementById(i);if(el)el.value='';});window._teamPhotoB64='';const prev=document.getElementById('team-photo-prev');if(prev)prev.innerHTML='';const s=document.getElementById('team-success');if(s){s.style.display='block';setTimeout(()=>s.style.display='none',3000);}});};
   window.saveAbout=function(){const m=document.getElementById('about-edit').value.trim();set(ref(db,'haqqimizda'),{metn:m}).then(()=>{const s=document.getElementById('about-success');if(s){s.style.display='block';setTimeout(()=>s.style.display='none',3000);}});};
   window.__dn=function(id){if(!confirm('Xəbəri silmək istəyirsiniz?'))return;remove(ref(db,'xeberler/'+id));};
   window.__dt=function(id){if(!confirm('Əməkdaşı silmək istəyirsiniz?'))return;remove(ref(db,'emekdaslar/'+id));};
