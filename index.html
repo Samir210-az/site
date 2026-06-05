@@ -1598,5 +1598,40 @@ renderTeam();
 document.getElementById('about-text').textContent = data.about;
 updateNewsBadge();
 </script>
+  <script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+  import { getDatabase, ref, push, set, remove, onValue }
+    from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
+
+  const app = initializeApp({
+    apiKey: "AIzaSyCBhyGNzZRGgQShP_C9kwAzTm_g_0zJlzg",
+    authDomain: "an-psixoloji-33442.firebaseapp.com",
+    databaseURL: "https://an-psixoloji-33442-default-rtdb.firebaseio.com",
+    projectId: "an-psixoloji-33442",
+    storageBucket: "an-psixoloji-33442.firebasestorage.app",
+    messagingSenderId: "528809299356",
+    appId: "1:528809299356:web:59cae89a64e446dc520c59"
+  });
+  const db = getDatabase(app);
+
+  let _nc=[], _tc=[];
+
+  onValue(ref(db,'xeberler'),s=>{const r=s.val();_nc=r?Object.entries(r).map(([id,v])=>({id,...v})):[];const l=[..._nc].sort((a,b)=>(b.ts||0)-(a.ts||0));renderNews(l);renderAdminNews(l);});
+  onValue(ref(db,'emekdaslar'),s=>{const r=s.val();_tc=r?Object.entries(r).map(([id,v])=>({id,...v})):[];const l=[..._tc].sort((a,b)=>(a.ts||0)-(b.ts||0));renderTeam(l);renderAdminTeam(l);});
+  onValue(ref(db,'haqqimizda'),s=>{const v=s.val();if(v&&v.metn){const el=document.getElementById('about-text');if(el)el.textContent=v.metn;const ae=document.getElementById('about-edit');if(ae)ae.value=v.metn;}});
+
+  function getYT(u){if(!u)return '';const m=u.match(/[?&]v=([^&]+)/)||u.match(/youtu\.be\/([^?]+)/);return m?`https://www.youtube.com/embed/${m[1]}`:''}
+
+  function renderNews(l){const el=document.getElementById('news-container');if(!el)return;if(!l.length){el.innerHTML='<div class="news-empty"><span style="font-size:48px;display:block;margin-bottom:14px;">📰</span>Hələlik xəbər yoxdur.</div>';return;}el.innerHTML=l.map(n=>{const yt=getYT(n.video);let m=yt?`<div class="news-video-wrap"><iframe src="${yt}" allowfullscreen loading="lazy"></iframe></div>`:n.img?`<img class="news-media" src="${n.img}" alt="" loading="lazy">`:`<div class="news-media-placeholder">📰</div>`;return`<div class="news-card">${m}<div class="news-body"><div class="news-date">${n.date||''}</div><h3>${n.title||''}</h3>${n.text?`<p>${n.text}</p>`:''}</div></div>`;}).join('');}
+  function renderTeam(l){const el=document.getElementById('team-container');if(!el)return;if(!l.length){el.innerHTML='<div class="team-empty"><span style="font-size:48px;display:block;margin-bottom:14px;">👥</span>Əməkdaşlar admin paneldən əlavə ediləcək</div>';return;}el.innerHTML=l.map(t=>`<div class="team-card"><div class="team-avatar">${t.photo?`<img src="${t.photo}" alt="">`:t.name?t.name.charAt(0):''}</div><h3>${t.name||''}</h3><div class="role">${t.role||''}</div>${t.bio?`<p class="bio">${t.bio}</p>`:''}</div>`).join('');}
+  function renderAdminNews(l){const el=document.getElementById('admin-news-list');if(!el)return;if(!l.length){el.innerHTML='<p style="color:var(--gray);font-size:13px;">Hələlik xəbər yoxdur.</p>';return;}el.innerHTML=l.map(n=>`<div class="admin-list-item"><div class="admin-list-item-info"><h4>${n.title||''}</h4><p>${n.date||''}</p></div><div class="list-actions"><button class="btn-admin danger" onclick="window.__dn('${n.id}')">🗑️</button></div></div>`).join('');}
+  function renderAdminTeam(l){const el=document.getElementById('admin-team-list');if(!el)return;if(!l.length){el.innerHTML='<p style="color:var(--gray);font-size:13px;">Hələlik əməkdaş yoxdur.</p>';return;}el.innerHTML=l.map(t=>`<div class="admin-list-item"><div class="adm-mini-av">${t.photo?`<img src="${t.photo}" alt="">`:t.name?t.name.charAt(0):''}</div><div class="admin-list-item-info" style="flex:1"><h4>${t.name||''}</h4><p>${t.role||''}</p></div><div class="list-actions"><button class="btn-admin danger" onclick="window.__dt('${t.id}')">🗑️</button></div></div>`).join('');}
+
+  window.addNews=function(){const t=document.getElementById('news-title').value.trim();if(!t){alert('Başlıq daxil edin!');return;}const img=document.getElementById('news-img-url')?document.getElementById('news-img-url').value.trim():'';push(ref(db,'xeberler'),{title:t,text:document.getElementById('news-text').value.trim(),img,video:document.getElementById('news-video').value.trim(),date:new Date().toLocaleDateString('az-AZ',{day:'2-digit',month:'long',year:'numeric'}),ts:Date.now()}).then(()=>{['news-title','news-text','news-img-url','news-video'].forEach(i=>{const el=document.getElementById(i);if(el)el.value='';});const s=document.getElementById('news-success');if(s){s.style.display='block';setTimeout(()=>s.style.display='none',3000);}});};
+  window.addTeam=function(){const n=document.getElementById('team-name').value.trim(),r=document.getElementById('team-role').value.trim();if(!n||!r){alert('Ad və vəzifə daxil edin!');return;}push(ref(db,'emekdaslar'),{name:n,role:r,bio:document.getElementById('team-bio').value.trim(),photo:'',ts:Date.now()}).then(()=>{['team-name','team-role','team-bio'].forEach(i=>{const el=document.getElementById(i);if(el)el.value='';});const s=document.getElementById('team-success');if(s){s.style.display='block';setTimeout(()=>s.style.display='none',3000);}});};
+  window.saveAbout=function(){const m=document.getElementById('about-edit').value.trim();set(ref(db,'haqqimizda'),{metn:m}).then(()=>{const s=document.getElementById('about-success');if(s){s.style.display='block';setTimeout(()=>s.style.display='none',3000);}});};
+  window.__dn=function(id){if(!confirm('Xəbəri silmək istəyirsiniz?'))return;remove(ref(db,'xeberler/'+id));};
+  window.__dt=function(id){if(!confirm('Əməkdaşı silmək istəyirsiniz?'))return;remove(ref(db,'emekdaslar/'+id));};
+  </script>
 </body>
 </html>
