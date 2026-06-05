@@ -1,1 +1,1577 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AN Psixoloji Dəstək və Reabilitasiya Mərkəzi</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C96A;
+    --gold-dark: #8B6914;
+    --deep: #0A0E1A;
+    --deep2: #111827;
+    --deep3: #1A2236;
+    --red: #C0392B;
+    --white: #F8F5EE;
+    --gray: #9CA3AF;
+  }
 
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: var(--deep);
+    color: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--deep2); }
+  ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+  /* ========== NAVBAR ========== */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5%;
+    height: 72px;
+    background: rgba(10,14,26,0.92);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+    transition: all 0.3s;
+  }
+  nav.scrolled {
+    height: 60px;
+    background: rgba(10,14,26,0.98);
+    box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 12px;
+    text-decoration: none;
+  }
+  .nav-logo img {
+    height: 44px; width: auto;
+    filter: drop-shadow(0 0 8px rgba(201,168,76,0.4));
+  }
+  .nav-logo span {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px; font-weight: 600;
+    color: var(--gold);
+    line-height: 1.3;
+    max-width: 160px;
+  }
+  .nav-links {
+    display: flex; gap: 32px; list-style: none;
+  }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    position: relative;
+    transition: color 0.3s;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute; bottom: -4px; left: 0;
+    width: 0; height: 1px;
+    background: var(--gold);
+    transition: width 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-links a:hover::after { width: 100%; }
+
+  .burger {
+    display: none; flex-direction: column; gap: 5px;
+    cursor: pointer; background: none; border: none; padding: 5px;
+  }
+  .burger span {
+    width: 26px; height: 2px;
+    background: var(--gold);
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+
+  /* Mobile menu */
+  .mobile-menu {
+    display: none;
+    position: fixed; top: 72px; left: 0; right: 0; z-index: 999;
+    background: rgba(10,14,26,0.97);
+    backdrop-filter: blur(20px);
+    padding: 24px 5%;
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+    flex-direction: column; gap: 20px;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    text-decoration: none; color: var(--white);
+    font-size: 15px; font-weight: 500;
+    letter-spacing: 0.05em; text-transform: uppercase;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    transition: color 0.3s;
+  }
+  .mobile-menu a:hover { color: var(--gold); }
+
+  /* ========== HERO ========== */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: 100px 5% 60px;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 50%, rgba(201,168,76,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 60% at 15% 80%, rgba(192,57,43,0.06) 0%, transparent 50%),
+      linear-gradient(135deg, #0A0E1A 0%, #111827 50%, #0D1220 100%);
+  }
+
+  .hero-grid {
+    position: absolute; inset: 0; opacity: 0.04;
+    background-image:
+      linear-gradient(rgba(201,168,76,1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,1) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    max-width: 680px;
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(201,168,76,0.1);
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 30px;
+    padding: 6px 16px;
+    font-size: 12px; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%,100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(38px, 5vw, 68px);
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--white);
+    margin-bottom: 16px;
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+  .hero-title span {
+    background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    font-size: 16px; color: var(--gray);
+    line-height: 1.7; margin-bottom: 40px;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+
+  .hero-btns {
+    display: flex; gap: 16px; flex-wrap: wrap;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+
+  .btn-gold {
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
+    color: #000;
+    padding: 14px 32px;
+    border-radius: 4px;
+    font-weight: 700; font-size: 13px;
+    letter-spacing: 0.05em; text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s;
+    box-shadow: 0 4px 24px rgba(201,168,76,0.3);
+  }
+  .btn-gold:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(201,168,76,0.5);
+  }
+
+  .btn-outline {
+    border: 1px solid rgba(201,168,76,0.4);
+    color: var(--gold);
+    padding: 14px 32px;
+    border-radius: 4px;
+    font-weight: 600; font-size: 13px;
+    letter-spacing: 0.05em; text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .btn-outline:hover {
+    background: rgba(201,168,76,0.1);
+    border-color: var(--gold);
+    transform: translateY(-2px);
+  }
+
+  .hero-stats {
+    position: absolute; right: 5%; top: 50%;
+    transform: translateY(-50%);
+    display: flex; flex-direction: column; gap: 24px;
+    animation: fadeLeft 0.8s 0.4s ease both;
+  }
+  .stat-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 12px;
+    padding: 20px 28px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s;
+  }
+  .stat-card:hover {
+    border-color: rgba(201,168,76,0.4);
+    background: rgba(201,168,76,0.06);
+    transform: translateX(-4px);
+  }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px; font-weight: 700;
+    color: var(--gold);
+    display: block;
+  }
+  .stat-label {
+    font-size: 11px; color: var(--gray);
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+
+  /* ========== SECTION BASE ========== */
+  section { padding: 100px 5%; }
+
+  .section-tag {
+    display: inline-block;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 3.5vw, 46px);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+  .section-desc {
+    font-size: 15px; color: var(--gray);
+    line-height: 1.8; max-width: 580px;
+  }
+  .gold-line {
+    width: 60px; height: 3px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    margin: 16px 0 40px;
+    border-radius: 2px;
+  }
+
+  /* ========== HAQQIMIZDA ========== */
+  #haqqimizda {
+    background: var(--deep2);
+    position: relative;
+  }
+  #haqqimizda::before {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .about-visual {
+    position: relative;
+  }
+  .about-logo-big {
+    width: 100%; max-width: 340px;
+    filter: drop-shadow(0 0 40px rgba(201,168,76,0.25));
+    animation: float 6s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+  .about-deco {
+    position: absolute;
+    width: 200px; height: 200px;
+    border: 1px solid rgba(201,168,76,0.1);
+    border-radius: 50%;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    animation: rotateSlow 20s linear infinite;
+  }
+  .about-deco::before {
+    content: '';
+    position: absolute;
+    width: 280px; height: 280px;
+    border: 1px solid rgba(201,168,76,0.06);
+    border-radius: 50%;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+  }
+  @keyframes rotateSlow {
+    from { transform: translate(-50%,-50%) rotate(0deg); }
+    to { transform: translate(-50%,-50%) rotate(360deg); }
+  }
+  .about-list {
+    list-style: none;
+    display: flex; flex-direction: column; gap: 16px;
+    margin-top: 24px;
+  }
+  .about-list li {
+    display: flex; align-items: flex-start; gap: 14px;
+    font-size: 14px; color: var(--gray); line-height: 1.6;
+  }
+  .about-list li::before {
+    content: '✦';
+    color: var(--gold);
+    font-size: 12px;
+    margin-top: 3px;
+    flex-shrink: 0;
+  }
+  .director-card {
+    margin-top: 36px;
+    background: rgba(201,168,76,0.06);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 12px;
+    padding: 20px 24px;
+    display: flex; align-items: center; gap: 18px;
+  }
+  .director-avatar {
+    width: 54px; height: 54px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; color: #000; font-weight: 700;
+    flex-shrink: 0;
+  }
+  .director-info h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px; color: var(--white); font-weight: 600;
+  }
+  .director-info span {
+    font-size: 12px; color: var(--gold);
+    letter-spacing: 0.05em; text-transform: uppercase;
+  }
+
+  /* ========== XİDMƏTLƏR ========== */
+  #xidmetler { background: var(--deep); }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+    margin-top: 20px;
+  }
+  .service-card {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(201,168,76,0.12);
+    border-radius: 16px;
+    padding: 32px 24px;
+    transition: all 0.4s;
+    position: relative;
+    overflow: hidden;
+    cursor: default;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(201,168,76,0.06), transparent);
+    opacity: 0; transition: opacity 0.4s;
+  }
+  .service-card:hover::before { opacity: 1; }
+  .service-card:hover {
+    border-color: rgba(201,168,76,0.4);
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(201,168,76,0.1);
+  }
+  .service-icon {
+    font-size: 42px; margin-bottom: 20px;
+    display: block;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+  }
+  .service-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px; color: var(--white);
+    margin-bottom: 10px;
+  }
+  .service-card p {
+    font-size: 13px; color: var(--gray);
+    line-height: 1.7;
+  }
+
+  /* ========== ƏMƏKDAŞLAR ========== */
+  #emekdaslar { background: var(--deep2); }
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 28px;
+    margin-top: 20px;
+  }
+  .team-card {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(201,168,76,0.12);
+    border-radius: 16px;
+    padding: 32px 24px;
+    text-align: center;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .team-card:hover {
+    border-color: rgba(201,168,76,0.35);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.3);
+  }
+  .team-avatar {
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold-dark));
+    margin: 0 auto 20px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 28px; color: #000; font-weight: 700;
+    border: 3px solid rgba(201,168,76,0.3);
+  }
+  .team-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px; color: var(--white);
+    margin-bottom: 8px;
+  }
+  .team-card .role {
+    font-size: 12px; color: var(--gold);
+    letter-spacing: 0.08em; text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .team-card .bio {
+    font-size: 13px; color: var(--gray);
+    line-height: 1.6;
+  }
+  .team-empty {
+    text-align: center; color: var(--gray);
+    font-size: 14px; padding: 60px 20px;
+    grid-column: 1/-1;
+  }
+
+  /* ========== XƏBƏRLƏR ========== */
+  #xeberler { background: var(--deep); }
+  .news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 28px;
+    margin-top: 20px;
+  }
+  .news-card {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(201,168,76,0.12);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+  .news-card:hover {
+    border-color: rgba(201,168,76,0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.3);
+  }
+  .news-media {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+    background: var(--deep3);
+  }
+  .news-media-placeholder {
+    width: 100%; height: 200px;
+    background: linear-gradient(135deg, var(--deep3), var(--deep2));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 40px;
+    color: rgba(201,168,76,0.3);
+  }
+  .news-video-wrap {
+    position: relative; width: 100%; height: 200px;
+    overflow: hidden;
+  }
+  .news-video-wrap iframe {
+    width: 100%; height: 100%; border: none;
+  }
+  .news-body { padding: 24px; }
+  .news-date {
+    font-size: 11px; color: var(--gold);
+    letter-spacing: 0.08em; text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .news-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px; color: var(--white);
+    margin-bottom: 10px; line-height: 1.3;
+  }
+  .news-card p {
+    font-size: 13px; color: var(--gray);
+    line-height: 1.7;
+  }
+  .news-empty {
+    text-align: center; color: var(--gray);
+    font-size: 14px; padding: 80px 20px;
+    grid-column: 1/-1;
+  }
+  .news-empty-icon { font-size: 48px; margin-bottom: 16px; display: block; }
+
+  /* ========== ƏLAQƏ ========== */
+  #elaqe { background: var(--deep2); }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+  .contact-items {
+    display: flex; flex-direction: column; gap: 24px;
+    margin-top: 16px;
+  }
+  .contact-item {
+    display: flex; align-items: flex-start; gap: 16px;
+  }
+  .contact-icon {
+    width: 48px; height: 48px; flex-shrink: 0;
+    border-radius: 10px;
+    background: rgba(201,168,76,0.1);
+    border: 1px solid rgba(201,168,76,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+  }
+  .contact-item h4 {
+    font-size: 12px; color: var(--gold);
+    letter-spacing: 0.08em; text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .contact-item p, .contact-item a {
+    font-size: 15px; color: var(--white);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .contact-item a:hover { color: var(--gold); }
+
+  .contact-form {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(201,168,76,0.12);
+    border-radius: 16px;
+    padding: 36px;
+  }
+  .contact-form h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; color: var(--white);
+    margin-bottom: 24px;
+  }
+  .form-group { margin-bottom: 18px; }
+  .form-group label {
+    display: block; font-size: 12px;
+    color: var(--gold); letter-spacing: 0.06em;
+    text-transform: uppercase; margin-bottom: 8px;
+  }
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 8px;
+    padding: 12px 16px;
+    color: var(--white);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    transition: border-color 0.3s;
+    resize: none;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.04);
+  }
+  .form-group textarea { height: 120px; }
+  .btn-submit {
+    width: 100%;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
+    color: #000;
+    border: none; border-radius: 8px;
+    padding: 14px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700; font-size: 13px;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .btn-submit:hover {
+    opacity: 0.9; transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(201,168,76,0.4);
+  }
+
+  /* ========== FOOTER ========== */
+  footer {
+    background: #060912;
+    border-top: 1px solid rgba(201,168,76,0.1);
+    padding: 40px 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 20px;
+  }
+  .footer-left {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .footer-left img { height: 36px; opacity: 0.8; }
+  .footer-left span {
+    font-size: 12px; color: var(--gray);
+  }
+  .footer-right {
+    display: flex; align-items: center; gap: 20px;
+  }
+  .footer-insta {
+    display: flex; align-items: center; gap: 8px;
+    text-decoration: none;
+    color: var(--gray);
+    font-size: 13px;
+    transition: color 0.3s;
+  }
+  .footer-insta:hover { color: var(--gold); }
+  .footer-insta svg {
+    width: 18px; height: 18px;
+    fill: currentColor;
+  }
+  .footer-credit {
+    font-size: 11px; color: rgba(255,255,255,0.2);
+    letter-spacing: 0.05em;
+  }
+  .footer-credit a {
+    color: rgba(201,168,76,0.4);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .footer-credit a:hover { color: var(--gold); }
+
+  /* ========== ADMIN PANEL ========== */
+  #admin-overlay {
+    display: none;
+    position: fixed; inset: 0; z-index: 9000;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(8px);
+    align-items: center; justify-content: center;
+  }
+  #admin-overlay.open { display: flex; }
+
+  .admin-login {
+    background: var(--deep2);
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 20px;
+    padding: 48px 44px;
+    width: 100%; max-width: 400px;
+    text-align: center;
+  }
+  .admin-login h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px; color: var(--white);
+    margin-bottom: 8px;
+  }
+  .admin-login p { font-size: 13px; color: var(--gray); margin-bottom: 32px; }
+  .admin-login input {
+    width: 100%;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 8px;
+    padding: 13px 16px;
+    color: var(--white);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    text-align: center;
+    letter-spacing: 0.2em;
+    margin-bottom: 16px;
+    transition: border-color 0.3s;
+  }
+  .admin-login input:focus {
+    outline: none; border-color: var(--gold);
+  }
+  .admin-login .btn-gold {
+    width: 100%; border: none; cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+  }
+  .admin-login .close-login {
+    background: none; border: none;
+    color: var(--gray); cursor: pointer;
+    font-size: 13px; margin-top: 16px;
+    text-decoration: underline;
+    font-family: 'Montserrat', sans-serif;
+  }
+  .admin-error {
+    color: var(--red); font-size: 13px;
+    margin-bottom: 12px; display: none;
+  }
+
+  /* Admin dashboard */
+  #admin-panel {
+    display: none;
+    position: fixed; inset: 0; z-index: 9000;
+    background: var(--deep);
+    overflow-y: auto;
+  }
+  #admin-panel.open { display: block; }
+
+  .admin-nav {
+    background: var(--deep2);
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+    padding: 16px 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .admin-nav h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; color: var(--gold);
+  }
+  .admin-nav-right {
+    display: flex; gap: 12px;
+  }
+  .btn-admin {
+    background: rgba(201,168,76,0.1);
+    border: 1px solid rgba(201,168,76,0.3);
+    color: var(--gold);
+    padding: 8px 18px;
+    border-radius: 6px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px; font-weight: 600;
+    cursor: pointer; transition: all 0.3s;
+    letter-spacing: 0.05em;
+  }
+  .btn-admin:hover {
+    background: rgba(201,168,76,0.2);
+  }
+  .btn-admin.danger {
+    background: rgba(192,57,43,0.1);
+    border-color: rgba(192,57,43,0.3);
+    color: #e74c3c;
+  }
+  .btn-admin.danger:hover { background: rgba(192,57,43,0.2); }
+
+  .admin-content { padding: 40px 5%; }
+
+  .admin-tabs {
+    display: flex; gap: 4px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(201,168,76,0.1);
+    border-radius: 10px;
+    padding: 4px;
+    margin-bottom: 36px;
+    width: fit-content;
+  }
+  .admin-tab {
+    padding: 10px 22px;
+    border-radius: 7px;
+    border: none;
+    background: none;
+    color: var(--gray);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px; font-weight: 600;
+    cursor: pointer; transition: all 0.3s;
+    letter-spacing: 0.04em;
+  }
+  .admin-tab.active {
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
+    color: #000;
+  }
+
+  .admin-section { display: none; }
+  .admin-section.active { display: block; }
+
+  .admin-form {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(201,168,76,0.12);
+    border-radius: 16px;
+    padding: 32px;
+    margin-bottom: 32px;
+  }
+  .admin-form h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; color: var(--white);
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(201,168,76,0.12);
+  }
+  .admin-form .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .admin-form input,
+  .admin-form textarea,
+  .admin-form select {
+    width: 100%;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 8px;
+    padding: 12px 14px;
+    color: var(--white);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px; transition: border-color 0.3s;
+    resize: none;
+  }
+  .admin-form input:focus,
+  .admin-form textarea:focus,
+  .admin-form select:focus {
+    outline: none; border-color: var(--gold);
+  }
+  .admin-form select option { background: var(--deep2); }
+  .admin-form label {
+    display: block; font-size: 11px;
+    color: var(--gold); letter-spacing: 0.08em;
+    text-transform: uppercase; margin-bottom: 6px; margin-top: 14px;
+  }
+  .admin-form label:first-of-type { margin-top: 0; }
+  .admin-form .btn-gold {
+    margin-top: 20px; border: none; cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px; padding: 12px 28px;
+  }
+
+  .admin-list { display: flex; flex-direction: column; gap: 12px; }
+  .admin-list-item {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(201,168,76,0.1);
+    border-radius: 12px;
+    padding: 16px 20px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px;
+  }
+  .admin-list-item-info h4 {
+    font-size: 14px; color: var(--white);
+    margin-bottom: 4px;
+  }
+  .admin-list-item-info p {
+    font-size: 12px; color: var(--gray);
+  }
+  .list-actions { display: flex; gap: 8px; flex-shrink: 0; }
+
+  .about-edit-area {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 8px;
+    padding: 14px;
+    color: var(--white);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px; line-height: 1.7;
+    width: 100%; min-height: 160px;
+    resize: vertical; transition: border-color 0.3s;
+  }
+  .about-edit-area:focus { outline: none; border-color: var(--gold); }
+
+  .success-msg {
+    background: rgba(39,174,96,0.1);
+    border: 1px solid rgba(39,174,96,0.3);
+    border-radius: 8px;
+    padding: 12px 16px;
+    color: #2ecc71;
+    font-size: 13px;
+    margin-top: 12px;
+    display: none;
+  }
+
+  /* ========== ANIMATIONS ========== */
+  @keyframes fadeUp {
+    from { opacity:0; transform: translateY(24px); }
+    to { opacity:1; transform: translateY(0); }
+  }
+  @keyframes fadeLeft {
+    from { opacity:0; transform: translateX(24px); }
+    to { opacity:1; transform: translateX(0); }
+  }
+  .reveal {
+    opacity: 0; transform: translateY(28px);
+    transition: all 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1; transform: translateY(0);
+  }
+
+  /* ========== RESPONSIVE ========== */
+  @media (max-width: 900px) {
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .hero-stats { display: none; }
+    .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+    .admin-form .form-row { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 680px) {
+    .nav-links { display: none; }
+    .burger { display: flex; }
+    section { padding: 70px 5%; }
+    .hero-btns { flex-direction: column; }
+    .btn-gold, .btn-outline { text-align: center; }
+    footer { flex-direction: column; text-align: center; }
+    .admin-tabs { flex-wrap: wrap; }
+    .admin-tab { font-size: 11px; padding: 8px 14px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">
+    <img src="logo.png" alt="AN" id="nav-logo-img" onerror="this.style.display='none';document.getElementById('nav-logo-text').style.display='flex'">
+    <div id="nav-logo-text" style="display:none;width:40px;height:40px;background:linear-gradient(135deg,#E8C96A,#8B6914);border-radius:8px;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;color:#000;font-size:16px;">AN</div>
+    <span>AN Psixoloji Dəstək və Reabilitasiya Mərkəzi</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#hero">Ana Səhifə</a></li>
+    <li><a href="#haqqimizda">Haqqımızda</a></li>
+    <li><a href="#xidmetler">Xidmətlər</a></li>
+    <li><a href="#emekdaslar">Əməkdaşlar</a></li>
+    <li><a href="#xeberler">Xəbərlər</a></li>
+    <li><a href="#elaqe">Əlaqə</a></li>
+  </ul>
+  <button class="burger" id="burger" aria-label="Menyu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#hero" onclick="closeMobile()">Ana Səhifə</a>
+  <a href="#haqqimizda" onclick="closeMobile()">Haqqımızda</a>
+  <a href="#xidmetler" onclick="closeMobile()">Xidmətlər</a>
+  <a href="#emekdaslar" onclick="closeMobile()">Əməkdaşlar</a>
+  <a href="#xeberler" onclick="closeMobile()">Xəbərlər</a>
+  <a href="#elaqe" onclick="closeMobile()">Əlaqə</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Xüsusi Qayğıya Ehtiyacı Olan Uşaqlar</div>
+    <h1 class="hero-title">
+      AN Psixoloji<br>
+      <span>Dəstək Mərkəzi</span>
+    </h1>
+    <p class="hero-sub">
+      Uşaqlarınızın potensialını açmaq üçün peşəkar psixoloji dəstək, reabilitasiya və inkişaf xidmətləri təqdim edirik. Hər uşaq xüsusidir.
+    </p>
+    <div class="hero-btns">
+      <a href="#elaqe" class="btn-gold">Bizimlə Əlaqə</a>
+      <a href="#xidmetler" class="btn-outline">Xidmətlərimiz</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-card">
+      <span class="stat-num">18K+</span>
+      <span class="stat-label">İzləyici</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num">5</span>
+      <span class="stat-label">Xidmət Növü</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num">193+</span>
+      <span class="stat-label">Paylaşım</span>
+    </div>
+  </div>
+</section>
+
+<!-- HAQQIMIZDA -->
+<section id="haqqimizda">
+  <div class="about-grid">
+    <div class="about-visual">
+      <div class="about-deco"></div>
+      <img src="logo.png" class="about-logo-big" alt="AN Logo"
+           onerror="this.outerHTML='<div style=\'width:260px;height:260px;background:linear-gradient(135deg,rgba(201,168,76,0.1),rgba(201,168,76,0.02));border-radius:50%;border:2px solid rgba(201,168,76,0.3);display:flex;align-items:center;justify-content:center;font-family:Playfair Display,serif;font-size:72px;font-weight:900;color:#C9A84C;\'>AN</div>'">
+    </div>
+    <div class="reveal">
+      <span class="section-tag">Haqqımızda</span>
+      <h2 class="section-title">Hər Uşaq<br>Xüsusi Qayğı Layiqdir</h2>
+      <div class="gold-line"></div>
+      <p class="section-desc" id="about-text">
+        AN Psixoloji Dəstək və Reabilitasiya Mərkəzi xüsusi qayğıya ehtiyacı olan uşaqlara peşəkar psixoloji dəstək, erken müdaxilə və reabilitasiya xidmətləri göstərir. Mərkəzimiz hər uşağın fərdi ehtiyaclarına uyğun proqramlar hazırlayır.
+      </p>
+      <ul class="about-list">
+        <li>Fərdi qiymətləndirmə və inkişaf planları</li>
+        <li>Erken müdaxilə proqramları (2-6 yaş)</li>
+        <li>Ailə məsləhəti və valideyn dəstəyi</li>
+        <li>Multidissiplinar komanda yanaşması</li>
+        <li>Müasir terapevtik metodologiyalar</li>
+      </ul>
+      <div class="director-card">
+        <div class="director-avatar">N</div>
+        <div class="director-info">
+          <h4>Nahidə Axundova</h4>
+          <span>Təsisçi &amp; Direktor</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- XİDMƏTLƏR -->
+<section id="xidmetler">
+  <div class="reveal">
+    <span class="section-tag">Xidmətlərimiz</span>
+    <h2 class="section-title">Peşəkar Dəstək<br>Xidmətləri</h2>
+    <div class="gold-line"></div>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <span class="service-icon">🧠</span>
+      <h3>Psixoloq</h3>
+      <p>Uşaqların emosional, davranış və inkişaf problemlərinin diaqnostikası və müalicəsi.</p>
+    </div>
+    <div class="service-card reveal">
+      <span class="service-icon">🗣️</span>
+      <h3>Loqoped</h3>
+      <p>Nitq, dil və ünsiyyət pozuntularının korreksiyası üzrə ixtisaslaşmış terapiya.</p>
+    </div>
+    <div class="service-card reveal">
+      <span class="service-icon">🧩</span>
+      <h3>Psixo-pedaqoq</h3>
+      <p>Xüsusi tədris metodları ilə uşağın öyrənmə potensialının açılması.</p>
+    </div>
+    <div class="service-card reveal">
+      <span class="service-icon">👂</span>
+      <h3>Duyu Bütünləmə</h3>
+      <p>Sensor emal pozuntularının müalicəsi, hiss sisteminin harmonik inkişafı.</p>
+    </div>
+    <div class="service-card reveal">
+      <span class="service-icon">🦋</span>
+      <h3>Erqoterapiya</h3>
+      <p>Gündəlik həyat bacarıqlarının inkişafı, əl-göz koordinasiyası terapiyası.</p>
+    </div>
+    <div class="service-card reveal" style="background:linear-gradient(135deg,rgba(201,168,76,0.08),rgba(201,168,76,0.02));border-color:rgba(201,168,76,0.25);">
+      <span class="service-icon">🌟</span>
+      <h3>Erkən İnkişaf Qrupu</h3>
+      <p>2–6 yaşlı uşaqlar üçün mütəxəssislər tərəfindən aparılan inkişaf proqramları.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ƏMƏKDAŞLAR -->
+<section id="emekdaslar">
+  <div class="reveal">
+    <span class="section-tag">Komandamız</span>
+    <h2 class="section-title">Peşəkar<br>Əməkdaşlarımız</h2>
+    <div class="gold-line"></div>
+  </div>
+  <div class="team-grid" id="team-container">
+    <div class="team-empty">
+      <span style="font-size:48px;display:block;margin-bottom:16px;">👥</span>
+      Əməkdaşlar admin paneldən əlavə ediləcək
+    </div>
+  </div>
+</section>
+
+<!-- XƏBƏRLƏR -->
+<section id="xeberler">
+  <div class="reveal">
+    <span class="section-tag">Xəbərlər &amp; Yeniliklər</span>
+    <h2 class="section-title">Gündəlik<br>Yeniliklər</h2>
+    <div class="gold-line"></div>
+  </div>
+  <div class="news-grid" id="news-container">
+    <div class="news-empty">
+      <span class="news-empty-icon">📰</span>
+      Hələlik xəbər yoxdur. Admin panel vasitəsilə əlavə edin.
+    </div>
+  </div>
+</section>
+
+<!-- ƏLAQƏ -->
+<section id="elaqe">
+  <div class="contact-grid">
+    <div class="reveal">
+      <span class="section-tag">Əlaqə</span>
+      <h2 class="section-title">Bizimlə<br>Əlaqə Saxlayın</h2>
+      <div class="gold-line"></div>
+      <div class="contact-items">
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div>
+            <h4>Telefon</h4>
+            <a href="tel:+994554157215">+994 55 415 72 15</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📧</div>
+          <div>
+            <h4>E-poçt</h4>
+            <a href="mailto:anpsixologiya@gmail.com">anpsixologiya@gmail.com</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📸</div>
+          <div>
+            <h4>Instagram</h4>
+            <a href="https://instagram.com/an_psixologiyamerkezi" target="_blank">@an_psixologiyamerkezi</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">💬</div>
+          <div>
+            <h4>WhatsApp</h4>
+            <a href="https://wa.me/994554157215" target="_blank">+994 55 415 72 15</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📢</div>
+          <div>
+            <h4>WhatsApp Kanalı</h4>
+            <a href="https://whatsapp.com/channel/0029Vb7W6y92P59" target="_blank">Kanala qoşul</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form reveal">
+      <h3>Sual Göndərin</h3>
+      <div class="form-group">
+        <label>Adınız</label>
+        <input type="text" placeholder="Adınızı daxil edin" id="cf-name">
+      </div>
+      <div class="form-group">
+        <label>Telefon</label>
+        <input type="tel" placeholder="+994 xx xxx xx xx" id="cf-phone">
+      </div>
+      <div class="form-group">
+        <label>Mesajınız</label>
+        <textarea placeholder="Sualınızı yazın..." id="cf-msg"></textarea>
+      </div>
+      <button class="btn-submit" onclick="sendWhatsapp()">WhatsApp ilə Göndər</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">
+    <img src="logo.png" alt="AN"
+         onerror="this.outerHTML='<div style=\'width:32px;height:32px;background:linear-gradient(135deg,#E8C96A,#8B6914);border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#000;font-size:14px;\'>AN</div>'">
+    <span>© 2024 AN Psixoloji Dəstək və Reabilitasiya Mərkəzi</span>
+  </div>
+  <div class="footer-right">
+    <a href="https://instagram.com/an_psixologiyamerkezi" target="_blank" class="footer-insta">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+      </svg>
+      @an_psixologiyamerkezi
+    </a>
+    <span class="footer-credit">
+      by <a href="https://instagram.com/s_akhundoff" target="_blank">@s_akhundoff</a>
+    </span>
+  </div>
+</footer>
+
+<!-- ADMIN LOGIN OVERLAY -->
+<div id="admin-overlay">
+  <div class="admin-login">
+    <h2>🔐 Admin Paneli</h2>
+    <p>Daxil olmaq üçün şifrəni daxil edin</p>
+    <div class="admin-error" id="admin-error">Şifrə yanlışdır!</div>
+    <input type="password" id="admin-pass" placeholder="••••••••" onkeydown="if(event.key==='Enter')checkAdmin()">
+    <button class="btn-gold" onclick="checkAdmin()">Daxil Ol</button>
+    <br>
+    <button class="close-login" onclick="closeAdminOverlay()">Bağla</button>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div id="admin-panel">
+  <div class="admin-nav">
+    <h1>⚙️ Admin Paneli</h1>
+    <div class="admin-nav-right">
+      <button class="btn-admin" onclick="closeAdmin()">← Sayta Qayıt</button>
+      <button class="btn-admin danger" onclick="logoutAdmin()">Çıxış</button>
+    </div>
+  </div>
+  <div class="admin-content">
+
+    <!-- TABS -->
+    <div class="admin-tabs">
+      <button class="admin-tab active" onclick="switchTab('tab-news',this)">📰 Xəbərlər</button>
+      <button class="admin-tab" onclick="switchTab('tab-team',this)">👥 Əməkdaşlar</button>
+      <button class="admin-tab" onclick="switchTab('tab-about',this)">ℹ️ Haqqımızda</button>
+    </div>
+
+    <!-- TAB: XƏBƏRLƏR -->
+    <div id="tab-news" class="admin-section active">
+      <div class="admin-form">
+        <h3>Yeni Xəbər / Post Əlavə Et</h3>
+        <label>Başlıq *</label>
+        <input type="text" id="news-title" placeholder="Xəbər başlığı">
+        <label>Məzmun</label>
+        <textarea id="news-text" style="height:100px" placeholder="Xəbər mətni..."></textarea>
+        <label>Şəkil (URL və ya Base64)</label>
+        <input type="text" id="news-img-url" placeholder="https://... şəkil linki və ya boş buraxın">
+        <div style="margin-top:8px;display:flex;align-items:center;gap:12px;">
+          <label style="margin:0;text-transform:none;font-size:12px;color:var(--gray);">və ya fayldan yüklə:</label>
+          <input type="file" id="news-img-file" accept="image/*" style="font-size:12px;color:var(--gray);border:none;background:none;padding:0;" onchange="previewImg(this)">
+        </div>
+        <div id="news-img-preview" style="margin-top:10px;"></div>
+        <label>Video (YouTube linki)</label>
+        <input type="text" id="news-video" placeholder="https://youtube.com/watch?v=...">
+        <button class="btn-gold" onclick="addNews()">Xəbər Əlavə Et</button>
+        <div class="success-msg" id="news-success">✓ Xəbər uğurla əlavə edildi!</div>
+      </div>
+      <h3 style="font-family:'Playfair Display',serif;color:var(--white);margin-bottom:16px;">Mövcud Xəbərlər</h3>
+      <div class="admin-list" id="admin-news-list"></div>
+    </div>
+
+    <!-- TAB: ƏMƏKDAŞLAR -->
+    <div id="tab-team" class="admin-section">
+      <div class="admin-form">
+        <h3>Yeni Əməkdaş Əlavə Et</h3>
+        <div class="form-row">
+          <div>
+            <label>Ad Soyad *</label>
+            <input type="text" id="team-name" placeholder="Ad Soyad">
+          </div>
+          <div>
+            <label>Vəzifə *</label>
+            <input type="text" id="team-role" placeholder="Psixoloq, Loqoped...">
+          </div>
+        </div>
+        <label>Qısa Məlumat</label>
+        <textarea id="team-bio" style="height:80px" placeholder="Əməkdaş haqqında qısa məlumat..."></textarea>
+        <button class="btn-gold" onclick="addTeam()">Əlavə Et</button>
+        <div class="success-msg" id="team-success">✓ Əməkdaş əlavə edildi!</div>
+      </div>
+      <h3 style="font-family:'Playfair Display',serif;color:var(--white);margin-bottom:16px;">Əməkdaşlar Siyahısı</h3>
+      <div class="admin-list" id="admin-team-list"></div>
+    </div>
+
+    <!-- TAB: HAQQIMIZDA -->
+    <div id="tab-about" class="admin-section">
+      <div class="admin-form">
+        <h3>Haqqımızda Bölməsini Redaktə Et</h3>
+        <label>Əsas Mətn</label>
+        <textarea class="about-edit-area" id="about-edit"></textarea>
+        <button class="btn-gold" onclick="saveAbout()">Yadda Saxla</button>
+        <div class="success-msg" id="about-success">✓ Yadda saxlandı!</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ========== DATA ==========
+const ADMIN_PASS = 'AN2024';
+let data = {
+  news: [],
+  team: [],
+  about: 'AN Psixoloji Dəstək və Reabilitasiya Mərkəzi xüsusi qayğıya ehtiyacı olan uşaqlara peşəkar psixoloji dəstək, erken müdaxilə və reabilitasiya xidmətləri göstərir. Mərkəzimiz hər uşağın fərdi ehtiyaclarına uyğun proqramlar hazırlayır.'
+};
+
+function loadData() {
+  try {
+    const saved = localStorage.getItem('an_site_data');
+    if (saved) data = JSON.parse(saved);
+  } catch(e) {}
+}
+
+function saveData() {
+  localStorage.setItem('an_site_data', JSON.stringify(data));
+}
+
+// ========== NAVBAR ==========
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
+});
+
+document.getElementById('burger').addEventListener('click', () => {
+  document.getElementById('mobile-menu').classList.toggle('open');
+});
+
+function closeMobile() {
+  document.getElementById('mobile-menu').classList.remove('open');
+}
+
+// ========== SCROLL REVEAL ==========
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// ========== ADMIN ACCESS (Ctrl+Shift+A) ==========
+document.addEventListener('keydown', (e) => {
+  if (e.ctrlKey && e.shiftKey && e.key === 'A') {
+    e.preventDefault();
+    document.getElementById('admin-overlay').classList.add('open');
+    setTimeout(() => document.getElementById('admin-pass').focus(), 100);
+  }
+});
+
+function checkAdmin() {
+  const pass = document.getElementById('admin-pass').value;
+  if (pass === ADMIN_PASS) {
+    document.getElementById('admin-overlay').classList.remove('open');
+    document.getElementById('admin-pass').value = '';
+    document.getElementById('admin-error').style.display = 'none';
+    openAdminPanel();
+  } else {
+    document.getElementById('admin-error').style.display = 'block';
+    document.getElementById('admin-pass').value = '';
+    document.getElementById('admin-pass').focus();
+  }
+}
+
+function closeAdminOverlay() {
+  document.getElementById('admin-overlay').classList.remove('open');
+  document.getElementById('admin-pass').value = '';
+  document.getElementById('admin-error').style.display = 'none';
+}
+
+function openAdminPanel() {
+  document.getElementById('admin-panel').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  renderAdminNews();
+  renderAdminTeam();
+  document.getElementById('about-edit').value = data.about;
+}
+
+function closeAdmin() {
+  document.getElementById('admin-panel').classList.remove('open');
+  document.body.style.overflow = '';
+  renderNews();
+  renderTeam();
+  document.getElementById('about-text').textContent = data.about;
+}
+
+function logoutAdmin() {
+  closeAdmin();
+}
+
+// ========== TABS ==========
+function switchTab(tabId, btn) {
+  document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.admin-tab').forEach(b => b.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ========== SUCCESS MSG ==========
+function showSuccess(id) {
+  const el = document.getElementById(id);
+  el.style.display = 'block';
+  setTimeout(() => el.style.display = 'none', 3000);
+}
+
+// ========== IMAGE PREVIEW ==========
+let uploadedImageBase64 = '';
+function previewImg(input) {
+  if (!input.files || !input.files[0]) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    uploadedImageBase64 = e.target.result;
+    document.getElementById('news-img-preview').innerHTML =
+      `<img src="${uploadedImageBase64}" style="max-height:120px;border-radius:8px;border:1px solid rgba(201,168,76,0.3);">`;
+    document.getElementById('news-img-url').value = '';
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+
+// ========== YOUTUBE EMBED ==========
+function getYTEmbed(url) {
+  if (!url) return '';
+  let id = '';
+  const m1 = url.match(/[?&]v=([^&]+)/);
+  const m2 = url.match(/youtu\.be\/([^?]+)/);
+  const m3 = url.match(/embed\/([^?]+)/);
+  if (m1) id = m1[1];
+  else if (m2) id = m2[1];
+  else if (m3) id = m3[1];
+  return id ? `https://www.youtube.com/embed/${id}` : '';
+}
+
+// ========== NEWS ==========
+function addNews() {
+  const title = document.getElementById('news-title').value.trim();
+  if (!title) { alert('Başlıq daxil edin!'); return; }
+  const imgUrl = uploadedImageBase64 || document.getElementById('news-img-url').value.trim();
+  const item = {
+    id: Date.now(),
+    title,
+    text: document.getElementById('news-text').value.trim(),
+    img: imgUrl,
+    video: document.getElementById('news-video').value.trim(),
+    date: new Date().toLocaleDateString('az-AZ', {day:'2-digit',month:'long',year:'numeric'})
+  };
+  data.news.unshift(item);
+  saveData();
+  document.getElementById('news-title').value = '';
+  document.getElementById('news-text').value = '';
+  document.getElementById('news-img-url').value = '';
+  document.getElementById('news-video').value = '';
+  document.getElementById('news-img-preview').innerHTML = '';
+  document.getElementById('news-img-file').value = '';
+  uploadedImageBase64 = '';
+  showSuccess('news-success');
+  renderAdminNews();
+}
+
+function deleteNews(id) {
+  if (!confirm('Xəbəri silmək istəyirsiniz?')) return;
+  data.news = data.news.filter(n => n.id !== id);
+  saveData();
+  renderAdminNews();
+}
+
+function renderAdminNews() {
+  const el = document.getElementById('admin-news-list');
+  if (!data.news.length) {
+    el.innerHTML = '<p style="color:var(--gray);font-size:13px;">Hələlik xəbər yoxdur.</p>';
+    return;
+  }
+  el.innerHTML = data.news.map(n => `
+    <div class="admin-list-item">
+      <div class="admin-list-item-info">
+        <h4>${n.title}</h4>
+        <p>${n.date}${n.img ? ' · 🖼️ Şəkil var' : ''}${n.video ? ' · 🎬 Video var' : ''}</p>
+      </div>
+      <div class="list-actions">
+        <button class="btn-admin danger" onclick="deleteNews(${n.id})">Sil</button>
+      </div>
+    </div>`).join('');
+}
+
+function renderNews() {
+  const el = document.getElementById('news-container');
+  if (!data.news.length) {
+    el.innerHTML = '<div class="news-empty"><span class="news-empty-icon">📰</span>Hələlik xəbər yoxdur.</div>';
+    return;
+  }
+  el.innerHTML = data.news.map(n => {
+    let mediaHtml = '';
+    const ytEmbed = getYTEmbed(n.video);
+    if (ytEmbed) {
+      mediaHtml = `<div class="news-video-wrap"><iframe src="${ytEmbed}" allowfullscreen loading="lazy"></iframe></div>`;
+    } else if (n.img) {
+      mediaHtml = `<img class="news-media" src="${n.img}" alt="${n.title}" loading="lazy">`;
+    } else {
+      mediaHtml = `<div class="news-media-placeholder">📰</div>`;
+    }
+    return `
+    <div class="news-card">
+      ${mediaHtml}
+      <div class="news-body">
+        <div class="news-date">${n.date}</div>
+        <h3>${n.title}</h3>
+        ${n.text ? `<p>${n.text}</p>` : ''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ========== TEAM ==========
+function addTeam() {
+  const name = document.getElementById('team-name').value.trim();
+  const role = document.getElementById('team-role').value.trim();
+  if (!name || !role) { alert('Ad və vəzifə daxil edin!'); return; }
+  data.team.push({
+    id: Date.now(),
+    name, role,
+    bio: document.getElementById('team-bio').value.trim()
+  });
+  saveData();
+  document.getElementById('team-name').value = '';
+  document.getElementById('team-role').value = '';
+  document.getElementById('team-bio').value = '';
+  showSuccess('team-success');
+  renderAdminTeam();
+}
+
+function deleteTeam(id) {
+  if (!confirm('Əməkdaşı silmək istəyirsiniz?')) return;
+  data.team = data.team.filter(t => t.id !== id);
+  saveData();
+  renderAdminTeam();
+}
+
+function renderAdminTeam() {
+  const el = document.getElementById('admin-team-list');
+  if (!data.team.length) {
+    el.innerHTML = '<p style="color:var(--gray);font-size:13px;">Hələlik əməkdaş yoxdur.</p>';
+    return;
+  }
+  el.innerHTML = data.team.map(t => `
+    <div class="admin-list-item">
+      <div class="admin-list-item-info">
+        <h4>${t.name}</h4>
+        <p>${t.role}${t.bio ? ' · ' + t.bio.substring(0,50) + '...' : ''}</p>
+      </div>
+      <div class="list-actions">
+        <button class="btn-admin danger" onclick="deleteTeam(${t.id})">Sil</button>
+      </div>
+    </div>`).join('');
+}
+
+function renderTeam() {
+  const el = document.getElementById('team-container');
+  if (!data.team.length) {
+    el.innerHTML = '<div class="team-empty"><span style="font-size:48px;display:block;margin-bottom:16px;">👥</span>Əməkdaşlar admin paneldən əlavə ediləcək</div>';
+    return;
+  }
+  el.innerHTML = data.team.map(t => `
+    <div class="team-card">
+      <div class="team-avatar">${t.name.charAt(0)}</div>
+      <h3>${t.name}</h3>
+      <div class="role">${t.role}</div>
+      ${t.bio ? `<p class="bio">${t.bio}</p>` : ''}
+    </div>`).join('');
+}
+
+// ========== ABOUT ==========
+function saveAbout() {
+  data.about = document.getElementById('about-edit').value.trim();
+  saveData();
+  showSuccess('about-success');
+}
+
+// ========== CONTACT FORM ==========
+function sendWhatsapp() {
+  const name = document.getElementById('cf-name').value.trim();
+  const phone = document.getElementById('cf-phone').value.trim();
+  const msg = document.getElementById('cf-msg').value.trim();
+  if (!name || !msg) { alert('Ad və mesaj daxil edin!'); return; }
+  const text = encodeURIComponent(`Salam! Adım: ${name}\nTelefon: ${phone}\nMesaj: ${msg}`);
+  window.open(`https://wa.me/994554157215?text=${text}`, '_blank');
+}
+
+// ========== INIT ==========
+loadData();
+renderNews();
+renderTeam();
+document.getElementById('about-text').textContent = data.about;
+</script>
+</body>
+</html>
