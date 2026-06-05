@@ -1434,23 +1434,21 @@ document.querySelectorAll('.reveal').forEach(el=>revealObs.observe(el));
 
 // ===== NEWS BADGE =====
 function updateNewsBadge() {
-  const seen = parseInt(localStorage.getItem('an_news_seen')||'0');
-  const unseen = Math.max(0, data.news.length - seen);
-  // Logo yanındakı badge
-  const lb = document.getElementById('logo-news-badge');
-  if(lb) {
-    if(unseen > 0){ lb.textContent = unseen; lb.classList.add('show'); }
-    else { lb.classList.remove('show'); }
-  }
-  // Mobil menyu badge
-  const mb = document.getElementById('mob-news-badge');
-  if(mb) {
-    if(unseen > 0){ mb.textContent = unseen; mb.classList.add('show'); }
-    else { mb.classList.remove('show'); }
-  }
+  // Son görülmüş xəbər ID-sini yoxla
+  const lastSeen = localStorage.getItem('an_last_seen_id') || '';
+  const unseen = data.news.length > 0 && data.news[0].id.toString() !== lastSeen
+    ? data.news.filter(n => n.id.toString() > lastSeen).length
+    : 0;
+  [document.getElementById('logo-news-badge'), document.getElementById('mob-news-badge')].forEach(b => {
+    if (!b) return;
+    if (unseen > 0) { b.textContent = unseen; b.classList.add('show'); }
+    else { b.classList.remove('show'); }
+  });
 }
 function markSeen() {
-  localStorage.setItem('an_news_seen', String(data.news.length));
+  if (data.news.length > 0) {
+    localStorage.setItem('an_last_seen_id', data.news[0].id.toString());
+  }
   updateNewsBadge();
 }
 // Auto mark seen on scroll into view
