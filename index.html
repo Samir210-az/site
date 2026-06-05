@@ -143,6 +143,7 @@
     display: flex; align-items: center;
     padding: 90px 5% 60px;
     overflow: hidden;
+    max-width: 100%;
   }
 
   .hero-office-bg {
@@ -760,7 +761,7 @@
   @keyframes badgePop { from{transform:scale(0);opacity:0} to{transform:scale(1);opacity:1} }
 
   /* News image 16:9 */
-  .news-media { width:100%; height:220px; object-fit:cover; display:block; }
+  .news-media { width:100%; height:220px; min-height:220px; max-height:220px; object-fit:cover; object-position:center; display:block; flex-shrink:0; }
   .news-media-placeholder { width:100%; height:220px; background:linear-gradient(135deg,var(--warm2),var(--warm3)); display:flex; align-items:center; justify-content:center; font-size:48px; }
   .news-video-wrap { position:relative; width:100%; height:220px; overflow:hidden; }
   .news-video-wrap iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:none; }
@@ -857,17 +858,22 @@
 
 
   /* News badge — fixed header position */
-  .news-badge-fixed {
-    display: none;
+    .news-badge-fixed {
+    display: inline-flex;
     background: #e74c3c; color: #fff;
     font-size: 10px; font-weight: 900;
     min-width: 18px; height: 18px; border-radius: 9px;
     align-items: center; justify-content: center;
     padding: 0 5px; line-height: 1;
-    animation: badgePop2 0.3s cubic-bezier(0.34,1.56,0.64,1);
-    vertical-align: middle; margin-left: 4px;
+    vertical-align: middle; margin-left: 5px;
+    opacity: 0; transform: scale(0);
+    transition: opacity 0.3s, transform 0.3s;
+    pointer-events: none;
   }
-  .news-badge-fixed.show { display: inline-flex; }
+  .news-badge-fixed.show {
+    opacity: 1; transform: scale(1);
+    pointer-events: auto;
+  }
   @keyframes badgePop2 { from{transform:scale(0);opacity:0} to{transform:scale(1);opacity:1} }
 
 </style>
