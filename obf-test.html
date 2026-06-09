@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AN Psixoloji Dəstək və Reabilitasiya Mərkəzi</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C96A;
+    --gold-dark: #8B6914;
+    --red: #C0392B;
+    --warm1: #FFF8F0;
+    --warm2: #FFF3E8;
+    --warm3: #FDEBD0;
+    --deep: #2C1810;
+    --deep2: #3D2314;
+    --text: #3D2314;
+    --text2: #6B4226;
+    --gray: #9B7B6B;
+    --white: #FFFFFF;
+    --cream: #FEF9F4;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; overflow-x: hidden; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--warm2); }
+  ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+  /* ===== NAVBAR ===== */
+  nav {
+    position: fixed; top:0; left:0; right:0; z-index:1000;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5%;
+    height: 72px;
+    background: rgba(255,248,240,0.95);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+    transition: all 0.3s;
+  }
+  nav.scrolled {
+    height: 62px;
+    box-shadow: 0 4px 24px rgba(44,24,16,0.08);
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none;
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .nav-logo img {
+    height: 48px; width: auto;
+    transition: transform 0.15s;
+  }
+  .nav-logo.tapping img { transform: scale(0.92); }
+  .nav-logo-text {
+    display: none;
+    width: 46px; height: 46px;
+    background: linear-gradient(135deg, #E8C96A, #8B6914);
+    border-radius: 10px;
+    align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700; font-size: 18px; color: #fff;
+  }
+
+  .tap-counter {
+    position: fixed; top: 80px; left: 50%; transform: translateX(-50%);
+    background: rgba(44,24,16,0.85);
+    color: var(--gold-light);
+    padding: 8px 20px; border-radius: 20px;
+    font-size: 13px; font-weight: 600;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s; z-index: 9999;
+  }
+  .tap-counter.show { opacity: 1; }
+
+  .nav-links {
+    display: flex; gap: 28px; list-style: none;
+  }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text2);
+    font-size: 13px; font-weight: 700;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    position: relative; transition: color 0.3s;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute; bottom:-4px; left:0;
+    width:0; height:2px;
+    background: var(--gold);
+    border-radius: 2px;
+    transition: width 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold-dark); }
+  .nav-links a:hover::after { width: 100%; }
+
+  .burger {
+    display: none; flex-direction: column; gap: 5px;
+    cursor: pointer; background: none; border: none; padding: 5px;
+  }
+  .burger span {
+    width: 26px; height: 2px;
+    background: var(--gold-dark); border-radius: 2px;
+    transition: all 0.3s;
+  }
+
+  .mobile-menu {
+    display: none; position: fixed;
+    top: 72px; left:0; right:0; z-index:999;
+    background: rgba(255,248,240,0.98);
+    backdrop-filter: blur(20px);
+    padding: 20px 5%;
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+    flex-direction: column; gap: 4px;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    text-decoration: none; color: var(--text2);
+    font-size: 15px; font-weight: 700;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(201,168,76,0.12);
+    letter-spacing: 0.04em; text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .mobile-menu a:hover { color: var(--gold-dark); }
+
+  /* ===== HERO ===== */
+  #hero {
+    min-height: 100vh;
+    position: relative;
+    display: flex; align-items: center;
+    padding: 90px 5% 60px;
+    overflow: hidden;
+    max-width: 100%;
+  }
+
+  .hero-office-bg {
+    position: absolute; inset:0;
+    background-image: url('office.jpg');
+    background-size: cover;
+    background-position: center top;
+    filter: brightness(0.35) saturate(0.8);
+  }
+
+  .hero-overlay {
+    position: absolute; inset:0;
+    background: linear-gradient(
+      135deg,
+      rgba(255,248,240,0.92) 0%,
+      rgba(255,243,232,0.75) 40%,
+      rgba(201,168,76,0.15) 70%,
+      rgba(44,24,16,0.5) 100%
+    );
+  }
+
+  /* Decorative bubbles */
+  .bubble {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.12;
+    animation: floatBubble linear infinite;
+  }
+  .bubble:nth-child(1) { width:180px;height:180px;background:var(--gold);top:10%;right:12%;animation-duration:8s; }
+  .bubble:nth-child(2) { width:120px;height:120px;background:var(--red);top:60%;right:25%;animation-duration:11s;animation-delay:-3s; }
+  .bubble:nth-child(3) { width:80px;height:80px;background:var(--gold-light);top:30%;right:5%;animation-duration:9s;animation-delay:-5s; }
+  @keyframes floatBubble {
+    0%,100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(10deg); }
+  }
+
+  .hero-content {
+    position: relative; z-index:2;
+    max-width: 640px;
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap:8px;
+    background: rgba(201,168,76,0.15);
+    border: 1.5px solid rgba(201,168,76,0.5);
+    border-radius: 30px;
+    padding: 7px 18px;
+    font-size: 12px; font-weight: 800;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--gold-dark);
+    margin-bottom: 24px;
+    animation: fadeUp 0.7s ease both;
+  }
+  .hero-badge::before {
+    content:'';
+    width:8px;height:8px;
+    background:var(--gold);
+    border-radius:50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.7)} }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 5.5vw, 66px);
+    font-weight: 700;
+    line-height: 1.12;
+    color: var(--deep);
+    margin-bottom: 18px;
+    animation: fadeUp 0.7s 0.1s ease both;
+  }
+  .hero-title span {
+    background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    font-size: 16px; color: var(--text2);
+    line-height: 1.75; margin-bottom: 36px;
+    font-weight: 500;
+    animation: fadeUp 0.7s 0.2s ease both;
+  }
+
+  .hero-btns {
+    display: flex; gap:14px; flex-wrap:wrap;
+    animation: fadeUp 0.7s 0.3s ease both;
+  }
+
+  .btn-gold {
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
+    color: #fff;
+    padding: 14px 30px;
+    border-radius: 50px;
+    font-weight: 800; font-size: 13px;
+    letter-spacing: 0.05em; text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s;
+    box-shadow: 0 4px 20px rgba(201,168,76,0.4);
+    border: none; cursor: pointer;
+    font-family: 'Nunito', sans-serif;
+  }
+  .btn-gold:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(201,168,76,0.5);
+  }
+
+  .btn-outline {
+    border: 2px solid var(--gold);
+    color: var(--gold-dark);
+    padding: 13px 30px;
+    border-radius: 50px;
+    font-weight: 800; font-size: 13px;
+    letter-spacing: 0.05em; text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s;
+    background: rgba(255,255,255,0.6);
+  }
+  .btn-outline:hover {
+    background: var(--gold);
+    color: #fff;
+    transform: translateY(-2px);
+  }
+
+  .hero-stats {
+    position: absolute; right:5%; top:50%;
+    transform: translateY(-50%);
+    display: flex; flex-direction: column; gap:16px;
+    animation: fadeLeft 0.7s 0.4s ease both;
+  }
+  .stat-card {
+    background: rgba(255,255,255,0.88);
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 16px;
+    padding: 18px 24px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s;
+    box-shadow: 0 4px 20px rgba(44,24,16,0.08);
+  }
+  .stat-card:hover {
+    transform: translateX(-4px);
+    box-shadow: 0 8px 30px rgba(44,24,16,0.12);
+  }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px; font-weight: 700;
+    color: var(--gold-dark); display: block;
+  }
+  .stat-label {
+    font-size: 11px; color: var(--gray);
+    letter-spacing: 0.06em; text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  /* ===== SECTIONS ===== */
+  section { padding: 90px 5%; }
+
+  .section-tag {
+    display: inline-block;
+    font-size: 11px; font-weight: 800;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--gold-dark);
+    background: rgba(201,168,76,0.1);
+    padding: 5px 14px; border-radius: 20px;
+    margin-bottom: 14px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(26px, 3.5vw, 44px);
+    font-weight: 700; color: var(--deep);
+    line-height: 1.2; margin-bottom: 14px;
+  }
+  .section-desc {
+    font-size: 15px; color: var(--text2);
+    line-height: 1.8; max-width: 560px; font-weight: 500;
+  }
+  .gold-line {
+    width: 56px; height: 3px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    margin: 14px 0 36px; border-radius: 2px;
+  }
+
+  /* ===== HAQQIMIZDA ===== */
+  #haqqimizda {
+    background: linear-gradient(135deg, var(--warm1) 0%, var(--warm2) 100%);
+    position: relative;
+  }
+  #haqqimizda::before {
+    content: '🧸';
+    position: absolute; right:8%; top:12%;
+    font-size: 120px; opacity: 0.06;
+    transform: rotate(15deg);
+  }
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1.4fr;
+    gap: 70px; align-items: center;
+  }
+  .about-visual {
+    position: relative; display: flex;
+    align-items: center; justify-content: center;
+  }
+  .about-logo-wrap {
+    position: relative; z-index:2;
+    background: white;
+    border-radius: 24px;
+    padding: 32px;
+    box-shadow: 0 16px 48px rgba(44,24,16,0.12);
+    border: 1px solid rgba(201,168,76,0.2);
+  }
+  .about-logo-wrap img {
+    width: 100%; max-width: 260px;
+    display: block;
+    animation: float 6s ease-in-out infinite;
+  }
+  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+  .about-deco-ring {
+    position: absolute;
+    width: 320px; height: 320px;
+    border: 2px dashed rgba(201,168,76,0.2);
+    border-radius: 50%;
+    animation: rotateSlow 25s linear infinite;
+  }
+  @keyframes rotateSlow { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+
+  .about-list {
+    list-style: none;
+    display: flex; flex-direction: column; gap: 14px;
+    margin-top: 20px;
+  }
+  .about-list li {
+    display: flex; align-items: flex-start; gap: 12px;
+    font-size: 14px; color: var(--text2);
+    line-height: 1.6; font-weight: 600;
+  }
+  .about-list li span.icon {
+    font-size: 18px; flex-shrink:0; margin-top:1px;
+  }
+  .director-card {
+    margin-top: 32px;
+    background: white;
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 16px;
+    padding: 18px 22px;
+    display: flex; align-items: center; gap: 16px;
+    box-shadow: 0 4px 20px rgba(44,24,16,0.06);
+  }
+  .director-avatar {
+    width: 52px; height: 52px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold-dark));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; color: #fff; font-weight: 700;
+    flex-shrink:0;
+  }
+  .director-info h4 {
+    font-size: 16px; color: var(--deep); font-weight: 800;
+  }
+  .director-info span {
+    font-size: 12px; color: var(--gold-dark);
+    font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+  }
+
+  /* ===== XİDMƏTLƏR ===== */
+  #xidmetler {
+    background: var(--cream);
+    position: relative;
+  }
+  #xidmetler::after {
+    content: '🎯';
+    position: absolute; left:4%; bottom:10%;
+    font-size: 100px; opacity: 0.05;
+    transform: rotate(-10deg);
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 22px; margin-top: 10px;
+  }
+  .service-card {
+    background: white;
+    border: 1.5px solid rgba(201,168,76,0.15);
+    border-radius: 20px;
+    padding: 30px 22px;
+    transition: all 0.35s;
+    position: relative; overflow: hidden;
+    cursor: default;
+    box-shadow: 0 2px 16px rgba(44,24,16,0.04);
+  }
+  .service-card::before {
+    content:'';
+    position: absolute; top:0; left:0; right:0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold-light), var(--gold));
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.35s;
+  }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-card:hover {
+    border-color: rgba(201,168,76,0.35);
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(44,24,16,0.1);
+  }
+  .service-icon {
+    font-size: 44px; margin-bottom: 18px; display: block;
+  }
+  .service-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px; color: var(--deep);
+    margin-bottom: 10px; font-weight: 600;
+  }
+  .service-card p {
+    font-size: 13px; color: var(--text2);
+    line-height: 1.7; font-weight: 500;
+  }
+
+  /* ===== ƏMƏKDAŞLAR ===== */
+  #emekdaslar {
+    background: linear-gradient(135deg, var(--warm2) 0%, var(--warm3) 100%);
+  }
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 24px; margin-top: 10px;
+  }
+  .team-card {
+    background: white;
+    border: 1.5px solid rgba(201,168,76,0.15);
+    border-radius: 20px;
+    padding: 32px 22px;
+    text-align: center;
+    transition: all 0.3s;
+    box-shadow: 0 2px 16px rgba(44,24,16,0.04);
+  }
+  .team-card:hover {
+    border-color: rgba(201,168,76,0.35);
+    transform: translateY(-4px);
+    box-shadow: 0 14px 36px rgba(44,24,16,0.1);
+  }
+  .team-avatar {
+    width: 76px; height: 76px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold-dark));
+    margin: 0 auto 18px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 26px; color: #fff; font-weight: 700;
+    border: 3px solid rgba(201,168,76,0.3);
+  }
+  .team-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px; color: var(--deep); margin-bottom: 6px;
+  }
+  .team-card .role {
+    font-size: 12px; color: var(--gold-dark);
+    letter-spacing: 0.06em; text-transform: uppercase;
+    margin-bottom: 10px; font-weight: 800;
+  }
+  .team-card .bio {
+    font-size: 13px; color: var(--text2); line-height: 1.6; font-weight: 500;
+  }
+  .team-empty, .news-empty {
+    text-align: center; color: var(--gray);
+    font-size: 14px; padding: 60px 20px;
+    grid-column: 1/-1; font-weight: 600;
+  }
+
+  /* ===== XƏBƏRLƏR ===== */
+  #xeberler { background: var(--cream); }
+  .news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px; margin-top: 10px;
+  }
+  .news-card {
+    background: white;
+    border: 1.5px solid rgba(201,168,76,0.15);
+    border-radius: 20px; overflow: hidden;
+    transition: all 0.3s;
+    box-shadow: 0 2px 16px rgba(44,24,16,0.04);
+  }
+  .news-card:hover {
+    border-color: rgba(201,168,76,0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 14px 36px rgba(44,24,16,0.1);
+  }
+  /* news-media: overridden below */
+  /* news-media-placeholder & video: overridden below */
+  .news-body { padding: 22px; }
+  .news-date { font-size:11px; color:var(--gold-dark); font-weight:800; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:8px; }
+  .news-card h3 { font-family:'Playfair Display',serif; font-size:18px; color:var(--deep); margin-bottom:8px; line-height:1.3; }
+  .news-card p { font-size:13px; color:var(--text2); line-height:1.7; font-weight:500; }
+
+  /* ===== ƏLAQƏ ===== */
+  #elaqe { background: linear-gradient(135deg, var(--warm1), var(--warm2)); }
+  .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:start; }
+  .contact-items { display:flex; flex-direction:column; gap:20px; margin-top:16px; }
+  .contact-item { display:flex; align-items:flex-start; gap:14px; }
+  .contact-icon {
+    width:48px; height:48px; flex-shrink:0;
+    border-radius:12px;
+    background: white;
+    border: 1.5px solid rgba(201,168,76,0.25);
+    display:flex; align-items:center; justify-content:center;
+    font-size:20px;
+    box-shadow: 0 2px 10px rgba(44,24,16,0.06);
+  }
+  .contact-item h4 { font-size:11px; color:var(--gold-dark); letter-spacing:0.08em; text-transform:uppercase; margin-bottom:4px; font-weight:800; }
+  .contact-item p, .contact-item a { font-size:15px; color:var(--deep); text-decoration:none; font-weight:600; transition:color 0.2s; }
+  .contact-item a:hover { color:var(--gold-dark); }
+
+  .contact-form {
+    background: white;
+    border: 1.5px solid rgba(201,168,76,0.2);
+    border-radius: 20px; padding: 32px;
+    box-shadow: 0 4px 24px rgba(44,24,16,0.06);
+  }
+  .contact-form h3 { font-family:'Playfair Display',serif; font-size:22px; color:var(--deep); margin-bottom:22px; }
+  .form-group { margin-bottom:16px; }
+  .form-group label { display:block; font-size:11px; color:var(--gold-dark); letter-spacing:0.08em; text-transform:uppercase; margin-bottom:7px; font-weight:800; }
+  .form-group input, .form-group textarea {
+    width:100%;
+    background: var(--warm1);
+    border: 1.5px solid rgba(201,168,76,0.2);
+    border-radius: 10px; padding: 12px 14px;
+    color: var(--deep);
+    font-family: 'Nunito', sans-serif; font-size:14px; font-weight:600;
+    transition: border-color 0.3s; resize:none;
+  }
+  .form-group input:focus, .form-group textarea:focus { outline:none; border-color:var(--gold); background:white; }
+  .form-group textarea { height:110px; }
+  .btn-submit {
+    width:100%;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
+    color: white; border:none; border-radius:50px;
+    padding:14px;
+    font-family:'Nunito',sans-serif; font-weight:800; font-size:13px;
+    letter-spacing:0.06em; text-transform:uppercase;
+    cursor:pointer; transition:all 0.3s;
+    box-shadow: 0 4px 16px rgba(201,168,76,0.35);
+  }
+  .btn-submit:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(201,168,76,0.45); }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--deep);
+    padding: 36px 5%;
+    display:flex; align-items:center; justify-content:space-between;
+    flex-wrap:wrap; gap:18px;
+  }
+  .footer-left { display:flex; align-items:center; gap:12px; }
+  .footer-logo-img { height:38px; opacity:0.9; filter:brightness(1.1); }
+  .footer-logo-fb {
+    width:36px;height:36px;
+    background:linear-gradient(135deg,var(--gold-light),var(--gold-dark));
+    border-radius:8px;display:flex;align-items:center;justify-content:center;
+    font-family:'Playfair Display',serif;font-weight:700;color:#fff;font-size:14px;
+  }
+  .footer-left span { font-size:12px; color:rgba(255,255,255,0.5); font-weight:600; }
+  .footer-right { display:flex; align-items:center; gap:20px; }
+  .footer-insta {
+    display:flex; align-items:center; gap:8px;
+    text-decoration:none; color:rgba(255,255,255,0.6);
+    font-size:13px; font-weight:700; transition:color 0.3s;
+  }
+  .footer-insta:hover { color:var(--gold); }
+  .footer-insta svg { width:18px;height:18px;fill:currentColor; }
+  .footer-credit { font-size:11px; color:rgba(255,255,255,0.25); letter-spacing:0.05em; }
+  .footer-credit a { color:rgba(201,168,76,0.5); text-decoration:none; transition:color 0.3s; }
+  .footer-credit a:hover { color:var(--gold); }
+
+  /* ===== ADMIN OVERLAY ===== */
+  #admin-overlay {
+    display:none; position:fixed; inset:0; z-index:9000;
+    background:rgba(44,24,16,0.8);
+    backdrop-filter:blur(10px);
+    align-items:center; justify-content:center;
+  }
+  #admin-overlay.open { display:flex; }
+  .admin-login {
+    background: var(--warm1);
+    border: 2px solid rgba(201,168,76,0.35);
+    border-radius: 24px; padding: 44px 40px;
+    width:100%; max-width:380px; text-align:center;
+    box-shadow: 0 24px 60px rgba(44,24,16,0.3);
+  }
+  .admin-login h2 { font-family:'Playfair Display',serif; font-size:24px; color:var(--deep); margin-bottom:6px; }
+  .admin-login p { font-size:13px; color:var(--text2); margin-bottom:28px; font-weight:600; }
+  .admin-login input {
+    width:100%;
+    background: white; border:1.5px solid rgba(201,168,76,0.3);
+    border-radius:10px; padding:13px 16px;
+    color:var(--deep); font-family:'Nunito',sans-serif; font-size:15px;
+    text-align:center; letter-spacing:0.2em; margin-bottom:14px;
+    transition:border-color 0.3s;
+  }
+  .admin-login input:focus { outline:none; border-color:var(--gold); }
+  .admin-login .btn-gold { width:100%; padding:13px; font-size:13px; }
+  .admin-login .close-login {
+    background:none; border:none; color:var(--gray);
+    cursor:pointer; font-size:13px; margin-top:14px;
+    text-decoration:underline; font-family:'Nunito',sans-serif; font-weight:600;
+  }
+  .admin-error { color:var(--red); font-size:13px; margin-bottom:10px; display:none; font-weight:700; }
+
+  /* ===== ADMIN PANEL ===== */
+  #admin-panel { display:none; position:fixed; inset:0; z-index:9000; background:var(--cream); overflow-y:auto; }
+  #admin-panel.open { display:block; }
+  .admin-nav {
+    background: var(--deep);
+    padding:16px 5%; display:flex; align-items:center; justify-content:space-between;
+    position:sticky; top:0; z-index:100;
+  }
+  .admin-nav h1 { font-family:'Playfair Display',serif; font-size:20px; color:var(--gold); }
+  .admin-nav-right { display:flex; gap:10px; }
+  .btn-admin {
+    background:rgba(201,168,76,0.15); border:1px solid rgba(201,168,76,0.4);
+    color:var(--gold-light); padding:8px 18px; border-radius:50px;
+    font-family:'Nunito',sans-serif; font-size:12px; font-weight:800;
+    cursor:pointer; transition:all 0.3s; letter-spacing:0.04em;
+  }
+  .btn-admin:hover { background:rgba(201,168,76,0.25); }
+  .btn-admin.danger { background:rgba(192,57,43,0.15); border-color:rgba(192,57,43,0.4); color:#e74c3c; }
+  .btn-admin.danger:hover { background:rgba(192,57,43,0.25); }
+
+  .admin-content { padding:36px 5%; }
+  .admin-tabs {
+    display:flex; gap:4px; background:white;
+    border:1.5px solid rgba(201,168,76,0.15);
+    border-radius:50px; padding:5px;
+    margin-bottom:32px; width:fit-content;
+    box-shadow:0 2px 12px rgba(44,24,16,0.06);
+  }
+  .admin-tab {
+    padding:10px 22px; border-radius:50px; border:none;
+    background:none; color:var(--text2);
+    font-family:'Nunito',sans-serif; font-size:13px; font-weight:800;
+    cursor:pointer; transition:all 0.3s; letter-spacing:0.03em;
+  }
+  .admin-tab.active { background:linear-gradient(135deg,var(--gold-light),var(--gold)); color:white; }
+  .admin-section { display:none; }
+  .admin-section.active { display:block; }
+  .admin-form {
+    background:white; border:1.5px solid rgba(201,168,76,0.15);
+    border-radius:20px; padding:28px; margin-bottom:28px;
+    box-shadow:0 2px 16px rgba(44,24,16,0.04);
+  }
+  .admin-form h3 { font-family:'Playfair Display',serif; font-size:19px; color:var(--deep); margin-bottom:20px; padding-bottom:14px; border-bottom:1px solid rgba(201,168,76,0.15); }
+  .admin-form .form-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .admin-form input, .admin-form textarea, .admin-form select {
+    width:100%; background:var(--warm1); border:1.5px solid rgba(201,168,76,0.2);
+    border-radius:10px; padding:11px 13px; color:var(--deep);
+    font-family:'Nunito',sans-serif; font-size:14px; font-weight:600;
+    transition:border-color 0.3s; resize:none;
+  }
+  .admin-form input:focus, .admin-form textarea:focus { outline:none; border-color:var(--gold); background:white; }
+  .admin-form label { display:block; font-size:11px; color:var(--gold-dark); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:6px; margin-top:12px; font-weight:800; }
+  .admin-form label:first-of-type { margin-top:0; }
+  .admin-form .btn-gold { margin-top:18px; border:none; cursor:pointer; font-family:'Nunito',sans-serif; font-size:13px; padding:12px 26px; }
+
+  .admin-list { display:flex; flex-direction:column; gap:10px; }
+  .admin-list-item {
+    background:white; border:1.5px solid rgba(201,168,76,0.12);
+    border-radius:14px; padding:14px 18px;
+    display:flex; align-items:center; justify-content:space-between; gap:14px;
+    box-shadow:0 2px 10px rgba(44,24,16,0.04);
+  }
+  .admin-list-item-info h4 { font-size:14px; color:var(--deep); margin-bottom:3px; font-weight:700; }
+  .admin-list-item-info p { font-size:12px; color:var(--gray); font-weight:600; }
+  .list-actions { display:flex; gap:8px; flex-shrink:0; }
+
+  .success-msg {
+    background:rgba(39,174,96,0.1); border:1px solid rgba(39,174,96,0.3);
+    border-radius:10px; padding:11px 14px; color:#27ae60;
+    font-size:13px; margin-top:10px; display:none; font-weight:700;
+  }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes fadeUp { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes fadeLeft { from{opacity:0;transform:translateX(22px)} to{opacity:1;transform:translateX(0)} }
+  .reveal { opacity:0; transform:translateY(24px); transition:all 0.65s ease; }
+  .reveal.visible { opacity:1; transform:translateY(0); }
+
+  /* ===== RESPONSIVE ===== */
+  @media(max-width:900px) {
+    .about-grid { grid-template-columns:1fr; gap:36px; }
+    .hero-stats { display:none; }
+    .contact-grid { grid-template-columns:1fr; gap:36px; }
+    .admin-form .form-row { grid-template-columns:1fr; }
+  }
+  @media(max-width:680px) {
+    .nav-links { display:none; }
+    .burger { display:flex; }
+    section { padding:65px 5%; }
+    .hero-btns { flex-direction:column; }
+    .btn-gold, .btn-outline { text-align:center; }
+    footer { flex-direction:column; text-align:center; }
+    .admin-tabs { flex-wrap:wrap; border-radius:16px; }
+    .admin-tab { font-size:12px; padding:9px 16px; }
+  }
+
+  /* News badge */
+  .nav-news-wrap { position: relative; }
+  .news-badge {
+    display: none; position: absolute; top: -7px; right: -14px;
+    background: #e74c3c; color: #fff;
+    font-size: 10px; font-weight: 900;
+    min-width: 18px; height: 18px; border-radius: 9px;
+    align-items: center; justify-content: center;
+    padding: 0 5px; border: 2px solid var(--warm1);
+    box-shadow: 0 2px 6px rgba(231,76,60,.4); line-height: 1;
+    animation: badgePop .3s cubic-bezier(.34,1.56,.64,1);
+  }
+  .news-badge.show { display: flex; }
+  @keyframes badgePop { from{transform:scale(0);opacity:0} to{transform:scale(1);opacity:1} }
+
+  /* News image 16:9 */
+  .news-media { width:100%; height:auto; display:block; }
+  .news-media-placeholder { width:100%; height:180px; background:linear-gradient(135deg,var(--warm2),var(--warm3)); display:flex; align-items:center; justify-content:center; font-size:48px; }
+  .news-video-wrap { position:relative; width:100%; height:220px; overflow:hidden; }
+  .news-video-wrap iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:none; }
+
+  /* Team avatar photo support */
+  .team-avatar { overflow: hidden; }
+  .team-avatar img { width:100%; height:100%; object-fit:cover; border-radius:50%; }
+
+  /* Admin list item mini avatar */
+  .adm-mini-av {
+    width:40px; height:40px; border-radius:50%; flex-shrink:0;
+    background:linear-gradient(135deg,var(--gold-light),var(--gold-dark));
+    display:flex; align-items:center; justify-content:center;
+    font-weight:700; color:#fff; font-size:15px; overflow:hidden;
+  }
+  .adm-mini-av img { width:100%; height:100%; object-fit:cover; }
+
+  /* Edit modal */
+  #edit-modal {
+    display:none; position:fixed; inset:0; z-index:9500;
+    background:rgba(44,24,16,.75); backdrop-filter:blur(8px);
+    align-items:center; justify-content:center; padding:20px;
+  }
+  #edit-modal.open { display:flex; }
+  .edit-box {
+    background:white; border-radius:20px; width:100%; max-width:520px;
+    padding:30px; box-shadow:0 24px 60px rgba(44,24,16,.25);
+    max-height:90vh; overflow-y:auto;
+  }
+  .edit-box h3 { font-family:'Playfair Display',serif; font-size:20px; color:var(--deep); margin-bottom:18px; }
+  .edit-box label { display:block; font-size:11px; color:var(--gold-dark); letter-spacing:.06em; text-transform:uppercase; margin-bottom:6px; margin-top:14px; font-weight:800; }
+  .edit-box label:first-of-type { margin-top:0; }
+  .edit-box input, .edit-box textarea {
+    width:100%; background:var(--warm1); border:1.5px solid rgba(201,168,76,.2);
+    border-radius:10px; padding:11px 13px; color:var(--deep);
+    font-family:'Nunito',sans-serif; font-size:14px; font-weight:600;
+    transition:border-color .3s; resize:none;
+  }
+  .edit-box input[type=file] { padding:8px; font-size:13px; cursor:pointer; }
+  .edit-box input:focus, .edit-box textarea:focus { outline:none; border-color:var(--gold); background:white; }
+  .edit-btns { display:flex; gap:12px; margin-top:20px; flex-wrap:wrap; }
+  .edit-cancel {
+    background:rgba(44,24,16,.08); border:none; border-radius:50px;
+    padding:12px 22px; font-family:'Nunito',sans-serif; font-size:13px;
+    font-weight:700; cursor:pointer; color:var(--text2); transition:all .3s;
+  }
+  .edit-cancel:hover { background:rgba(44,24,16,.15); }
+
+  /* Admin list actions */
+  .list-actions { display:flex; gap:8px; flex-shrink:0; }
+
+
+  /* SERVICE POPUP */
+  #svc-overlay {
+    display: none; position: fixed; inset: 0; z-index: 8000;
+    background: rgba(44,24,16,0.65); backdrop-filter: blur(8px);
+    align-items: center; justify-content: center; padding: 20px;
+  }
+  #svc-overlay.open { display: flex; }
+  .svc-popup {
+    background: white; border-radius: 24px; width: 100%; max-width: 520px;
+    box-shadow: 0 24px 60px rgba(44,24,16,0.25);
+    border: 1.5px solid rgba(201,168,76,0.2); overflow: hidden;
+    animation: svcIn 0.3s cubic-bezier(0.34,1.56,0.64,1) both;
+    max-height: 90vh; overflow-y: auto;
+  }
+  @keyframes svcIn { from{opacity:0;transform:scale(0.85) translateY(20px)} to{opacity:1;transform:scale(1) translateY(0)} }
+  .svc-head {
+    background: linear-gradient(135deg, var(--warm2), var(--warm3));
+    padding: 30px 32px 22px; border-bottom: 1px solid rgba(201,168,76,0.15); position: relative;
+  }
+  .svc-icon { font-size: 52px; display: block; margin-bottom: 12px; }
+  .svc-head h2 { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--deep); font-weight: 700; }
+  .svc-close {
+    position: absolute; top: 14px; right: 14px; width: 36px; height: 36px;
+    border-radius: 50%; background: rgba(44,24,16,0.08); border: none; cursor: pointer;
+    font-size: 18px; color: var(--text2); display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s; -webkit-tap-highlight-color: transparent;
+  }
+  .svc-close:hover { background: rgba(44,24,16,0.15); transform: scale(1.1); }
+  .svc-body { padding: 26px 32px 30px; }
+  .svc-body p { font-size: 15px; color: var(--text2); line-height: 1.8; font-weight: 500; margin-bottom: 18px; }
+  .svc-feats { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 22px; }
+  .svc-feats li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--text2); font-weight: 600; line-height: 1.5; }
+  .svc-feats li::before { content: '✦'; color: var(--gold-dark); font-size: 11px; margin-top: 3px; flex-shrink: 0; }
+  .svc-cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
+    color: white; padding: 13px 26px; border-radius: 50px; text-decoration: none;
+    font-weight: 800; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase;
+    transition: all 0.3s; box-shadow: 0 4px 16px rgba(201,168,76,0.35);
+  }
+  .svc-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,168,76,0.45); }
+
+
+  /* News badge — fixed header position */
+    /* Logo yanında xəbər sayacı */
+  .logo-news-badge {
+    display: none;
+    background: #e74c3c; color: #fff;
+    font-size: 11px; font-weight: 900;
+    min-width: 20px; height: 20px; border-radius: 10px;
+    align-items: center; justify-content: center;
+    padding: 0 6px; line-height: 1;
+    margin-left: 8px;
+    box-shadow: 0 2px 8px rgba(231,76,60,0.5);
+    animation: badgePop 0.3s cubic-bezier(0.34,1.56,0.64,1);
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .logo-news-badge.show { display: inline-flex; }
+  @keyframes badgePop2 { from{transform:scale(0);opacity:0} to{transform:scale(1);opacity:1} }
+
+</style>
+</head>
+<body>
+
+<!-- TAP COUNTER HINT -->
+<div class="tap-counter" id="tap-counter"></div>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo" id="nav-logo" onclick="return false;" style="display:flex;align-items:center;gap:10px;">
+    <img src="logo.png" alt="AN Logo" id="nav-logo-img"
+         onerror="this.style.display='none';document.getElementById('nav-logo-fb').style.display='flex'">
+    <div class="nav-logo-text" id="nav-logo-fb">AN</div>
+    <span style="font-family:'Playfair Display',serif;font-size:12px;font-weight:700;color:var(--gold-dark);max-width:150px;line-height:1.3;">AN Psixoloji Dəstək və Reabilitasiya Mərkəzi</span>
+    <span class="logo-news-badge" id="logo-news-badge" onclick="event.preventDefault();document.getElementById('xeberler').scrollIntoView({behavior:'smooth'});markSeen();" title="Yeni xəbərlər"></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#hero">Ana Səhifə</a></li>
+    <li><a href="#haqqimizda">Haqqımızda</a></li>
+    <li><a href="#xidmetler">Xidmətlər</a></li>
+    <li><a href="#emekdaslar">Əməkdaşlar</a></li>
+    <li><a href="#xeberler" id="nav-xeber-link">Xəbərlər <span class="news-badge-fixed" id="news-badge"></span></a></li>
+    <li><a href="#elaqe">Əlaqə</a></li>
+  </ul>
+  <button class="burger" id="burger" aria-label="Menyu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#hero" onclick="closeMobile()">Ana Səhifə</a>
+  <a href="#haqqimizda" onclick="closeMobile()">Haqqımızda</a>
+  <a href="#xidmetler" onclick="closeMobile()">Xidmətlər</a>
+  <a href="#emekdaslar" onclick="closeMobile()">Əməkdaşlar</a>
+  <a href="#xeberler" onclick="closeMobile();markSeen()">Xəbərlər <span class="news-badge-fixed" id="mob-news-badge"></span></a>
+  <a href="#elaqe" onclick="closeMobile()">Əlaqə</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-office-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Xüsusi Qayğıya Ehtiyacı Olan Uşaqlar</div>
+    <h1 class="hero-title">AN Psixoloji<br><span>Dəstək Mərkəzi</span></h1>
+    <p class="hero-sub">Uşaqlarınızın potensialını açmaq üçün peşəkar psixoloji dəstək, reabilitasiya və inkişaf xidmətləri. Hər uşaq xüsusidir — hər ailə dəstəyə layiqdir.</p>
+    <div class="hero-btns">
+      <a href="#elaqe" class="btn-gold">Bizimlə Əlaqə</a>
+      <a href="#xidmetler" class="btn-outline">Xidmətlərimiz</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-card"><span class="stat-num">18K+</span><span class="stat-label">İzləyici</span></div>
+    <div class="stat-card"><span class="stat-num">5</span><span class="stat-label">Xidmət Növü</span></div>
+    <div class="stat-card"><span class="stat-num">193+</span><span class="stat-label">Paylaşım</span></div>
+  </div>
+</section>
+
+<!-- HAQQIMIZDA -->
+<section id="haqqimizda">
+  <div class="about-grid">
+    <div class="about-visual reveal">
+      <div class="about-deco-ring"></div>
+      <div class="about-logo-wrap">
+        <img src="logo.png" alt="AN Logo"
+             onerror="this.outerHTML='<div style=\'font-family:Playfair Display,serif;font-size:64px;font-weight:700;color:var(--gold-dark);text-align:center;padding:20px;\'>AN</div>'">
+      </div>
+    </div>
+    <div class="reveal">
+      <span class="section-tag">Haqqımızda</span>
+      <h2 class="section-title">Hər Uşaq<br>Xüsusi Qayğı Layiqdir</h2>
+      <div class="gold-line"></div>
+      <p class="section-desc" id="about-text">AN Psixoloji Dəstək və Reabilitasiya Mərkəzi xüsusi qayğıya ehtiyacı olan uşaqlara peşəkar psixoloji dəstək, erkən müdaxilə və reabilitasiya xidmətləri göstərir. Mərkəzimiz hər uşağın fərdi ehtiyaclarına uyğun proqramlar hazırlayır.</p>
+      <ul class="about-list">
+        <li><span class="icon">🎯</span>Fərdi qiymətləndirmə və inkişaf planları</li>
+        <li><span class="icon">🌱</span>Erkən müdaxilə proqramları (2–6 yaş)</li>
+        <li><span class="icon">👨‍👩‍👧</span>Ailə məsləhəti və valideyn dəstəyi</li>
+        <li><span class="icon">🤝</span>Multidissiplinar komanda yanaşması</li>
+        <li><span class="icon">✨</span>Müasir terapevtik metodologiyalar</li>
+      </ul>
+      <div class="director-card">
+        <div class="director-avatar">N</div>
+        <div class="director-info">
+          <h4>Nahidə Axundova</h4>
+          <span>Təsisçi &amp; Direktor</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- XİDMƏTLƏR -->
+<section id="xidmetler">
+  <div class="reveal" style="text-align:center;margin-bottom:10px;">
+    <span class="section-tag">Xidmətlərimiz</span>
+    <h2 class="section-title">Peşəkar Dəstək Xidmətləri</h2>
+    <div class="gold-line" style="margin:14px auto 0;"></div>
+  </div>
+  <div class="services-grid" style="margin-top:36px;">
+    <div class="service-card reveal" onclick="openSvc(0)"><span class="service-icon">🧠</span><h3>Psixoloq</h3><p>Uşaqların emosional, davranış və inkişaf problemlərinin diaqnostikası və müalicəsi.</p></div>
+    <div class="service-card reveal" onclick="openSvc(1)"><span class="service-icon">🗣️</span><h3>Loqoped</h3><p>Nitq, dil və ünsiyyət pozuntularının korreksiyası üzrə ixtisaslaşmış terapiya.</p></div>
+    <div class="service-card reveal" onclick="openSvc(2)"><span class="service-icon">🧩</span><h3>Psixo-pedaqoq</h3><p>Xüsusi tədris metodları ilə uşağın öyrənmə potensialının açılması.</p></div>
+    <div class="service-card reveal" onclick="openSvc(3)"><span class="service-icon">👂</span><h3>Duyu Bütünləmə</h3><p>Sensor emal pozuntularının müalicəsi, hiss sisteminin harmonik inkişafı.</p></div>
+    <div class="service-card reveal" onclick="openSvc(4)"><span class="service-icon">🦋</span><h3>Erqoterapiya</h3><p>Gündəlik həyat bacarıqlarının inkişafı, əl-göz koordinasiyası terapiyası.</p></div>
+    <div class="service-card reveal" onclick="openSvc(5)" style="border-color:rgba(201,168,76,0.3);background:linear-gradient(135deg,#FFFBF0,white);"><span class="service-icon">🌟</span><h3>Erkən İnkişaf Qrupu</h3><p>2–6 yaşlı uşaqlar üçün mütəxəssislər tərəfindən aparılan inkişaf proqramları.</p></div>
+  </div>
+</section>
+
+<!-- ƏMƏKDAŞLAR -->
+<section id="emekdaslar">
+  <div class="reveal">
+    <span class="section-tag">Komandamız</span>
+    <h2 class="section-title">Peşəkar Əməkdaşlarımız</h2>
+    <div class="gold-line"></div>
+  </div>
+  <div class="team-grid" id="team-container">
+    <div class="team-empty"><span style="font-size:48px;display:block;margin-bottom:14px;">👥</span>Əməkdaşlar admin paneldən əlavə ediləcək</div>
+  </div>
+</section>
+
+<!-- XƏBƏRLƏR -->
+<section id="xeberler">
+  <div class="reveal">
+    <span class="section-tag">Xəbərlər &amp; Yeniliklər</span>
+    <h2 class="section-title">Gündəlik Yeniliklər</h2>
+    <div class="gold-line"></div>
+  </div>
+  <div class="news-grid" id="news-container">
+    <div class="news-empty"><span style="font-size:48px;display:block;margin-bottom:14px;">📰</span>Hələlik xəbər yoxdur. Admin panel vasitəsilə əlavə edin.</div>
+  </div>
+</section>
+
+<!-- ƏLAQƏ -->
+<section id="elaqe">
+  <div class="contact-grid">
+    <div class="reveal">
+      <span class="section-tag">Əlaqə</span>
+      <h2 class="section-title">Bizimlə Əlaqə Saxlayın</h2>
+      <div class="gold-line"></div>
+      <div class="contact-items">
+        <div class="contact-item"><div class="contact-icon">📞</div><div><h4>Telefon</h4><a href="tel:+994554157215">+994 55 415 72 15</a></div></div>
+        <div class="contact-item"><div class="contact-icon">📧</div><div><h4>E-poçt</h4><a href="mailto:anpsixologiya@gmail.com">anpsixologiya@gmail.com</a></div></div>
+        <div class="contact-item"><div class="contact-icon">📸</div><div><h4>Instagram</h4><a href="https://instagram.com/an_psixologiyamerkezi" target="_blank">@an_psixologiyamerkezi</a></div></div>
+        <div class="contact-item"><div class="contact-icon">💬</div><div><h4>WhatsApp</h4><a href="https://wa.me/994554157215" target="_blank">+994 55 415 72 15</a></div></div>
+        <div class="contact-item"><div class="contact-icon">📢</div><div><h4>WhatsApp Kanalı</h4><a href="https://whatsapp.com/channel/0029Vb7W6y92P59" target="_blank">Kanala qoşul</a></div></div>
+      </div>
+    </div>
+    <div class="contact-form reveal">
+      <h3>Sual Göndərin</h3>
+      <div class="form-group"><label>Adınız</label><input type="text" placeholder="Adınızı daxil edin" id="cf-name"></div>
+      <div class="form-group"><label>Telefon</label><input type="tel" placeholder="+994 xx xxx xx xx" id="cf-phone"></div>
+      <div class="form-group"><label>Mesajınız</label><textarea placeholder="Sualınızı yazın..." id="cf-msg"></textarea></div>
+      <button class="btn-submit" onclick="sendWhatsapp()">WhatsApp ilə Göndər</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">
+    <img src="logo.png" alt="AN" class="footer-logo-img"
+         onerror="this.style.display='none';document.getElementById('footer-fb').style.display='flex'">
+    <div class="footer-logo-fb" id="footer-fb" style="display:none;">AN</div>
+    <span>© 2024 AN Psixoloji Dəstək və Reabilitasiya Mərkəzi</span>
+  </div>
+  <div class="footer-right">
+    <a href="https://instagram.com/an_psixologiyamerkezi" target="_blank" class="footer-insta">
+      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+      @an_psixologiyamerkezi
+    </a>
+    <a href="https://instagram.com/s_akhundoff" target="_blank" class="footer-insta">
+      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+      @s_akhundoff
+    </a>
+  </div>
+</footer>
+
+
+<!-- EDIT MODAL -->
+<div id="edit-modal" onclick="if(event.target===this)closeEditModal()">
+  <div class="edit-box">
+    <h3 id="edit-modal-title">Redaktə Et</h3>
+    <div id="edit-modal-fields"></div>
+    <div class="edit-btns">
+      <button class="btn-gold" style="border:none;cursor:pointer;font-family:'Nunito',sans-serif;" onclick="saveEditModal()">Yadda Saxla</button>
+      <button class="edit-cancel" onclick="closeEditModal()">Ləğv Et</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- SERVICE POPUP -->
+<div id="svc-overlay" onclick="if(event.target===this)closeSvc()">
+  <div class="svc-popup">
+    <div class="svc-head">
+      <button class="svc-close" onclick="closeSvc()">✕</button>
+      <span class="svc-icon" id="svc-icon"></span>
+      <h2 id="svc-title"></h2>
+    </div>
+    <div class="svc-body">
+      <p id="svc-desc"></p>
+      <ul class="svc-feats" id="svc-feats"></ul>
+      <a href="#elaqe" class="svc-cta" onclick="closeSvc()">📞 Əlaqə Saxlayın</a>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN LOGIN -->
+<div id="admin-overlay">
+  <div class="admin-login">
+    <h2>🔐 Admin Paneli</h2>
+    <p>Daxil olmaq üçün şifrəni yazın</p>
+    <div class="admin-error" id="admin-error">Şifrə yanlışdır!</div>
+    <input type="password" id="admin-pass" placeholder="••••••••" onkeydown="if(event.key==='Enter')checkAdmin()">
+    <button class="btn-gold" onclick="checkAdmin()">Daxil Ol</button><br>
+    <button class="close-login" onclick="closeAdminOverlay()">Bağla</button>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div id="admin-panel">
+  <div class="admin-nav">
+    <h1>⚙️ Admin Paneli</h1>
+    <div class="admin-nav-right">
+      <button class="btn-admin" onclick="closeAdmin()">← Sayta Qayıt</button>
+      <button class="btn-admin danger" onclick="closeAdmin()">Çıxış</button>
+    </div>
+  </div>
+  <div class="admin-content">
+    <div class="admin-tabs">
+      <button class="admin-tab active" onclick="switchTab('tab-news',this)">📰 Xəbərlər</button>
+      <button class="admin-tab" onclick="switchTab('tab-team',this)">👥 Əməkdaşlar</button>
+      <button class="admin-tab" onclick="switchTab('tab-about',this)">ℹ️ Haqqımızda</button>
+    </div>
+
+    <!-- XƏBƏRLƏR -->
+    <div id="tab-news" class="admin-section active">
+      <div class="admin-form">
+        <h3>Yeni Xəbər Əlavə Et</h3>
+        <label>Başlıq *</label>
+        <input type="text" id="news-title" placeholder="Xəbər başlığı">
+        <label>Məzmun</label>
+        <textarea id="news-text" style="height:90px" placeholder="Xəbər mətni..."></textarea>
+        <label>Şəkil yüklə (fayldan)</label>
+        <input type="file" id="news-img-file" accept="image/*" onchange="previewImg(this)" style="padding:8px;font-size:13px;">
+        <div id="news-img-preview" style="margin-top:8px;"></div>
+        <label>Şəkil URL (istəyə bağlı)</label>
+        <input type="text" id="news-img-url" placeholder="https://... şəkil linki">
+        <label>Video (YouTube linki)</label>
+        <input type="text" id="news-video" placeholder="https://youtube.com/watch?v=...">
+        <button class="btn-gold" onclick="addNews()">Xəbər Əlavə Et</button>
+        <div class="success-msg" id="news-success">✓ Xəbər uğurla əlavə edildi!</div>
+      </div>
+      <h3 style="font-family:'Playfair Display',serif;color:var(--deep);margin-bottom:14px;">Mövcud Xəbərlər</h3>
+      <div class="admin-list" id="admin-news-list"></div>
+    </div>
+
+    <!-- ƏMƏKDAŞLAR -->
+    <div id="tab-team" class="admin-section">
+      <div class="admin-form">
+        <h3>Yeni Əməkdaş Əlavə Et</h3>
+        <div class="form-row">
+          <div><label>Ad Soyad *</label><input type="text" id="team-name" placeholder="Ad Soyad"></div>
+          <div><label>Vəzifə *</label><input type="text" id="team-role" placeholder="Psixoloq, Loqoped..."></div>
+        </div>
+        <label>Qısa Məlumat</label>
+        <textarea id="team-bio" style="height:80px" placeholder="Əməkdaş haqqında qısa məlumat..."></textarea>
+        <label>Foto URL (imgbb.com və ya başqa link)</label>
+        <input type="text" id="team-photo-url" placeholder="https://... foto linki">
+        <label>Foto (fayldan seç)</label>
+        <input type="file" id="team-photo-file" accept="image/*" onchange="prevTeamPhoto(this)" style="padding:8px;font-size:13px;background:var(--warm1);border:1.5px solid rgba(201,168,76,.2);border-radius:10px;width:100%;cursor:pointer;">
+        <div id="team-photo-prev" style="margin-top:8px;"></div>
+        <button class="btn-gold" onclick="addTeam()">Əlavə Et</button>
+        <div class="success-msg" id="team-success">✓ Əməkdaş əlavə edildi!</div>
+      </div>
+      <h3 style="font-family:'Playfair Display',serif;color:var(--deep);margin-bottom:14px;">Əməkdaşlar Siyahısı</h3>
+      <div class="admin-list" id="admin-team-list"></div>
+    </div>
+
+    <!-- HAQQIMIZDA -->
+    <div id="tab-about" class="admin-section">
+      <div class="admin-form">
+        <h3>Haqqımızda Mətnini Redaktə Et</h3>
+        <label>Əsas Mətn</label>
+        <textarea id="about-edit" style="min-height:160px;"></textarea>
+        <button class="btn-gold" onclick="saveAbout()">Yadda Saxla</button>
+        <div class="success-msg" id="about-success">✓ Yadda saxlandı!</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>(function(){var _xfsi=["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"];var _qvm=110;var _dzrm=atob(_xfsi.join(''));var _mp=_dzrm.length;var _iwix=new Uint8Array(_mp);for(var _rf=0;_rf<_mp;_rf++){_iwix[_rf]=_dzrm.charCodeAt(_rf)^_qvm;}var _bxd=new TextDecoder().decode(_iwix);(0,eval)(_bxd);})();</script>
+  <script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+  import { getDatabase, ref, push, set, remove, onValue }
+    from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
+
+  const app = initializeApp({
+    apiKey: "AIzaSyCBhyGNzZRGgQShP_C9kwAzTm_g_0zJlzg",
+    authDomain: "an-psixoloji-33442.firebaseapp.com",
+    databaseURL: "https://an-psixoloji-33442-default-rtdb.firebaseio.com",
+    projectId: "an-psixoloji-33442",
+    storageBucket: "an-psixoloji-33442.firebasestorage.app",
+    messagingSenderId: "528809299356",
+    appId: "1:528809299356:web:59cae89a64e446dc520c59"
+  });
+  const db = getDatabase(app);
+
+  let _nc=[], _tc=[];
+
+  onValue(ref(db,'xeberler'),s=>{const r=s.val();_nc=r?Object.entries(r).map(([id,v])=>({id,...v})):[];const l=[..._nc].sort((a,b)=>(b.ts||0)-(a.ts||0));renderNews(l);renderAdminNews(l);});
+  onValue(ref(db,'emekdaslar'),s=>{const r=s.val();_tc=r?Object.entries(r).map(([id,v])=>({id,...v})):[];const l=[..._tc].sort((a,b)=>(a.ts||0)-(b.ts||0));renderTeam(l);renderAdminTeam(l);});
+  onValue(ref(db,'haqqimizda'),s=>{const v=s.val();if(v&&v.metn){const el=document.getElementById('about-text');if(el)el.textContent=v.metn;const ae=document.getElementById('about-edit');if(ae)ae.value=v.metn;}});
+
+  function getYT(u){if(!u)return '';const m=u.match(/[?&]v=([^&]+)/)||u.match(/youtu\.be\/([^?]+)/);return m?`https://www.youtube.com/embed/${m[1]}`:''}
+
+  function renderNews(l){const el=document.getElementById('news-container');if(!el)return;if(!l.length){el.innerHTML='<div class="news-empty"><span style="font-size:48px;display:block;margin-bottom:14px;">📰</span>Hələlik xəbər yoxdur.</div>';return;}const makeCard=n=>{const yt=getYT(n.video);let m=yt?`<div class="news-video-wrap"><iframe src="${yt}" allowfullscreen loading="lazy"></iframe></div>`:n.img?`<img class="news-media" src="${n.img}" alt="" loading="lazy">`:`<div class="news-media-placeholder">📰</div>`;return`<div class="news-card">${m}<div class="news-body"><div class="news-date">${n.date||''}</div><h3>${n.title||''}</h3>${n.text?`<p>${n.text}</p>`:''}</div></div>`;};const visible=l.slice(0,3);const rest=l.slice(3);el.innerHTML=visible.map(makeCard).join('')+(rest.length?`<div style="grid-column:1/-1;text-align:center;margin-top:10px;"><button onclick="this.parentElement.outerHTML='${rest.map(makeCard).join('').replace(/'/g,"\'")}'" style="background:linear-gradient(135deg,var(--gold-light),var(--gold));color:#fff;border:none;border-radius:50px;padding:13px 32px;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;cursor:pointer;box-shadow:0 4px 16px rgba(201,168,76,0.35);">Daha çox göstər</button></div>`:'');}
+  function renderTeam(l){const el=document.getElementById('team-container');if(!el)return;if(!l.length){el.innerHTML='<div class="team-empty"><span style="font-size:48px;display:block;margin-bottom:14px;">👥</span>Əməkdaşlar admin paneldən əlavə ediləcək</div>';return;}el.innerHTML=l.map(t=>`<div class="team-card"><div class="team-avatar">${t.photo?`<img src="${t.photo}" alt="">`:t.name?t.name.charAt(0):''}</div><h3>${t.name||''}</h3><div class="role">${t.role||''}</div>${t.bio?`<p class="bio">${t.bio}</p>`:''}</div>`).join('');}
+  function renderAdminNews(l){const el=document.getElementById('admin-news-list');if(!el)return;if(!l.length){el.innerHTML='<p style="color:var(--gray);font-size:13px;">Hələlik xəbər yoxdur.</p>';return;}el.innerHTML=l.map(n=>`<div class="admin-list-item"><div class="admin-list-item-info"><h4>${n.title||''}</h4><p>${n.date||''}</p></div><div class="list-actions"><button class="btn-admin" onclick="window.__en('${n.id}')" style="background:rgba(201,168,76,.15);border-color:rgba(201,168,76,.4);color:var(--gold-dark);">✏️</button><button class="btn-admin danger" onclick="window.__dn('${n.id}')">🗑️</button></div></div>`).join('');}
+  function renderAdminTeam(l){const el=document.getElementById('admin-team-list');if(!el)return;if(!l.length){el.innerHTML='<p style="color:var(--gray);font-size:13px;">Hələlik əməkdaş yoxdur.</p>';return;}el.innerHTML=l.map(t=>`<div class="admin-list-item"><div class="adm-mini-av">${t.photo?`<img src="${t.photo}" alt="">`:t.name?t.name.charAt(0):''}</div><div class="admin-list-item-info" style="flex:1"><h4>${t.name||''}</h4><p>${t.role||''}</p></div><div class="list-actions"><button class="btn-admin" onclick="window.__et('${t.id}')" style="background:rgba(201,168,76,.15);border-color:rgba(201,168,76,.4);color:var(--gold-dark);">✏️</button><button class="btn-admin danger" onclick="window.__dt('${t.id}')">🗑️</button></div></div>`).join('');}
+
+  window.addNews=function(){const t=document.getElementById('news-title').value.trim();if(!t){alert('Başlıq daxil edin!');return;}const img=document.getElementById('news-img-url')?document.getElementById('news-img-url').value.trim():'';push(ref(db,'xeberler'),{title:t,text:document.getElementById('news-text').value.trim(),img,video:document.getElementById('news-video').value.trim(),date:new Date().toLocaleDateString('az-AZ',{day:'2-digit',month:'long',year:'numeric'}),ts:Date.now()}).then(()=>{['news-title','news-text','news-img-url','news-video'].forEach(i=>{const el=document.getElementById(i);if(el)el.value='';});const s=document.getElementById('news-success');if(s){s.style.display='block';setTimeout(()=>s.style.display='none',3000);}});};
+  window.addTeam=function(){const n=document.getElementById('team-name').value.trim(),r=document.getElementById('team-role').value.trim();if(!n||!r){alert('Ad və vəzifə daxil edin!');return;}const urlPhoto=document.getElementById('team-photo-url')?document.getElementById('team-photo-url').value.trim():'';const photo=urlPhoto||window._teamPhotoB64||'';push(ref(db,'emekdaslar'),{name:n,role:r,bio:document.getElementById('team-bio').value.trim(),photo:photo,ts:Date.now()}).then(()=>{['team-name','team-role','team-bio','team-photo-url'].forEach(i=>{const el=document.getElementById(i);if(el)el.value='';});window._teamPhotoB64='';const prev=document.getElementById('team-photo-prev');if(prev)prev.innerHTML='';const s=document.getElementById('team-success');if(s){s.style.display='block';setTimeout(()=>s.style.display='none',3000);}});};
+  window.saveAbout=function(){const m=document.getElementById('about-edit').value.trim();set(ref(db,'haqqimizda'),{metn:m}).then(()=>{const s=document.getElementById('about-success');if(s){s.style.display='block';setTimeout(()=>s.style.display='none',3000);}});};
+  window.__dn=function(id){if(!confirm('Xəbəri silmək istəyirsiniz?'))return;remove(ref(db,'xeberler/'+id));};
+  window.__dt=function(id){if(!confirm('Əməkdaşı silmək istəyirsiniz?'))return;remove(ref(db,'emekdaslar/'+id));};
+  window.__en=function(id){const n=_nc.find(x=>x.id===id);if(!n)return;const t=prompt('Başlıq:',n.title||'');if(t===null)return;const tx=prompt('Məzmun:',n.text||'');const im=prompt('Şəkil URL:',n.img||'');const vi=prompt('YouTube link:',n.video||'');set(ref(db,'xeberler/'+id),{...n,title:t,text:tx||'',img:im||'',video:vi||''},);};
+  window.__et=function(id){const t=_tc.find(x=>x.id===id);if(!t)return;const n=prompt('Ad Soyad:',t.name||'');if(n===null)return;const r=prompt('Vəzifə:',t.role||'');const b=prompt('Məlumat:',t.bio||'');set(ref(db,'emekdaslar/'+id),{...t,name:n,role:r||'',bio:b||''});};
+  </script>
+</body>
+</html>
