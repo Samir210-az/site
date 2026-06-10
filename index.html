@@ -4,954 +4,303 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AN Psixoloji Dəstək və Reabilitasiya Mərkəzi</title>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+<meta name="description" content="Xüsusi qayğıya ehtiyacı olan uşaqlara peşəkar psixoloji dəstək, erkən müdaxilə və reabilitasiya xidmətləri.">
+<link rel="icon" href="logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
-  :root {
-    --gold: #C9A84C;
-    --gold-light: #E8C96A;
-    --gold-dark: #8B6914;
-    --red: #C0392B;
-    --warm1: #FFF8F0;
-    --warm2: #FFF3E8;
-    --warm3: #FDEBD0;
-    --deep: #2C1810;
-    --deep2: #3D2314;
-    --text: #3D2314;
-    --text2: #6B4226;
-    --gray: #9B7B6B;
-    --white: #FFFFFF;
-    --cream: #FEF9F4;
-  }
+:root{
+  --bordo:#6A0000;--bordo-bright:#B00001;--bordo-deep:#3A0000;
+  --gold:#D2A55D;--gold-light:#E6B05A;--gold-dark:#94713A;
+  --teal:#2A9D8F;--teal-light:#3bbdad;
+  --bg:#FFFBF8;--card:#FEF3E8;--text:#3A2A20;--muted:#7A6A60;
+  --white:#fff;--line:#f1e4d8;
+  --shadow:0 4px 24px rgba(106,0,0,0.10);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.6}
+a{text-decoration:none;color:inherit}
+img{max-width:100%}
 
-  * { margin:0; padding:0; box-sizing:border-box; }
-  html { scroll-behavior: smooth; overflow-x: hidden; }
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  background:rgba(255,251,248,0.96);backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(210,165,93,0.2);
+  padding:0 20px;height:64px;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:box-shadow .3s;
+}
+nav.scrolled{box-shadow:0 4px 20px rgba(106,0,0,0.08)}
+.brand{display:flex;align-items:center;gap:10px;cursor:pointer}
+.brand img{width:42px;height:42px;object-fit:contain}
+.brand-name{font-family:'Playfair Display',serif;font-size:13px;color:var(--bordo);font-weight:700;line-height:1.3;max-width:160px}
+.nav-links{display:none}
+@media(min-width:700px){
+  .nav-links{display:flex;gap:22px}
+  .nav-links a{font-size:13px;font-weight:500;color:var(--muted);transition:color .2s}
+  .nav-links a:hover{color:var(--bordo)}
+}
+.nav-right{display:flex;align-items:center;gap:10px}
+.nav-phone{display:none}
+@media(min-width:520px){.nav-phone{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--bordo)}}
+.nav-ig{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px}
+.burger{background:none;border:none;cursor:pointer;display:flex;flex-direction:column;gap:5px;padding:4px}
+.burger span{display:block;width:22px;height:2px;background:var(--bordo);border-radius:2px;transition:all .3s}
+@media(min-width:700px){.burger{display:none}}
+.mob-menu{
+  display:none;position:fixed;top:64px;left:0;right:0;
+  background:rgba(255,251,248,0.98);backdrop-filter:blur(12px);
+  padding:20px;border-bottom:1px solid var(--line);z-index:199;
+  flex-direction:column;gap:4px;
+}
+.mob-menu.open{display:flex}
+.mob-menu a{padding:12px 16px;font-size:15px;font-weight:500;color:var(--text);border-radius:12px;transition:background .2s}
+.mob-menu a:hover{background:var(--card)}
 
-  body {
-    font-family: 'Nunito', sans-serif;
-    background: var(--cream);
-    color: var(--text);
-    overflow-x: hidden;
-  }
+/* HERO */
+.hero{
+  min-height:100vh;
+  background:linear-gradient(155deg,var(--bordo) 0%,var(--bordo-deep) 55%,#100000 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:96px 24px 60px;position:relative;overflow:hidden;
+}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 65% 35%,rgba(210,165,93,.12) 0%,transparent 65%);pointer-events:none}
+.hero-badge{background:rgba(210,165,93,.15);border:1px solid rgba(210,165,93,.4);color:var(--gold-light);padding:5px 16px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:20px;display:inline-block}
+.hero-logo{width:90px;height:90px;object-fit:contain;margin-bottom:18px;filter:drop-shadow(0 4px 20px rgba(210,165,93,.35))}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(24px,6.5vw,46px);color:#fff;line-height:1.22;margin-bottom:14px;max-width:560px}
+.hero h1 span{color:var(--gold-light)}
+.hero .lead{color:rgba(255,255,255,.72);font-size:clamp(14px,3.5vw,17px);max-width:460px;line-height:1.75;margin-bottom:32px}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:44px}
+.btn-gold{background:var(--gold);color:var(--bordo);padding:13px 26px;border-radius:30px;font-size:14px;font-weight:700;display:inline-flex;align-items:center;gap:8px;box-shadow:0 4px 20px rgba(210,165,93,.4);transition:transform .2s,box-shadow .2s;border:none;cursor:pointer;font-family:'Inter',sans-serif}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(210,165,93,.5)}
+.btn-ghost{background:rgba(255,255,255,.1);color:#fff;padding:13px 26px;border-radius:30px;font-size:14px;font-weight:600;display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.25);transition:background .2s}
+.btn-ghost:hover{background:rgba(255,255,255,.18)}
+.hero-stats{display:flex;gap:28px;flex-wrap:wrap;justify-content:center}
+.hstat{text-align:center}
+.hstat-num{font-family:'Playfair Display',serif;font-size:28px;color:var(--gold-light);font-weight:700}
+.hstat-lbl{font-size:11px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
+.hero-scroll{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.35);font-size:18px;animation:bounce 2s infinite}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
 
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: var(--warm2); }
-  ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+/* SECTION BASE */
+.sec{padding:60px 24px;max-width:740px;margin:0 auto}
+.sec-full{padding:60px 24px}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin-bottom:10px;display:block}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(22px,5vw,32px);color:var(--bordo);line-height:1.3;margin-bottom:12px}
+.sec-sub{color:var(--muted);font-size:15px;line-height:1.75;margin-bottom:28px}
+.gold-line{width:48px;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-light));border-radius:2px;margin-bottom:20px}
 
-  /* ===== NAVBAR ===== */
-  nav {
-    position: fixed; top:0; left:0; right:0; z-index:1000;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0 5%;
-    height: 72px;
-    background: rgba(255,248,240,0.95);
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(201,168,76,0.2);
-    transition: all 0.3s;
-  }
-  nav.scrolled {
-    height: 62px;
-    box-shadow: 0 4px 24px rgba(44,24,16,0.08);
-  }
-  .nav-logo {
-    display: flex; align-items: center; gap: 10px;
-    text-decoration: none;
-    cursor: pointer;
-    user-select: none;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .nav-logo img {
-    height: 48px; width: auto;
-    transition: transform 0.15s;
-  }
-  .nav-logo.tapping img { transform: scale(0.92); }
-  .nav-logo-text {
-    display: none;
-    width: 46px; height: 46px;
-    background: linear-gradient(135deg, #E8C96A, #8B6914);
-    border-radius: 10px;
-    align-items: center; justify-content: center;
-    font-family: 'Playfair Display', serif;
-    font-weight: 700; font-size: 18px; color: #fff;
-  }
+/* ABOUT */
+.about-grid{display:flex;flex-direction:column;gap:32px}
+@media(min-width:640px){.about-grid{flex-direction:row;align-items:flex-start}}
+.about-visual{display:flex;justify-content:center}
+.about-logo-wrap{width:160px;height:160px;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center;border:3px solid var(--gold);box-shadow:0 8px 32px rgba(210,165,93,.2)}
+.about-logo-wrap img{width:120px;height:120px;object-fit:contain}
+.about-text{font-size:15px;color:var(--text);line-height:1.8;margin-bottom:18px}
+.about-list{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
+.about-list li{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--text)}
+.about-list .icon{font-size:18px;flex-shrink:0}
+.director-card{display:flex;align-items:center;gap:12px;background:var(--card);border-radius:14px;padding:14px 18px;border-left:3px solid var(--gold)}
+.director-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--bordo));display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;font-weight:700;flex-shrink:0}
+.director-info h4{font-size:14px;font-weight:700;color:var(--bordo)}
+.director-info span{font-size:12px;color:var(--muted)}
 
-  .tap-counter {
-    position: fixed; top: 80px; left: 50%; transform: translateX(-50%);
-    background: rgba(44,24,16,0.85);
-    color: var(--gold-light);
-    padding: 8px 20px; border-radius: 20px;
-    font-size: 13px; font-weight: 600;
-    opacity: 0; pointer-events: none;
-    transition: opacity 0.3s; z-index: 9999;
-  }
-  .tap-counter.show { opacity: 1; }
+/* SERVICES */
+.services-bg{background:#fff}
+.services-inner{max-width:740px;margin:0 auto;padding:60px 24px}
+.services-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px}
+@media(min-width:600px){.services-grid{grid-template-columns:repeat(3,1fr)}}
+.svc-card{background:var(--bg);border-radius:20px;padding:24px 18px;box-shadow:var(--shadow);cursor:pointer;transition:transform .2s,box-shadow .2s;border-top:3px solid transparent;text-align:center}
+.svc-card:hover{transform:translateY(-4px);box-shadow:0 8px 32px rgba(106,0,0,0.14);border-top-color:var(--gold)}
+.svc-icon{font-size:32px;margin-bottom:10px;display:block}
+.svc-card h3{font-size:14px;font-weight:700;color:var(--bordo);margin-bottom:6px}
+.svc-card p{font-size:12px;color:var(--muted);line-height:1.6}
 
-  .nav-links {
-    display: flex; gap: 28px; list-style: none;
-  }
-  .nav-links a {
-    text-decoration: none;
-    color: var(--text2);
-    font-size: 13px; font-weight: 700;
-    letter-spacing: 0.04em; text-transform: uppercase;
-    position: relative; transition: color 0.3s;
-  }
-  .nav-links a::after {
-    content: '';
-    position: absolute; bottom:-4px; left:0;
-    width:0; height:2px;
-    background: var(--gold);
-    border-radius: 2px;
-    transition: width 0.3s;
-  }
-  .nav-links a:hover { color: var(--gold-dark); }
-  .nav-links a:hover::after { width: 100%; }
+/* TEAM */
+.team-bg{background:var(--card)}
+.team-inner{max-width:740px;margin:0 auto;padding:60px 24px}
+.team-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px}
+@media(min-width:600px){.team-grid{grid-template-columns:repeat(3,1fr)}}
+.team-card{background:#fff;border-radius:20px;padding:24px 16px;text-align:center;box-shadow:var(--shadow)}
+.team-avatar{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--bordo));display:flex;align-items:center;justify-content:center;color:#fff;font-size:24px;font-weight:700;margin:0 auto 12px}
+.team-card h4{font-size:14px;font-weight:700;color:var(--bordo);margin-bottom:4px}
+.team-card .role{font-size:12px;color:var(--muted)}
+.team-empty{grid-column:1/-1;text-align:center;padding:40px;color:var(--muted);font-size:14px}
 
-  .burger {
-    display: none; flex-direction: column; gap: 5px;
-    cursor: pointer; background: none; border: none; padding: 5px;
-  }
-  .burger span {
-    width: 26px; height: 2px;
-    background: var(--gold-dark); border-radius: 2px;
-    transition: all 0.3s;
-  }
+/* NEWS */
+.news-grid{display:flex;flex-direction:column;gap:16px;margin-top:28px}
+.news-card{background:#fff;border-radius:18px;padding:22px 20px;box-shadow:var(--shadow);display:flex;gap:16px;align-items:flex-start}
+.news-date-badge{min-width:48px;height:48px;background:linear-gradient(135deg,var(--bordo),var(--bordo-bright));border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;font-size:10px;font-weight:700;text-transform:uppercase;line-height:1.2;flex-shrink:0}
+.news-date-badge .day{font-size:18px;font-family:'Playfair Display',serif}
+.news-card h3{font-size:15px;font-weight:700;color:var(--bordo);margin-bottom:5px}
+.news-card p{font-size:13px;color:var(--muted);line-height:1.6}
+.news-badge{display:inline-block;width:8px;height:8px;background:var(--bordo-bright);border-radius:50%;margin-left:4px;vertical-align:middle}
+.news-empty{text-align:center;padding:40px;color:var(--muted);font-size:14px}
 
-  .mobile-menu {
-    display: none; position: fixed;
-    top: 72px; left:0; right:0; z-index:999;
-    background: rgba(255,248,240,0.98);
-    backdrop-filter: blur(20px);
-    padding: 20px 5%;
-    border-bottom: 1px solid rgba(201,168,76,0.2);
-    flex-direction: column; gap: 4px;
-  }
-  .mobile-menu.open { display: flex; }
-  .mobile-menu a {
-    text-decoration: none; color: var(--text2);
-    font-size: 15px; font-weight: 700;
-    padding: 12px 0;
-    border-bottom: 1px solid rgba(201,168,76,0.12);
-    letter-spacing: 0.04em; text-transform: uppercase;
-    transition: color 0.3s;
-  }
-  .mobile-menu a:hover { color: var(--gold-dark); }
+/* CONTACT */
+.contact-grid{display:flex;flex-direction:column;gap:24px}
+@media(min-width:640px){.contact-grid{flex-direction:row}}
+.contact-items{display:flex;flex-direction:column;gap:12px}
+.ci{display:flex;align-items:center;gap:14px;background:#fff;border-radius:14px;padding:14px 18px;box-shadow:var(--shadow);transition:transform .2s}
+.ci:hover{transform:translateX(3px)}
+.ci-icon{width:40px;height:40px;border-radius:12px;background:var(--card);display:flex;align-items:center;justify-content:center;color:var(--bordo);font-size:17px;flex-shrink:0}
+.ci-label{font-size:11px;color:var(--muted)}
+.ci-val{font-size:14px;font-weight:600}
+.maps-btn{background:var(--teal);color:#fff;border-radius:14px;padding:13px 18px;display:flex;align-items:center;gap:10px;font-weight:700;font-size:14px;box-shadow:0 4px 14px rgba(42,157,143,.3);transition:transform .2s}
+.maps-btn:hover{transform:translateY(-2px)}
+.form-card{background:#fff;border-radius:20px;padding:28px 22px;box-shadow:var(--shadow);flex:1}
+.form-card h3{font-family:'Playfair Display',serif;font-size:18px;color:var(--bordo);margin-bottom:6px}
+.form-card .sub{font-size:13px;color:var(--muted);margin-bottom:18px}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:12px;font-weight:600;color:var(--text);margin-bottom:5px}
+.field input,.field textarea,.field select{width:100%;border:1.5px solid #ece4d8;border-radius:12px;padding:11px 14px;font-size:14px;font-family:'Inter',sans-serif;color:var(--text);background:var(--bg);outline:none;transition:border .2s}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--gold)}
+.field textarea{resize:vertical;min-height:80px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.btn-submit{background:var(--bordo);color:#fff;border:none;border-radius:12px;padding:13px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:background .2s;width:100%;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn-submit:hover{background:var(--bordo-bright)}
+.form-ok{display:none;background:#e8f7f6;border-radius:10px;padding:10px 14px;font-size:13px;color:var(--teal);font-weight:600;margin-top:10px;align-items:center;gap:8px}
+.form-ok.show{display:flex}
 
-  /* ===== HERO ===== */
-  #hero {
-    min-height: 100vh;
-    position: relative;
-    display: flex; align-items: center;
-    padding: 90px 5% 60px;
-    overflow: hidden;
-    max-width: 100%;
-  }
+/* REGISTER */
+.reg-bg{background:linear-gradient(155deg,var(--bordo),var(--bordo-deep))}
+.reg-inner{max-width:560px;margin:0 auto;padding:60px 24px}
+.reg-inner .eyebrow{color:var(--gold-light)}
+.reg-inner .sec-title{color:#fff}
+.reg-inner .sec-sub{color:rgba(255,255,255,.65)}
+.reg-inner .form-card{background:rgba(255,255,255,.07);border:1px solid rgba(210,165,93,.25)}
+.reg-inner .form-card h3{color:var(--gold-light)}
+.reg-inner .form-card .sub{color:rgba(255,255,255,.5)}
+.reg-inner .field label{color:rgba(255,255,255,.8)}
+.reg-inner .field input,.reg-inner .field select{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15);color:#fff}
+.reg-inner .field input::placeholder{color:rgba(255,255,255,.35)}
+.reg-inner .field select option{background:var(--bordo-deep)}
 
-  .hero-office-bg {
-    position: absolute; inset:0;
-    background-image: url('office.jpg');
-    background-size: cover;
-    background-position: center top;
-    filter: brightness(0.35) saturate(0.8);
-  }
+/* FOOTER */
+footer{background:#1a0000;color:rgba(255,255,255,.5);text-align:center;padding:28px 24px;font-size:13px}
+footer a{color:var(--gold-light)}
+.footer-logo{width:44px;margin-bottom:12px;opacity:.75}
 
-  .hero-overlay {
-    position: absolute; inset:0;
-    background: linear-gradient(
-      135deg,
-      rgba(255,248,240,0.92) 0%,
-      rgba(255,243,232,0.75) 40%,
-      rgba(201,168,76,0.15) 70%,
-      rgba(44,24,16,0.5) 100%
-    );
-  }
+/* MODAL BASE */
+.modal-ov{display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.65);backdrop-filter:blur(5px);align-items:center;justify-content:center;padding:16px}
+.modal-ov.open{display:flex}
+.modal-box{background:var(--bg);border-radius:24px;width:100%;max-width:660px;box-shadow:0 30px 80px rgba(0,0,0,.35);animation:popIn .28s cubic-bezier(.34,1.56,.64,1);max-height:92vh;overflow:hidden;display:flex;flex-direction:column}
+@keyframes popIn{from{opacity:0;transform:scale(.88)}to{opacity:1;transform:scale(1)}}
+.modal-head{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;border-bottom:1px solid var(--line);flex-shrink:0}
+.modal-head h3{font-family:'Playfair Display',serif;font-size:18px;color:var(--bordo)}
+.modal-close{background:var(--card);border:none;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:14px;color:var(--muted);display:flex;align-items:center;justify-content:center}
+.modal-body{padding:22px;overflow-y:auto;flex:1}
 
-  /* Decorative bubbles */
-  .bubble {
-    position: absolute;
-    border-radius: 50%;
-    opacity: 0.12;
-    animation: floatBubble linear infinite;
-  }
-  .bubble:nth-child(1) { width:180px;height:180px;background:var(--gold);top:10%;right:12%;animation-duration:8s; }
-  .bubble:nth-child(2) { width:120px;height:120px;background:var(--red);top:60%;right:25%;animation-duration:11s;animation-delay:-3s; }
-  .bubble:nth-child(3) { width:80px;height:80px;background:var(--gold-light);top:30%;right:5%;animation-duration:9s;animation-delay:-5s; }
-  @keyframes floatBubble {
-    0%,100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-20px) rotate(10deg); }
-  }
+/* SVC MODAL */
+.svc-modal-icon{font-size:48px;text-align:center;margin-bottom:12px}
+.svc-modal-body{font-size:14px;color:var(--text);line-height:1.8}
+.svc-modal-body ul{margin-top:12px;padding-left:18px}
+.svc-modal-body ul li{margin-bottom:6px}
 
-  .hero-content {
-    position: relative; z-index:2;
-    max-width: 640px;
-  }
+/* ADMIN */
+.admin-tabs{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap}
+.atab{border:none;cursor:pointer;background:#fff;color:var(--muted);padding:7px 14px;border-radius:20px;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;box-shadow:0 2px 8px rgba(0,0,0,.05);transition:all .2s}
+.atab.active{background:var(--bordo);color:#fff}
+.apane{display:none}
+.apane.active{display:block}
+.acard{background:#fff;border-radius:14px;padding:16px 18px;margin-bottom:10px;box-shadow:0 2px 8px rgba(0,0,0,.05);border-left:4px solid var(--gold)}
+.acard.read{border-left-color:var(--teal)}
+.acard-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;margin-bottom:4px}
+.acard-name{font-weight:700;color:var(--text);font-size:14px}
+.acard-name a{color:var(--teal)}
+.abadge{font-size:11px;padding:3px 9px;border-radius:10px;background:#fff0e0;color:var(--gold-dark);font-weight:600}
+.acard.read .abadge{background:#e8f7f6;color:var(--teal)}
+.acard-date{font-size:12px;color:var(--muted);margin-bottom:5px}
+.acard-text{font-size:13px;color:var(--text);line-height:1.6}
+.acard-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}
+.deliver{background:#fffbf5;border:1px dashed var(--gold);border-radius:10px;padding:9px 12px;margin:8px 0;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.dl-lbl{font-size:11px;color:var(--gold-dark);font-weight:700}
+.mbtn{border:none;cursor:pointer;font-size:12px;font-weight:600;padding:6px 12px;border-radius:20px;display:inline-flex;align-items:center;gap:5px;font-family:'Inter',sans-serif;transition:transform .15s}
+.mbtn:hover{transform:translateY(-1px)}
+.mbtn.wa{background:#25D366;color:#fff}
+.mbtn.call{background:var(--bordo);color:#fff}
+.mbtn.read{background:#e8f7f6;color:var(--teal)}
+.mbtn.del{background:#ffe0e0;color:#c0392b}
+.mbtn.edit{background:var(--card);color:var(--bordo)}
+.aempty{text-align:center;padding:40px;color:var(--muted);font-size:14px}
+.aempty i{font-size:32px;display:block;margin-bottom:10px;opacity:.4}
+.asep{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin:18px 0 10px}
+.login-err{color:#c0392b;font-size:13px;margin-bottom:10px;display:none}
+.login-err.show{display:block}
+.afooter{display:flex;justify-content:flex-end;margin-top:14px}
+.btn-teal{background:var(--teal);color:#fff;border:none;border-radius:12px;padding:11px 20px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;display:inline-flex;align-items:center;gap:8px;transition:background .2s}
+.btn-teal:hover{background:var(--teal-light)}
 
-  .hero-badge {
-    display: inline-flex; align-items: center; gap:8px;
-    background: rgba(201,168,76,0.15);
-    border: 1.5px solid rgba(201,168,76,0.5);
-    border-radius: 30px;
-    padding: 7px 18px;
-    font-size: 12px; font-weight: 800;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--gold-dark);
-    margin-bottom: 24px;
-    animation: fadeUp 0.7s ease both;
-  }
-  .hero-badge::before {
-    content:'';
-    width:8px;height:8px;
-    background:var(--gold);
-    border-radius:50%;
-    animation: pulse 2s infinite;
-  }
-  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.7)} }
-
-  .hero-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(36px, 5.5vw, 66px);
-    font-weight: 700;
-    line-height: 1.12;
-    color: var(--deep);
-    margin-bottom: 18px;
-    animation: fadeUp 0.7s 0.1s ease both;
-  }
-  .hero-title span {
-    background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-light));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .hero-sub {
-    font-size: 16px; color: var(--text2);
-    line-height: 1.75; margin-bottom: 36px;
-    font-weight: 500;
-    animation: fadeUp 0.7s 0.2s ease both;
-  }
-
-  .hero-btns {
-    display: flex; gap:14px; flex-wrap:wrap;
-    animation: fadeUp 0.7s 0.3s ease both;
-  }
-
-  .btn-gold {
-    background: linear-gradient(135deg, var(--gold-light), var(--gold));
-    color: #fff;
-    padding: 14px 30px;
-    border-radius: 50px;
-    font-weight: 800; font-size: 13px;
-    letter-spacing: 0.05em; text-transform: uppercase;
-    text-decoration: none;
-    transition: all 0.3s;
-    box-shadow: 0 4px 20px rgba(201,168,76,0.4);
-    border: none; cursor: pointer;
-    font-family: 'Nunito', sans-serif;
-  }
-  .btn-gold:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 28px rgba(201,168,76,0.5);
-  }
-
-  .btn-outline {
-    border: 2px solid var(--gold);
-    color: var(--gold-dark);
-    padding: 13px 30px;
-    border-radius: 50px;
-    font-weight: 800; font-size: 13px;
-    letter-spacing: 0.05em; text-transform: uppercase;
-    text-decoration: none;
-    transition: all 0.3s;
-    background: rgba(255,255,255,0.6);
-  }
-  .btn-outline:hover {
-    background: var(--gold);
-    color: #fff;
-    transform: translateY(-2px);
-  }
-
-  .hero-stats {
-    position: absolute; right:5%; top:50%;
-    transform: translateY(-50%);
-    display: flex; flex-direction: column; gap:16px;
-    animation: fadeLeft 0.7s 0.4s ease both;
-  }
-  .stat-card {
-    background: rgba(255,255,255,0.88);
-    border: 1px solid rgba(201,168,76,0.25);
-    border-radius: 16px;
-    padding: 18px 24px;
-    text-align: center;
-    backdrop-filter: blur(10px);
-    transition: all 0.3s;
-    box-shadow: 0 4px 20px rgba(44,24,16,0.08);
-  }
-  .stat-card:hover {
-    transform: translateX(-4px);
-    box-shadow: 0 8px 30px rgba(44,24,16,0.12);
-  }
-  .stat-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 32px; font-weight: 700;
-    color: var(--gold-dark); display: block;
-  }
-  .stat-label {
-    font-size: 11px; color: var(--gray);
-    letter-spacing: 0.06em; text-transform: uppercase;
-    font-weight: 700;
-  }
-
-  /* ===== SECTIONS ===== */
-  section { padding: 90px 5%; }
-
-  .section-tag {
-    display: inline-block;
-    font-size: 11px; font-weight: 800;
-    letter-spacing: 0.15em; text-transform: uppercase;
-    color: var(--gold-dark);
-    background: rgba(201,168,76,0.1);
-    padding: 5px 14px; border-radius: 20px;
-    margin-bottom: 14px;
-  }
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(26px, 3.5vw, 44px);
-    font-weight: 700; color: var(--deep);
-    line-height: 1.2; margin-bottom: 14px;
-  }
-  .section-desc {
-    font-size: 15px; color: var(--text2);
-    line-height: 1.8; max-width: 560px; font-weight: 500;
-  }
-  .gold-line {
-    width: 56px; height: 3px;
-    background: linear-gradient(90deg, var(--gold), transparent);
-    margin: 14px 0 36px; border-radius: 2px;
-  }
-
-  /* ===== HAQQIMIZDA ===== */
-  #haqqimizda {
-    background: linear-gradient(135deg, var(--warm1) 0%, var(--warm2) 100%);
-    position: relative;
-  }
-  #haqqimizda::before {
-    content: '🧸';
-    position: absolute; right:8%; top:12%;
-    font-size: 120px; opacity: 0.06;
-    transform: rotate(15deg);
-  }
-  .about-grid {
-    display: grid; grid-template-columns: 1fr 1.4fr;
-    gap: 70px; align-items: center;
-  }
-  .about-visual {
-    position: relative; display: flex;
-    align-items: center; justify-content: center;
-  }
-  .about-logo-wrap {
-    position: relative; z-index:2;
-    background: white;
-    border-radius: 24px;
-    padding: 32px;
-    box-shadow: 0 16px 48px rgba(44,24,16,0.12);
-    border: 1px solid rgba(201,168,76,0.2);
-  }
-  .about-logo-wrap img {
-    width: 100%; max-width: 260px;
-    display: block;
-    animation: float 6s ease-in-out infinite;
-  }
-  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
-  .about-deco-ring {
-    position: absolute;
-    width: 320px; height: 320px;
-    border: 2px dashed rgba(201,168,76,0.2);
-    border-radius: 50%;
-    animation: rotateSlow 25s linear infinite;
-  }
-  @keyframes rotateSlow { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
-
-  .about-list {
-    list-style: none;
-    display: flex; flex-direction: column; gap: 14px;
-    margin-top: 20px;
-  }
-  .about-list li {
-    display: flex; align-items: flex-start; gap: 12px;
-    font-size: 14px; color: var(--text2);
-    line-height: 1.6; font-weight: 600;
-  }
-  .about-list li span.icon {
-    font-size: 18px; flex-shrink:0; margin-top:1px;
-  }
-  .director-card {
-    margin-top: 32px;
-    background: white;
-    border: 1px solid rgba(201,168,76,0.25);
-    border-radius: 16px;
-    padding: 18px 22px;
-    display: flex; align-items: center; gap: 16px;
-    box-shadow: 0 4px 20px rgba(44,24,16,0.06);
-  }
-  .director-avatar {
-    width: 52px; height: 52px; border-radius: 50%;
-    background: linear-gradient(135deg, var(--gold-light), var(--gold-dark));
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Playfair Display', serif;
-    font-size: 20px; color: #fff; font-weight: 700;
-    flex-shrink:0;
-  }
-  .director-info h4 {
-    font-size: 16px; color: var(--deep); font-weight: 800;
-  }
-  .director-info span {
-    font-size: 12px; color: var(--gold-dark);
-    font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
-  }
-
-  /* ===== XİDMƏTLƏR ===== */
-  #xidmetler {
-    background: var(--cream);
-    position: relative;
-  }
-  #xidmetler::after {
-    content: '🎯';
-    position: absolute; left:4%; bottom:10%;
-    font-size: 100px; opacity: 0.05;
-    transform: rotate(-10deg);
-  }
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-    gap: 22px; margin-top: 10px;
-  }
-  .service-card {
-    background: white;
-    border: 1.5px solid rgba(201,168,76,0.15);
-    border-radius: 20px;
-    padding: 30px 22px;
-    transition: all 0.35s;
-    position: relative; overflow: hidden;
-    cursor: default;
-    box-shadow: 0 2px 16px rgba(44,24,16,0.04);
-  }
-  .service-card::before {
-    content:'';
-    position: absolute; top:0; left:0; right:0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--gold-light), var(--gold));
-    transform: scaleX(0); transform-origin: left;
-    transition: transform 0.35s;
-  }
-  .service-card:hover::before { transform: scaleX(1); }
-  .service-card:hover {
-    border-color: rgba(201,168,76,0.35);
-    transform: translateY(-6px);
-    box-shadow: 0 16px 40px rgba(44,24,16,0.1);
-  }
-  .service-icon {
-    font-size: 44px; margin-bottom: 18px; display: block;
-  }
-  .service-card h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 17px; color: var(--deep);
-    margin-bottom: 10px; font-weight: 600;
-  }
-  .service-card p {
-    font-size: 13px; color: var(--text2);
-    line-height: 1.7; font-weight: 500;
-  }
-
-  /* ===== ƏMƏKDAŞLAR ===== */
-  #emekdaslar {
-    background: linear-gradient(135deg, var(--warm2) 0%, var(--warm3) 100%);
-  }
-  .team-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-    gap: 24px; margin-top: 10px;
-  }
-  .team-card {
-    background: white;
-    border: 1.5px solid rgba(201,168,76,0.15);
-    border-radius: 20px;
-    padding: 32px 22px;
-    text-align: center;
-    transition: all 0.3s;
-    box-shadow: 0 2px 16px rgba(44,24,16,0.04);
-  }
-  .team-card:hover {
-    border-color: rgba(201,168,76,0.35);
-    transform: translateY(-4px);
-    box-shadow: 0 14px 36px rgba(44,24,16,0.1);
-  }
-  .team-avatar {
-    width: 76px; height: 76px; border-radius: 50%;
-    background: linear-gradient(135deg, var(--gold-light), var(--gold-dark));
-    margin: 0 auto 18px;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Playfair Display', serif;
-    font-size: 26px; color: #fff; font-weight: 700;
-    border: 3px solid rgba(201,168,76,0.3);
-  }
-  .team-card h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 17px; color: var(--deep); margin-bottom: 6px;
-  }
-  .team-card .role {
-    font-size: 12px; color: var(--gold-dark);
-    letter-spacing: 0.06em; text-transform: uppercase;
-    margin-bottom: 10px; font-weight: 800;
-  }
-  .team-card .bio {
-    font-size: 13px; color: var(--text2); line-height: 1.6; font-weight: 500;
-  }
-  .team-empty, .news-empty {
-    text-align: center; color: var(--gray);
-    font-size: 14px; padding: 60px 20px;
-    grid-column: 1/-1; font-weight: 600;
-  }
-
-  /* ===== XƏBƏRLƏR ===== */
-  #xeberler { background: var(--cream); }
-  .news-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 24px; margin-top: 10px;
-  }
-  .news-card {
-    background: white;
-    border: 1.5px solid rgba(201,168,76,0.15);
-    border-radius: 20px; overflow: hidden;
-    transition: all 0.3s;
-    box-shadow: 0 2px 16px rgba(44,24,16,0.04);
-  }
-  .news-card:hover {
-    border-color: rgba(201,168,76,0.3);
-    transform: translateY(-4px);
-    box-shadow: 0 14px 36px rgba(44,24,16,0.1);
-  }
-  /* news-media: overridden below */
-  /* news-media-placeholder & video: overridden below */
-  .news-body { padding: 22px; }
-  .news-date { font-size:11px; color:var(--gold-dark); font-weight:800; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:8px; }
-  .news-card h3 { font-family:'Playfair Display',serif; font-size:18px; color:var(--deep); margin-bottom:8px; line-height:1.3; }
-  .news-card p { font-size:13px; color:var(--text2); line-height:1.7; font-weight:500; }
-
-  /* ===== ƏLAQƏ ===== */
-  #elaqe { background: linear-gradient(135deg, var(--warm1), var(--warm2)); }
-  .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:start; }
-  .contact-items { display:flex; flex-direction:column; gap:20px; margin-top:16px; }
-  .contact-item { display:flex; align-items:flex-start; gap:14px; }
-  .contact-icon {
-    width:48px; height:48px; flex-shrink:0;
-    border-radius:12px;
-    background: white;
-    border: 1.5px solid rgba(201,168,76,0.25);
-    display:flex; align-items:center; justify-content:center;
-    font-size:20px;
-    box-shadow: 0 2px 10px rgba(44,24,16,0.06);
-  }
-  .contact-item h4 { font-size:11px; color:var(--gold-dark); letter-spacing:0.08em; text-transform:uppercase; margin-bottom:4px; font-weight:800; }
-  .contact-item p, .contact-item a { font-size:15px; color:var(--deep); text-decoration:none; font-weight:600; transition:color 0.2s; }
-  .contact-item a:hover { color:var(--gold-dark); }
-
-  .contact-form {
-    background: white;
-    border: 1.5px solid rgba(201,168,76,0.2);
-    border-radius: 20px; padding: 32px;
-    box-shadow: 0 4px 24px rgba(44,24,16,0.06);
-  }
-  .contact-form h3 { font-family:'Playfair Display',serif; font-size:22px; color:var(--deep); margin-bottom:22px; }
-  .form-group { margin-bottom:16px; }
-  .form-group label { display:block; font-size:11px; color:var(--gold-dark); letter-spacing:0.08em; text-transform:uppercase; margin-bottom:7px; font-weight:800; }
-  .form-group input, .form-group textarea {
-    width:100%;
-    background: var(--warm1);
-    border: 1.5px solid rgba(201,168,76,0.2);
-    border-radius: 10px; padding: 12px 14px;
-    color: var(--deep);
-    font-family: 'Nunito', sans-serif; font-size:14px; font-weight:600;
-    transition: border-color 0.3s; resize:none;
-  }
-  .form-group input:focus, .form-group textarea:focus { outline:none; border-color:var(--gold); background:white; }
-  .form-group textarea { height:110px; }
-  .btn-submit {
-    width:100%;
-    background: linear-gradient(135deg, var(--gold-light), var(--gold));
-    color: white; border:none; border-radius:50px;
-    padding:14px;
-    font-family:'Nunito',sans-serif; font-weight:800; font-size:13px;
-    letter-spacing:0.06em; text-transform:uppercase;
-    cursor:pointer; transition:all 0.3s;
-    box-shadow: 0 4px 16px rgba(201,168,76,0.35);
-  }
-  .btn-submit:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(201,168,76,0.45); }
-
-  /* ===== FOOTER ===== */
-  footer {
-    background: var(--deep);
-    padding: 36px 5%;
-    display:flex; align-items:center; justify-content:space-between;
-    flex-wrap:wrap; gap:18px;
-  }
-  .footer-left { display:flex; align-items:center; gap:12px; }
-  .footer-logo-img { height:38px; opacity:0.9; filter:brightness(1.1); }
-  .footer-logo-fb {
-    width:36px;height:36px;
-    background:linear-gradient(135deg,var(--gold-light),var(--gold-dark));
-    border-radius:8px;display:flex;align-items:center;justify-content:center;
-    font-family:'Playfair Display',serif;font-weight:700;color:#fff;font-size:14px;
-  }
-  .footer-left span { font-size:12px; color:rgba(255,255,255,0.5); font-weight:600; }
-  .footer-right { display:flex; align-items:center; gap:20px; }
-  .footer-insta {
-    display:flex; align-items:center; gap:8px;
-    text-decoration:none; color:rgba(255,255,255,0.6);
-    font-size:13px; font-weight:700; transition:color 0.3s;
-  }
-  .footer-insta:hover { color:var(--gold); }
-  .footer-insta svg { width:18px;height:18px;fill:currentColor; }
-  .footer-credit { font-size:11px; color:rgba(255,255,255,0.25); letter-spacing:0.05em; }
-  .footer-credit a { color:rgba(201,168,76,0.5); text-decoration:none; transition:color 0.3s; }
-  .footer-credit a:hover { color:var(--gold); }
-
-  /* ===== ADMIN OVERLAY ===== */
-  #admin-overlay {
-    display:none; position:fixed; inset:0; z-index:9000;
-    background:rgba(44,24,16,0.8);
-    backdrop-filter:blur(10px);
-    align-items:center; justify-content:center;
-  }
-  #admin-overlay.open { display:flex; }
-  .admin-login {
-    background: var(--warm1);
-    border: 2px solid rgba(201,168,76,0.35);
-    border-radius: 24px; padding: 44px 40px;
-    width:100%; max-width:380px; text-align:center;
-    box-shadow: 0 24px 60px rgba(44,24,16,0.3);
-  }
-  .admin-login h2 { font-family:'Playfair Display',serif; font-size:24px; color:var(--deep); margin-bottom:6px; }
-  .admin-login p { font-size:13px; color:var(--text2); margin-bottom:28px; font-weight:600; }
-  .admin-login input {
-    width:100%;
-    background: white; border:1.5px solid rgba(201,168,76,0.3);
-    border-radius:10px; padding:13px 16px;
-    color:var(--deep); font-family:'Nunito',sans-serif; font-size:15px;
-    text-align:center; letter-spacing:0.2em; margin-bottom:14px;
-    transition:border-color 0.3s;
-  }
-  .admin-login input:focus { outline:none; border-color:var(--gold); }
-  .admin-login .btn-gold { width:100%; padding:13px; font-size:13px; }
-  .admin-login .close-login {
-    background:none; border:none; color:var(--gray);
-    cursor:pointer; font-size:13px; margin-top:14px;
-    text-decoration:underline; font-family:'Nunito',sans-serif; font-weight:600;
-  }
-  .admin-error { color:var(--red); font-size:13px; margin-bottom:10px; display:none; font-weight:700; }
-
-  /* ===== ADMIN PANEL ===== */
-  #admin-panel { display:none; position:fixed; inset:0; z-index:9000; background:var(--cream); overflow-y:auto; }
-  #admin-panel.open { display:block; }
-  .admin-nav {
-    background: var(--deep);
-    padding:16px 5%; display:flex; align-items:center; justify-content:space-between;
-    position:sticky; top:0; z-index:100;
-  }
-  .admin-nav h1 { font-family:'Playfair Display',serif; font-size:20px; color:var(--gold); }
-  .admin-nav-right { display:flex; gap:10px; }
-  .btn-admin {
-    background:rgba(201,168,76,0.15); border:1px solid rgba(201,168,76,0.4);
-    color:var(--gold-light); padding:8px 18px; border-radius:50px;
-    font-family:'Nunito',sans-serif; font-size:12px; font-weight:800;
-    cursor:pointer; transition:all 0.3s; letter-spacing:0.04em;
-  }
-  .btn-admin:hover { background:rgba(201,168,76,0.25); }
-  .btn-admin.danger { background:rgba(192,57,43,0.15); border-color:rgba(192,57,43,0.4); color:#e74c3c; }
-  .btn-admin.danger:hover { background:rgba(192,57,43,0.25); }
-
-  .admin-content { padding:36px 5%; }
-  .admin-tabs {
-    display:flex; gap:4px; background:white;
-    border:1.5px solid rgba(201,168,76,0.15);
-    border-radius:50px; padding:5px;
-    margin-bottom:32px; width:fit-content;
-    box-shadow:0 2px 12px rgba(44,24,16,0.06);
-  }
-  .admin-tab {
-    padding:10px 22px; border-radius:50px; border:none;
-    background:none; color:var(--text2);
-    font-family:'Nunito',sans-serif; font-size:13px; font-weight:800;
-    cursor:pointer; transition:all 0.3s; letter-spacing:0.03em;
-  }
-  .admin-tab.active { background:linear-gradient(135deg,var(--gold-light),var(--gold)); color:white; }
-  .admin-section { display:none; }
-  .admin-section.active { display:block; }
-  .admin-form {
-    background:white; border:1.5px solid rgba(201,168,76,0.15);
-    border-radius:20px; padding:28px; margin-bottom:28px;
-    box-shadow:0 2px 16px rgba(44,24,16,0.04);
-  }
-  .admin-form h3 { font-family:'Playfair Display',serif; font-size:19px; color:var(--deep); margin-bottom:20px; padding-bottom:14px; border-bottom:1px solid rgba(201,168,76,0.15); }
-  .admin-form .form-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
-  .admin-form input, .admin-form textarea, .admin-form select {
-    width:100%; background:var(--warm1); border:1.5px solid rgba(201,168,76,0.2);
-    border-radius:10px; padding:11px 13px; color:var(--deep);
-    font-family:'Nunito',sans-serif; font-size:14px; font-weight:600;
-    transition:border-color 0.3s; resize:none;
-  }
-  .admin-form input:focus, .admin-form textarea:focus { outline:none; border-color:var(--gold); background:white; }
-  .admin-form label { display:block; font-size:11px; color:var(--gold-dark); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:6px; margin-top:12px; font-weight:800; }
-  .admin-form label:first-of-type { margin-top:0; }
-  .admin-form .btn-gold { margin-top:18px; border:none; cursor:pointer; font-family:'Nunito',sans-serif; font-size:13px; padding:12px 26px; }
-
-  .admin-list { display:flex; flex-direction:column; gap:10px; }
-  .admin-list-item {
-    background:white; border:1.5px solid rgba(201,168,76,0.12);
-    border-radius:14px; padding:14px 18px;
-    display:flex; align-items:center; justify-content:space-between; gap:14px;
-    box-shadow:0 2px 10px rgba(44,24,16,0.04);
-  }
-  .admin-list-item-info h4 { font-size:14px; color:var(--deep); margin-bottom:3px; font-weight:700; }
-  .admin-list-item-info p { font-size:12px; color:var(--gray); font-weight:600; }
-  .list-actions { display:flex; gap:8px; flex-shrink:0; }
-
-  .success-msg {
-    background:rgba(39,174,96,0.1); border:1px solid rgba(39,174,96,0.3);
-    border-radius:10px; padding:11px 14px; color:#27ae60;
-    font-size:13px; margin-top:10px; display:none; font-weight:700;
-  }
-
-  /* ===== ANIMATIONS ===== */
-  @keyframes fadeUp { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
-  @keyframes fadeLeft { from{opacity:0;transform:translateX(22px)} to{opacity:1;transform:translateX(0)} }
-  .reveal { opacity:0; transform:translateY(24px); transition:all 0.65s ease; }
-  .reveal.visible { opacity:1; transform:translateY(0); }
-
-  /* ===== RESPONSIVE ===== */
-  @media(max-width:900px) {
-    .about-grid { grid-template-columns:1fr; gap:36px; }
-    .hero-stats { display:none; }
-    .contact-grid { grid-template-columns:1fr; gap:36px; }
-    .admin-form .form-row { grid-template-columns:1fr; }
-  }
-  @media(max-width:680px) {
-    .nav-links { display:none; }
-    .burger { display:flex; }
-    section { padding:65px 5%; }
-    .hero-btns { flex-direction:column; }
-    .btn-gold, .btn-outline { text-align:center; }
-    footer { flex-direction:column; text-align:center; }
-    .admin-tabs { flex-wrap:wrap; border-radius:16px; }
-    .admin-tab { font-size:12px; padding:9px 16px; }
-  }
-
-  /* News badge */
-  .nav-news-wrap { position: relative; }
-  .news-badge {
-    display: none; position: absolute; top: -7px; right: -14px;
-    background: #e74c3c; color: #fff;
-    font-size: 10px; font-weight: 900;
-    min-width: 18px; height: 18px; border-radius: 9px;
-    align-items: center; justify-content: center;
-    padding: 0 5px; border: 2px solid var(--warm1);
-    box-shadow: 0 2px 6px rgba(231,76,60,.4); line-height: 1;
-    animation: badgePop .3s cubic-bezier(.34,1.56,.64,1);
-  }
-  .news-badge.show { display: flex; }
-  @keyframes badgePop { from{transform:scale(0);opacity:0} to{transform:scale(1);opacity:1} }
-
-  /* News image 16:9 */
-  .news-media { width:100%; height:auto; display:block; }
-  .news-media-placeholder { width:100%; height:180px; background:linear-gradient(135deg,var(--warm2),var(--warm3)); display:flex; align-items:center; justify-content:center; font-size:48px; }
-  .news-video-wrap { position:relative; width:100%; height:220px; overflow:hidden; }
-  .news-video-wrap iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:none; }
-
-  /* Team avatar photo support */
-  .team-avatar { overflow: hidden; }
-  .team-avatar img { width:100%; height:100%; object-fit:cover; border-radius:50%; }
-
-  /* Admin list item mini avatar */
-  .adm-mini-av {
-    width:40px; height:40px; border-radius:50%; flex-shrink:0;
-    background:linear-gradient(135deg,var(--gold-light),var(--gold-dark));
-    display:flex; align-items:center; justify-content:center;
-    font-weight:700; color:#fff; font-size:15px; overflow:hidden;
-  }
-  .adm-mini-av img { width:100%; height:100%; object-fit:cover; }
-
-  /* Edit modal */
-  #edit-modal {
-    display:none; position:fixed; inset:0; z-index:9500;
-    background:rgba(44,24,16,.75); backdrop-filter:blur(8px);
-    align-items:center; justify-content:center; padding:20px;
-  }
-  #edit-modal.open { display:flex; }
-  .edit-box {
-    background:white; border-radius:20px; width:100%; max-width:520px;
-    padding:30px; box-shadow:0 24px 60px rgba(44,24,16,.25);
-    max-height:90vh; overflow-y:auto;
-  }
-  .edit-box h3 { font-family:'Playfair Display',serif; font-size:20px; color:var(--deep); margin-bottom:18px; }
-  .edit-box label { display:block; font-size:11px; color:var(--gold-dark); letter-spacing:.06em; text-transform:uppercase; margin-bottom:6px; margin-top:14px; font-weight:800; }
-  .edit-box label:first-of-type { margin-top:0; }
-  .edit-box input, .edit-box textarea {
-    width:100%; background:var(--warm1); border:1.5px solid rgba(201,168,76,.2);
-    border-radius:10px; padding:11px 13px; color:var(--deep);
-    font-family:'Nunito',sans-serif; font-size:14px; font-weight:600;
-    transition:border-color .3s; resize:none;
-  }
-  .edit-box input[type=file] { padding:8px; font-size:13px; cursor:pointer; }
-  .edit-box input:focus, .edit-box textarea:focus { outline:none; border-color:var(--gold); background:white; }
-  .edit-btns { display:flex; gap:12px; margin-top:20px; flex-wrap:wrap; }
-  .edit-cancel {
-    background:rgba(44,24,16,.08); border:none; border-radius:50px;
-    padding:12px 22px; font-family:'Nunito',sans-serif; font-size:13px;
-    font-weight:700; cursor:pointer; color:var(--text2); transition:all .3s;
-  }
-  .edit-cancel:hover { background:rgba(44,24,16,.15); }
-
-  /* Admin list actions */
-  .list-actions { display:flex; gap:8px; flex-shrink:0; }
-
-
-  /* SERVICE POPUP */
-  #svc-overlay {
-    display: none; position: fixed; inset: 0; z-index: 8000;
-    background: rgba(44,24,16,0.65); backdrop-filter: blur(8px);
-    align-items: center; justify-content: center; padding: 20px;
-  }
-  #svc-overlay.open { display: flex; }
-  .svc-popup {
-    background: white; border-radius: 24px; width: 100%; max-width: 520px;
-    box-shadow: 0 24px 60px rgba(44,24,16,0.25);
-    border: 1.5px solid rgba(201,168,76,0.2); overflow: hidden;
-    animation: svcIn 0.3s cubic-bezier(0.34,1.56,0.64,1) both;
-    max-height: 90vh; overflow-y: auto;
-  }
-  @keyframes svcIn { from{opacity:0;transform:scale(0.85) translateY(20px)} to{opacity:1;transform:scale(1) translateY(0)} }
-  .svc-head {
-    background: linear-gradient(135deg, var(--warm2), var(--warm3));
-    padding: 30px 32px 22px; border-bottom: 1px solid rgba(201,168,76,0.15); position: relative;
-  }
-  .svc-icon { font-size: 52px; display: block; margin-bottom: 12px; }
-  .svc-head h2 { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--deep); font-weight: 700; }
-  .svc-close {
-    position: absolute; top: 14px; right: 14px; width: 36px; height: 36px;
-    border-radius: 50%; background: rgba(44,24,16,0.08); border: none; cursor: pointer;
-    font-size: 18px; color: var(--text2); display: flex; align-items: center; justify-content: center;
-    transition: all 0.2s; -webkit-tap-highlight-color: transparent;
-  }
-  .svc-close:hover { background: rgba(44,24,16,0.15); transform: scale(1.1); }
-  .svc-body { padding: 26px 32px 30px; }
-  .svc-body p { font-size: 15px; color: var(--text2); line-height: 1.8; font-weight: 500; margin-bottom: 18px; }
-  .svc-feats { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 22px; }
-  .svc-feats li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--text2); font-weight: 600; line-height: 1.5; }
-  .svc-feats li::before { content: '✦'; color: var(--gold-dark); font-size: 11px; margin-top: 3px; flex-shrink: 0; }
-  .svc-cta {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: linear-gradient(135deg, var(--gold-light), var(--gold));
-    color: white; padding: 13px 26px; border-radius: 50px; text-decoration: none;
-    font-weight: 800; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase;
-    transition: all 0.3s; box-shadow: 0 4px 16px rgba(201,168,76,0.35);
-  }
-  .svc-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,168,76,0.45); }
-
-
-  /* News badge — fixed header position */
-    /* Logo yanında xəbər sayacı */
-  .logo-news-badge {
-    display: none;
-    background: #e74c3c; color: #fff;
-    font-size: 11px; font-weight: 900;
-    min-width: 20px; height: 20px; border-radius: 10px;
-    align-items: center; justify-content: center;
-    padding: 0 6px; line-height: 1;
-    margin-left: 8px;
-    box-shadow: 0 2px 8px rgba(231,76,60,0.5);
-    animation: badgePop 0.3s cubic-bezier(0.34,1.56,0.64,1);
-    cursor: pointer;
-    flex-shrink: 0;
-  }
-  .logo-news-badge.show { display: inline-flex; }
-  @keyframes badgePop2 { from{transform:scale(0);opacity:0} to{transform:scale(1);opacity:1} }
-
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s,transform .6s}
+.reveal.visible{opacity:1;transform:translateY(0)}
 </style>
 </head>
 <body>
 
-<!-- TAP COUNTER HINT -->
-<div class="tap-counter" id="tap-counter"></div>
-
-<!-- NAVBAR -->
+<!-- NAV -->
 <nav id="navbar">
-  <a href="#hero" class="nav-logo" id="nav-logo" onclick="return false;" style="display:flex;align-items:center;gap:10px;">
-    <img src="logo.png" alt="AN Logo" id="nav-logo-img"
-         onerror="this.style.display='none';document.getElementById('nav-logo-fb').style.display='flex'">
-    <div class="nav-logo-text" id="nav-logo-fb">AN</div>
-    <span style="font-family:'Playfair Display',serif;font-size:12px;font-weight:700;color:var(--gold-dark);max-width:150px;line-height:1.3;">AN Psixoloji Dəstək və Reabilitasiya Mərkəzi</span>
-    <span class="logo-news-badge" id="logo-news-badge" onclick="event.preventDefault();document.getElementById('xeberler').scrollIntoView({behavior:'smooth'});markSeen();" title="Yeni xəbərlər"></span>
+  <a class="brand" href="#hero" id="logo-tap">
+    <img src="logo.png" alt="AN Logo" onerror="this.style.display='none'">
+    <span class="brand-name">AN Psixoloji Dəstək və Reabilitasiya Mərkəzi</span>
   </a>
-  <ul class="nav-links">
-    <li><a href="#hero">Ana Səhifə</a></li>
-    <li><a href="#haqqimizda">Haqqımızda</a></li>
-    <li><a href="#xidmetler">Xidmətlər</a></li>
-    <li><a href="#emekdaslar">Əməkdaşlar</a></li>
-    <li><a href="#xeberler" id="nav-xeber-link">Xəbərlər <span class="news-badge-fixed" id="news-badge"></span></a></li>
-    <li><a href="#elaqe">Əlaqə</a></li>
-  </ul>
-  <button class="burger" id="burger" aria-label="Menyu">
-    <span></span><span></span><span></span>
-  </button>
+  <div class="nav-links">
+    <a href="#haqqimizda">Haqqımızda</a>
+    <a href="#xidmetler">Xidmətlər</a>
+    <a href="#emekdaslar">Əməkdaşlar</a>
+    <a href="#xeberler">Xəbərlər <span class="news-badge" id="nav-badge" style="display:none"></span></a>
+    <a href="#elaqe">Əlaqə</a>
+  </div>
+  <div class="nav-right">
+    <a href="tel:+994554157215" class="nav-phone"><i class="fas fa-phone"></i> +994 55 415 72 15</a>
+    <a href="https://www.instagram.com/an_psixologiyamerkezi" target="_blank" class="nav-ig"><i class="fab fa-instagram"></i></a>
+    <button class="burger" id="burger"><span></span><span></span><span></span></button>
+  </div>
 </nav>
 
 <!-- MOBILE MENU -->
-<div class="mobile-menu" id="mobile-menu">
-  <a href="#hero" onclick="closeMobile()">Ana Səhifə</a>
-  <a href="#haqqimizda" onclick="closeMobile()">Haqqımızda</a>
-  <a href="#xidmetler" onclick="closeMobile()">Xidmətlər</a>
-  <a href="#emekdaslar" onclick="closeMobile()">Əməkdaşlar</a>
-  <a href="#xeberler" onclick="closeMobile();markSeen()">Xəbərlər <span class="news-badge-fixed" id="mob-news-badge"></span></a>
-  <a href="#elaqe" onclick="closeMobile()">Əlaqə</a>
+<div class="mob-menu" id="mob-menu">
+  <a href="#haqqimizda" onclick="closeMob()">Haqqımızda</a>
+  <a href="#xidmetler" onclick="closeMob()">Xidmətlər</a>
+  <a href="#emekdaslar" onclick="closeMob()">Əməkdaşlar</a>
+  <a href="#xeberler" onclick="closeMob()">Xəbərlər</a>
+  <a href="#elaqe" onclick="closeMob()">Əlaqə</a>
+  <a href="#register" onclick="closeMob()">Qeydiyyat</a>
 </div>
 
 <!-- HERO -->
-<section id="hero">
-  <div class="hero-office-bg"></div>
-  <div class="hero-overlay"></div>
-  <div class="bubble"></div>
-  <div class="bubble"></div>
-  <div class="bubble"></div>
-  <div class="hero-content">
-    <div class="hero-badge">Xüsusi Qayğıya Ehtiyacı Olan Uşaqlar</div>
-    <h1 class="hero-title">AN Psixoloji<br><span>Dəstək Mərkəzi</span></h1>
-    <p class="hero-sub">Uşaqlarınızın potensialını açmaq üçün peşəkar psixoloji dəstək, reabilitasiya və inkişaf xidmətləri. Hər uşaq xüsusidir — hər ailə dəstəyə layiqdir.</p>
-    <div class="hero-btns">
-      <a href="#elaqe" class="btn-gold">Bizimlə Əlaqə</a>
-      <a href="#xidmetler" class="btn-outline">Xidmətlərimiz</a>
-    </div>
+<section class="hero" id="hero">
+  <div class="hero-badge"><i class="fas fa-star"></i> &nbsp;Sübuta əsaslanan metodologiya</div>
+  <img class="hero-logo" src="logo.png" alt="AN Logo">
+  <h1>AN Psixoloji<br><span>Dəstək Mərkəzi</span></h1>
+  <p class="lead">Uşaqlarınızın potensialını açmaq üçün peşəkar psixoloji dəstək, reabilitasiya və inkişaf xidmətləri.</p>
+  <div class="hero-btns">
+    <a href="#register" class="btn-gold"><i class="fas fa-hand-holding-heart"></i> Pulsuz ilkin məsləhət</a>
+    <a href="#xidmetler" class="btn-ghost"><i class="fas fa-circle-info"></i> Xidmətlər</a>
   </div>
   <div class="hero-stats">
-    <div class="stat-card"><span class="stat-num">18K+</span><span class="stat-label">İzləyici</span></div>
-    <div class="stat-card"><span class="stat-num">5</span><span class="stat-label">Xidmət Növü</span></div>
-    <div class="stat-card"><span class="stat-num">193+</span><span class="stat-label">Paylaşım</span></div>
+    <div class="hstat"><div class="hstat-num">18K+</div><div class="hstat-lbl">İzləyici</div></div>
+    <div class="hstat"><div class="hstat-num">5</div><div class="hstat-lbl">Xidmət növü</div></div>
+    <div class="hstat"><div class="hstat-num">193+</div><div class="hstat-lbl">Paylaşım</div></div>
   </div>
+  <div class="hero-scroll"><i class="fas fa-chevron-down"></i></div>
 </section>
 
 <!-- HAQQIMIZDA -->
-<section id="haqqimizda">
-  <div class="about-grid">
-    <div class="about-visual reveal">
-      <div class="about-deco-ring"></div>
+<section class="sec" id="haqqimizda">
+  <div class="about-grid reveal">
+    <div class="about-visual">
       <div class="about-logo-wrap">
-        <img src="logo.png" alt="AN Logo"
-             onerror="this.outerHTML='<div style=\'font-family:Playfair Display,serif;font-size:64px;font-weight:700;color:var(--gold-dark);text-align:center;padding:20px;\'>AN</div>'">
+        <img src="logo.png" alt="AN Logo">
       </div>
     </div>
-    <div class="reveal">
-      <span class="section-tag">Haqqımızda</span>
-      <h2 class="section-title">Hər Uşaq<br>Xüsusi Qayğı Layiqdir</h2>
+    <div>
+      <span class="eyebrow">Haqqımızda</span>
+      <h2 class="sec-title">Hər Uşaq<br>Xüsusi Qayğı Layiqdir</h2>
       <div class="gold-line"></div>
-      <p class="section-desc" id="about-text">AN Psixoloji Dəstək və Reabilitasiya Mərkəzi xüsusi qayğıya ehtiyacı olan uşaqlara peşəkar psixoloji dəstək, erkən müdaxilə və reabilitasiya xidmətləri göstərir. Mərkəzimiz hər uşağın fərdi ehtiyaclarına uyğun proqramlar hazırlayır.</p>
+      <p class="about-text" id="about-text">AN Psixoloji Dəstək və Reabilitasiya Mərkəzi xüsusi qayğıya ehtiyacı olan uşaqlara peşəkar psixoloji dəstək, erkən müdaxilə və reabilitasiya xidmətləri göstərir. Mərkəzimiz hər uşağın fərdi ehtiyaclarına uyğun proqramlar hazırlayır.</p>
       <ul class="about-list">
         <li><span class="icon">🎯</span>Fərdi qiymətləndirmə və inkişaf planları</li>
         <li><span class="icon">🌱</span>Erkən müdaxilə proqramları (2–6 yaş)</li>
@@ -961,253 +310,449 @@
       </ul>
       <div class="director-card">
         <div class="director-avatar">N</div>
-        <div class="director-info">
-          <h4>Nahidə Axundova</h4>
-          <span>Təsisçi &amp; Direktor</span>
-        </div>
+        <div class="director-info"><h4>Nahidə Axundova</h4><span>Təsisçi &amp; Direktor</span></div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- XİDMƏTLƏR -->
-<section id="xidmetler">
-  <div class="reveal" style="text-align:center;margin-bottom:10px;">
-    <span class="section-tag">Xidmətlərimiz</span>
-    <h2 class="section-title">Peşəkar Dəstək Xidmətləri</h2>
-    <div class="gold-line" style="margin:14px auto 0;"></div>
+<div class="services-bg">
+  <div class="services-inner" id="xidmetler">
+    <span class="eyebrow reveal">Xidmətlərimiz</span>
+    <h2 class="sec-title reveal">Peşəkar Dəstək Xidmətləri</h2>
+    <div class="gold-line reveal"></div>
+    <div class="services-grid reveal">
+      <div class="svc-card" onclick="openSvc(0)"><span class="svc-icon">🧠</span><h3>Psixoloq</h3><p>Uşaqların emosional, davranış və inkişaf problemlərinin diaqnostikası.</p></div>
+      <div class="svc-card" onclick="openSvc(1)"><span class="svc-icon">🗣️</span><h3>Loqoped</h3><p>Nitq, dil və ünsiyyət pozuntularının korreksiyası üzrə ixtisaslaşmış terapiya.</p></div>
+      <div class="svc-card" onclick="openSvc(2)"><span class="svc-icon">🧩</span><h3>Psixo-pedaqoq</h3><p>Xüsusi tədris metodları ilə uşağın öyrənmə potensialının açılması.</p></div>
+      <div class="svc-card" onclick="openSvc(3)"><span class="svc-icon">👂</span><h3>Duyu Bütünləmə</h3><p>Sensor emal pozuntularının müalicəsi, hiss sisteminin harmonik inkişafı.</p></div>
+      <div class="svc-card" onclick="openSvc(4)"><span class="svc-icon">🦋</span><h3>Erqoterapiya</h3><p>Gündəlik həyat bacarıqlarının inkişafı, əl-göz koordinasiyası terapiyası.</p></div>
+      <div class="svc-card" onclick="openSvc(5)"><span class="svc-icon">🌟</span><h3>Erkən İnkişaf Qrupu</h3><p>2–6 yaşlı uşaqlar üçün mütəxəssislər tərəfindən aparılan inkişaf proqramları.</p></div>
+    </div>
   </div>
-  <div class="services-grid" style="margin-top:36px;">
-    <div class="service-card reveal" onclick="openSvc(0)"><span class="service-icon">🧠</span><h3>Psixoloq</h3><p>Uşaqların emosional, davranış və inkişaf problemlərinin diaqnostikası və müalicəsi.</p></div>
-    <div class="service-card reveal" onclick="openSvc(1)"><span class="service-icon">🗣️</span><h3>Loqoped</h3><p>Nitq, dil və ünsiyyət pozuntularının korreksiyası üzrə ixtisaslaşmış terapiya.</p></div>
-    <div class="service-card reveal" onclick="openSvc(2)"><span class="service-icon">🧩</span><h3>Psixo-pedaqoq</h3><p>Xüsusi tədris metodları ilə uşağın öyrənmə potensialının açılması.</p></div>
-    <div class="service-card reveal" onclick="openSvc(3)"><span class="service-icon">👂</span><h3>Duyu Bütünləmə</h3><p>Sensor emal pozuntularının müalicəsi, hiss sisteminin harmonik inkişafı.</p></div>
-    <div class="service-card reveal" onclick="openSvc(4)"><span class="service-icon">🦋</span><h3>Erqoterapiya</h3><p>Gündəlik həyat bacarıqlarının inkişafı, əl-göz koordinasiyası terapiyası.</p></div>
-    <div class="service-card reveal" onclick="openSvc(5)" style="border-color:rgba(201,168,76,0.3);background:linear-gradient(135deg,#FFFBF0,white);"><span class="service-icon">🌟</span><h3>Erkən İnkişaf Qrupu</h3><p>2–6 yaşlı uşaqlar üçün mütəxəssislər tərəfindən aparılan inkişaf proqramları.</p></div>
-  </div>
-</section>
+</div>
 
 <!-- ƏMƏKDAŞLAR -->
-<section id="emekdaslar">
-  <div class="reveal">
-    <span class="section-tag">Komandamız</span>
-    <h2 class="section-title">Peşəkar Əməkdaşlarımız</h2>
-    <div class="gold-line"></div>
+<div class="team-bg">
+  <div class="team-inner" id="emekdaslar">
+    <span class="eyebrow reveal">Komandamız</span>
+    <h2 class="sec-title reveal">Peşəkar Əməkdaşlarımız</h2>
+    <div class="gold-line reveal"></div>
+    <div class="team-grid reveal" id="team-container">
+      <div class="team-empty">👥 Əməkdaşlar admin paneldən əlavə ediləcək</div>
+    </div>
   </div>
-  <div class="team-grid" id="team-container">
-    <div class="team-empty"><span style="font-size:48px;display:block;margin-bottom:14px;">👥</span>Əməkdaşlar admin paneldən əlavə ediləcək</div>
-  </div>
-</section>
+</div>
 
 <!-- XƏBƏRLƏR -->
-<section id="xeberler">
-  <div class="reveal">
-    <span class="section-tag">Xəbərlər &amp; Yeniliklər</span>
-    <h2 class="section-title">Gündəlik Yeniliklər</h2>
-    <div class="gold-line"></div>
-  </div>
-  <div class="news-grid" id="news-container">
-    <div class="news-empty"><span style="font-size:48px;display:block;margin-bottom:14px;">📰</span>Hələlik xəbər yoxdur. Admin panel vasitəsilə əlavə edin.</div>
+<section class="sec" id="xeberler">
+  <span class="eyebrow reveal">Xəbərlər &amp; Yeniliklər</span>
+  <h2 class="sec-title reveal">Gündəlik Yeniliklər <span class="news-badge" id="news-main-badge" style="display:none"></span></h2>
+  <div class="gold-line reveal"></div>
+  <div class="news-grid reveal" id="news-container">
+    <div class="news-empty">📰 Hələlik xəbər yoxdur.</div>
   </div>
 </section>
 
 <!-- ƏLAQƏ -->
-<section id="elaqe">
-  <div class="contact-grid">
-    <div class="reveal">
-      <span class="section-tag">Əlaqə</span>
-      <h2 class="section-title">Bizimlə Əlaqə Saxlayın</h2>
-      <div class="gold-line"></div>
-      <div class="contact-items">
-        <div class="contact-item"><div class="contact-icon">📞</div><div><h4>Telefon</h4><a href="tel:+994554157215">+994 55 415 72 15</a></div></div>
-        <div class="contact-item"><div class="contact-icon">📧</div><div><h4>E-poçt</h4><a href="mailto:anpsixologiya@gmail.com">anpsixologiya@gmail.com</a></div></div>
-        <div class="contact-item"><div class="contact-icon">📸</div><div><h4>Instagram</h4><a href="https://instagram.com/an_psixologiyamerkezi" target="_blank">@an_psixologiyamerkezi</a></div></div>
-        <div class="contact-item"><div class="contact-icon">💬</div><div><h4>WhatsApp</h4><a href="https://wa.me/994554157215" target="_blank">+994 55 415 72 15</a></div></div>
-        <div class="contact-item"><div class="contact-icon">📢</div><div><h4>WhatsApp Kanalı</h4><a href="https://whatsapp.com/channel/0029Vb7W6y92P59" target="_blank">Kanala qoşul</a></div></div>
-      </div>
+<section class="sec" id="elaqe">
+  <span class="eyebrow reveal">Bizimlə əlaqə</span>
+  <h2 class="sec-title reveal">Əlaqə Saxlayın</h2>
+  <div class="gold-line reveal"></div>
+  <div class="contact-grid reveal">
+    <div class="contact-items">
+      <div class="ci"><div class="ci-icon"><i class="fas fa-location-dot"></i></div><div><div class="ci-label">Ünvan</div><div class="ci-val">Bakı, Nizami r., Rizvan Teymurov 59</div></div></div>
+      <a href="tel:+994554157215" class="ci"><div class="ci-icon"><i class="fas fa-phone"></i></div><div><div class="ci-label">Telefon</div><div class="ci-val">+994 55 415 72 15</div></div></a>
+      <a href="mailto:anpsixologiya@gmail.com" class="ci"><div class="ci-icon" style="background:#fff0e8;color:#e67e22"><i class="fas fa-envelope"></i></div><div><div class="ci-label">E-poçt</div><div class="ci-val">anpsixologiya@gmail.com</div></div></a>
+      <a href="https://instagram.com/an_psixologiyamerkezi" target="_blank" class="ci"><div class="ci-icon" style="background:#fff0e8;color:#E1306C"><i class="fab fa-instagram"></i></div><div><div class="ci-label">Instagram</div><div class="ci-val">@an_psixologiyamerkezi</div></div></a>
+      <a href="https://wa.me/994554157215" target="_blank" class="ci"><div class="ci-icon" style="background:#e8fef0;color:#25D366"><i class="fab fa-whatsapp"></i></div><div><div class="ci-label">WhatsApp</div><div class="ci-val">+994 55 415 72 15</div></div></a>
+      <a href="https://maps.app.goo.gl/FJL5JUdLJrCB17N26" target="_blank" class="maps-btn"><i class="fas fa-map-location-dot"></i> Xəritədə göstər</a>
     </div>
-    <div class="contact-form reveal">
+    <div class="form-card">
       <h3>Sual Göndərin</h3>
-      <div class="form-group"><label>Adınız</label><input type="text" placeholder="Adınızı daxil edin" id="cf-name"></div>
-      <div class="form-group"><label>Telefon</label><input type="tel" placeholder="+994 xx xxx xx xx" id="cf-phone"></div>
-      <div class="form-group"><label>Mesajınız</label><textarea placeholder="Sualınızı yazın..." id="cf-msg"></textarea></div>
-      <button class="btn-submit" onclick="sendWhatsapp()">WhatsApp ilə Göndər</button>
+      <p class="sub">WhatsApp üzərindən birbaşa göndərilir.</p>
+      <div class="field"><label>Adınız</label><input type="text" id="cf-name" placeholder="Adınızı daxil edin"></div>
+      <div class="field"><label>Telefon</label><input type="tel" id="cf-phone" placeholder="+994 xx xxx xx xx"></div>
+      <div class="field"><label>Mesajınız</label><textarea id="cf-msg" placeholder="Sualınızı yazın..."></textarea></div>
+      <button class="btn-submit" onclick="sendWA()"><i class="fab fa-whatsapp"></i> WhatsApp ilə Göndər</button>
     </div>
   </div>
 </section>
 
+<!-- QEYDİYYAT -->
+<div class="reg-bg" id="register">
+  <div class="reg-inner">
+    <span class="eyebrow reveal">İlkin müraciət</span>
+    <h2 class="sec-title reveal">Pulsuz ilkin məsləhət üçün qeydiyyat</h2>
+    <p class="sec-sub reveal">Formu doldurun — ən uyğun proqramı birlikdə seçək.</p>
+    <div class="form-card reveal">
+      <h3>Müraciət Formu</h3>
+      <p class="sub">İlk görüş tamamilə pulsuzdur.</p>
+      <form id="reg-form">
+        <div class="row2">
+          <div class="field"><label>Valideyn adı</label><input type="text" id="r-parent" placeholder="Ad, soyad" required></div>
+          <div class="field"><label>Uşağın yaşı</label><input type="number" id="r-age" min="0" max="18" placeholder="Məsələn: 6" required></div>
+        </div>
+        <div class="row2">
+          <div class="field"><label>Telefon</label><input type="tel" id="r-phone" placeholder="+994 ..." required></div>
+          <div class="field"><label>Proqram</label>
+            <select id="r-program">
+              <option value="İcma əsaslı">İcma əsaslı inteqrasiya</option>
+              <option value="Uzaqdan dəstək">Uzaqdan dəstək</option>
+              <option value="Hibrid">Hibrid proqram</option>
+              <option value="Bilmirəm">Hələ bilmirəm</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="btn-submit"><i class="fas fa-check-circle"></i> Müraciəti göndər</button>
+        <div class="form-ok" id="reg-ok"><i class="fas fa-circle-check"></i> Müraciətiniz qəbul edildi!</div>
+      </form>
+    </div>
+  </div>
+</div>
+
 <!-- FOOTER -->
 <footer>
-  <div class="footer-left">
-    <img src="logo.png" alt="AN" class="footer-logo-img"
-         onerror="this.style.display='none';document.getElementById('footer-fb').style.display='flex'">
-    <div class="footer-logo-fb" id="footer-fb" style="display:none;">AN</div>
-    <span>© 2024 AN Psixoloji Dəstək və Reabilitasiya Mərkəzi</span>
-  </div>
-  <div class="footer-right">
-    <a href="https://instagram.com/an_psixologiyamerkezi" target="_blank" class="footer-insta">
-      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-      @an_psixologiyamerkezi
-    </a>
-    <a href="https://instagram.com/s_akhundoff" target="_blank" class="footer-insta">
-      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-      @s_akhundoff
-    </a>
-  </div>
+  <img class="footer-logo" src="logo.png" alt="AN Logo">
+  <div style="margin-bottom:6px;color:rgba(255,255,255,.7)">AN Psixoloji Dəstək və Reabilitasiya Mərkəzi</div>
+  <div>By <a href="https://www.instagram.com/s_akhundoff" target="_blank">@s_akhundoff</a></div>
 </footer>
 
-
-<!-- EDIT MODAL -->
-<div id="edit-modal" onclick="if(event.target===this)closeEditModal()">
-  <div class="edit-box">
-    <h3 id="edit-modal-title">Redaktə Et</h3>
-    <div id="edit-modal-fields"></div>
-    <div class="edit-btns">
-      <button class="btn-gold" style="border:none;cursor:pointer;font-family:'Nunito',sans-serif;" onclick="saveEditModal()">Yadda Saxla</button>
-      <button class="edit-cancel" onclick="closeEditModal()">Ləğv Et</button>
-    </div>
+<!-- SVC MODAL -->
+<div class="modal-ov" id="svc-modal">
+  <div class="modal-box" style="max-width:440px">
+    <div class="modal-head"><h3 id="svc-modal-title">Xidmət</h3><button class="modal-close" onclick="closeSvc()">✕</button></div>
+    <div class="modal-body"><div class="svc-modal-icon" id="svc-modal-icon"></div><div class="svc-modal-body" id="svc-modal-body"></div></div>
   </div>
 </div>
 
+<!-- ADMIN MODAL -->
+<div class="modal-ov" id="admin-modal">
+  <div class="modal-box">
+    <div class="modal-head"><h3><i class="fas fa-shield-halved"></i> Admin Paneli</h3><button class="modal-close" onclick="closeAdmin()">✕</button></div>
+    <div class="modal-body">
 
-<!-- SERVICE POPUP -->
-<div id="svc-overlay" onclick="if(event.target===this)closeSvc()">
-  <div class="svc-popup">
-    <div class="svc-head">
-      <button class="svc-close" onclick="closeSvc()">✕</button>
-      <span class="svc-icon" id="svc-icon"></span>
-      <h2 id="svc-title"></h2>
-    </div>
-    <div class="svc-body">
-      <p id="svc-desc"></p>
-      <ul class="svc-feats" id="svc-feats"></ul>
-      <a href="#elaqe" class="svc-cta" onclick="closeSvc()">📞 Əlaqə Saxlayın</a>
-    </div>
-  </div>
-</div>
-
-<!-- ADMIN LOGIN -->
-<div id="admin-overlay">
-  <div class="admin-login">
-    <h2>🔐 Admin Paneli</h2>
-    <p>Daxil olmaq üçün şifrəni yazın</p>
-    <div class="admin-error" id="admin-error">Şifrə yanlışdır!</div>
-    <input type="password" id="admin-pass" placeholder="••••••••" onkeydown="if(event.key==='Enter')checkAdmin()">
-    <button class="btn-gold" onclick="checkAdmin()">Daxil Ol</button><br>
-    <button class="close-login" onclick="closeAdminOverlay()">Bağla</button>
-  </div>
-</div>
-
-<!-- ADMIN PANEL -->
-<div id="admin-panel">
-  <div class="admin-nav">
-    <h1>⚙️ Admin Paneli</h1>
-    <div class="admin-nav-right">
-      <button class="btn-admin" onclick="closeAdmin()">← Sayta Qayıt</button>
-      <button class="btn-admin danger" onclick="closeAdmin()">Çıxış</button>
-    </div>
-  </div>
-  <div class="admin-content">
-    <div class="admin-tabs">
-      <button class="admin-tab active" onclick="switchTab('tab-news',this)">📰 Xəbərlər</button>
-      <button class="admin-tab" onclick="switchTab('tab-team',this)">👥 Əməkdaşlar</button>
-      <button class="admin-tab" onclick="switchTab('tab-about',this)">ℹ️ Haqqımızda</button>
-    </div>
-
-    <!-- XƏBƏRLƏR -->
-    <div id="tab-news" class="admin-section active">
-      <div class="admin-form">
-        <h3>Yeni Xəbər Əlavə Et</h3>
-        <label>Başlıq *</label>
-        <input type="text" id="news-title" placeholder="Xəbər başlığı">
-        <label>Məzmun</label>
-        <textarea id="news-text" style="height:90px" placeholder="Xəbər mətni..."></textarea>
-        <label>Şəkil yüklə (fayldan)</label>
-        <input type="file" id="news-img-file" accept="image/*" onchange="previewImg(this)" style="padding:8px;font-size:13px;">
-        <div id="news-img-preview" style="margin-top:8px;"></div>
-        <label>Şəkil URL (istəyə bağlı)</label>
-        <input type="text" id="news-img-url" placeholder="https://... şəkil linki">
-        <label>Video (YouTube linki)</label>
-        <input type="text" id="news-video" placeholder="https://youtube.com/watch?v=...">
-        <button class="btn-gold" onclick="addNews()">Xəbər Əlavə Et</button>
-        <div class="success-msg" id="news-success">✓ Xəbər uğurla əlavə edildi!</div>
+      <!-- LOGIN -->
+      <div id="login-view">
+        <div class="login-err" id="login-err"><i class="fas fa-triangle-exclamation"></i> Şifrə yanlışdır.</div>
+        <div class="field"><label>Şifrə</label><input type="password" id="a-pass" placeholder="••••••••"></div>
+        <button class="btn-submit" id="login-btn"><i class="fas fa-right-to-bracket"></i> Daxil ol</button>
       </div>
-      <h3 style="font-family:'Playfair Display',serif;color:var(--deep);margin-bottom:14px;">Mövcud Xəbərlər</h3>
-      <div class="admin-list" id="admin-news-list"></div>
-    </div>
 
-    <!-- ƏMƏKDAŞLAR -->
-    <div id="tab-team" class="admin-section">
-      <div class="admin-form">
-        <h3>Yeni Əməkdaş Əlavə Et</h3>
-        <div class="form-row">
-          <div><label>Ad Soyad *</label><input type="text" id="team-name" placeholder="Ad Soyad"></div>
-          <div><label>Vəzifə *</label><input type="text" id="team-role" placeholder="Psixoloq, Loqoped..."></div>
+      <!-- PANEL -->
+      <div id="panel-view" style="display:none">
+        <div class="admin-tabs">
+          <button class="atab active" data-tab="muracietler"><i class="fas fa-clipboard-list"></i> Müraciətlər</button>
+          <button class="atab" data-tab="mesajlar"><i class="fas fa-envelope"></i> Mesajlar</button>
+          <button class="atab" data-tab="xeberler"><i class="fas fa-newspaper"></i> Xəbərlər</button>
+          <button class="atab" data-tab="emekdaslar"><i class="fas fa-users"></i> Əməkdaşlar</button>
+          <button class="atab" data-tab="haqqimizda"><i class="fas fa-pen"></i> Haqqımızda</button>
         </div>
-        <label>Qısa Məlumat</label>
-        <textarea id="team-bio" style="height:80px" placeholder="Əməkdaş haqqında qısa məlumat..."></textarea>
-        <label>Foto URL (imgbb.com və ya başqa link)</label>
-        <input type="text" id="team-photo-url" placeholder="https://... foto linki">
-        <label>Foto (fayldan seç)</label>
-        <input type="file" id="team-photo-file" accept="image/*" onchange="prevTeamPhoto(this)" style="padding:8px;font-size:13px;background:var(--warm1);border:1.5px solid rgba(201,168,76,.2);border-radius:10px;width:100%;cursor:pointer;">
-        <div id="team-photo-prev" style="margin-top:8px;"></div>
-        <button class="btn-gold" onclick="addTeam()">Əlavə Et</button>
-        <div class="success-msg" id="team-success">✓ Əməkdaş əlavə edildi!</div>
-      </div>
-      <h3 style="font-family:'Playfair Display',serif;color:var(--deep);margin-bottom:14px;">Əməkdaşlar Siyahısı</h3>
-      <div class="admin-list" id="admin-team-list"></div>
-    </div>
 
-    <!-- HAQQIMIZDA -->
-    <div id="tab-about" class="admin-section">
-      <div class="admin-form">
-        <h3>Haqqımızda Mətnini Redaktə Et</h3>
-        <label>Əsas Mətn</label>
-        <textarea id="about-edit" style="min-height:160px;"></textarea>
-        <button class="btn-gold" onclick="saveAbout()">Yadda Saxla</button>
-        <div class="success-msg" id="about-success">✓ Yadda saxlandı!</div>
+        <!-- MÜRACİƏTLƏR -->
+        <div class="apane active" id="tab-muracietler"></div>
+
+        <!-- MESAJLAR -->
+        <div class="apane" id="tab-mesajlar"></div>
+
+        <!-- XƏBƏRLƏR -->
+        <div class="apane" id="tab-xeberler">
+          <div class="asep">Yeni Xəbər Əlavə Et</div>
+          <div class="field"><label>Başlıq</label><input type="text" id="n-title" placeholder="Xəbər başlığı"></div>
+          <div class="field"><label>Mətn</label><textarea id="n-body" placeholder="Xəbər mətni..."></textarea></div>
+          <button class="btn-teal" onclick="addNews()"><i class="fas fa-plus"></i> Əlavə et</button>
+          <div class="asep" style="margin-top:20px">Mövcud Xəbərlər</div>
+          <div id="news-admin-list"></div>
+        </div>
+
+        <!-- ƏMƏKDAŞLAR -->
+        <div class="apane" id="tab-emekdaslar">
+          <div class="asep">Yeni Əməkdaş Əlavə Et</div>
+          <div class="row2">
+            <div class="field"><label>Ad Soyad</label><input type="text" id="t-name" placeholder="Ad Soyad"></div>
+            <div class="field"><label>Vəzifə</label><input type="text" id="t-role" placeholder="Məsələn: Psixoloq"></div>
+          </div>
+          <button class="btn-teal" onclick="addTeam()"><i class="fas fa-plus"></i> Əlavə et</button>
+          <div class="asep" style="margin-top:20px">Mövcud Əməkdaşlar</div>
+          <div id="team-admin-list"></div>
+        </div>
+
+        <!-- HAQQIMIZDA -->
+        <div class="apane" id="tab-haqqimizda">
+          <div class="asep">Haqqımızda Mətni Redaktə Et</div>
+          <div class="field"><textarea id="about-edit" style="min-height:140px;"></textarea></div>
+          <div class="afooter"><button class="btn-teal" onclick="saveAbout()"><i class="fas fa-save"></i> Yadda saxla</button></div>
+        </div>
       </div>
+
     </div>
   </div>
 </div>
 
-<script>(function(){var _ipwx=["AyYmKTQ0NDQ0KU1IXUgpNDQ0NDQDamZnen0pSE1EQEdWWUhaWik0KS5IRzs5Oz0uMgNlbH0pbWh9aCk0","KXIpZ2x+ejNSVCUpfWxoZDNSVCUpaGtmfH0zLkhHKVl6YHFmZWZjYClNwJB6fcCQYil/wJApW2xoa2Bl","YH1oemBwaClEwJB7YsCQc2Apccq1enx6YCl4aHDNls24cGgpbGF9YHBoas24KWZlaGcpfMyWaHhlaHto","KXlszJbAkGJoeyl5emBxZmVmY2ApbcCQen3AkGIlKWx7YsCQZylkyrVtaHFgZcCQKX/AkCl7bGhrYGVg","fWh6YHBoKXFgbWTAkH1lwJB7YCluyr96fcCQe2B7JylEwJB7YsCQc2BkYHMpYcCQeyl8zJZozZbNuGcp","b8CQe21gKWxhfWBwaGplaHvNuGdoKXxwzZZ8Zyl5e2Z4e2hkZWh7KWFoc824e2VocM24eycuKXQyAwNv","fGdqfWBmZyllZmhtTWh9aCEgKXIpfXtwKXIpamZnen0pejRlZmpoZVp9Zntobmwnbmx9QH1sZCEuaGdW","emB9bFZtaH1oLiAyKWBvIXogKW1ofWg0Q1pGRyd5aHt6bCF6IDIpdClqaH1qYSFsIHJ0KXQDb3xnan1g","Zmcpemh/bE1ofWghIClyKWVmamhlWn1me2hubCd6bH1AfWxkIS5oZ1Z6YH1sVm1ofWguJSlDWkZHJ3p9","e2BnbmBvcCFtaH1oICAyKXQDAyYmKTQ0NDQ0KUdIX0tIWylaSltGRUUpNDQ0NDQDfmBnbWZ+J2htbUx/","bGd9RWB6fWxnbHshLnpqe2ZlZS4lKSEgKTQ3KXIDKSltZmp8ZGxnfSdubH1MZWxkbGd9S3BAbSEuZ2h/","a2h7LiAnamVoenpFYHp9J31mbm5lbCEuemp7ZmVlbG0uJSl+YGdtZn4nemp7ZmVlUCk3KT05IDIDdCAy","AwMmJik0NDQ0NClLXFtOTFspNDQ0NDQDbWZqfGRsZ30nbmx9TGVsZGxnfUtwQG0hLmt8e25sey4gJ2ht","bUx/bGd9RWB6fWxnbHshLmplYGpiLiUpISApNDcpcgMpKW1manxkbGd9J25sfUxlbGRsZ31LcEBtIS5k","ZmtgZWwkZGxnfC4gJ2plaHp6RWB6fSd9Zm5uZWwhLmZ5bGcuIDIDdCAyA298Z2p9YGZnKWplZnpsRGZr","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","aHp6NCtrfWckaG1kYGcrKWZnamVgamI0K2xtYH1HbH56IS1yZydgbXQgKyl6fXBlbDQra2hqYm57Znxn","bTN7bmtoITs5OCU4PzElPj8lJzg8IDJrZnttbHskamZlZnsze25raCE7OTglOD8xJT4/JSc9IDJqZmVm","ezN/aHshJCRuZmVtJG1oe2IgMis365WG5rGGNSZrfH19Zmc3AykpKSkpKSkpNWt8fX1mZylqZWh6ejQr","a31nJGhtZGBnKW1oZ25seyspZmdqZWBqYjQrbWxlbH1sR2x+eiEtcmcnYG10ICs3+ZaemOaxhjUma3x9","fWZnNwMpKSkpKSk1Jm1gfzcDKSkpKTUmbWB/N2kgJ2NmYGchLi4gMgN0A298Z2p9YGZnKXtsZ21se0ds","fnohIClyAykpamZnen0pbGU0bWZqfGRsZ30nbmx9TGVsZGxnfUtwQG0hLmdsfnokamZnfWhgZ2x7LiAy","AykpYG8pIShtaH1oJ2dsfnonZWxnbn1hIClyAykpKSlsZSdgZ2dse0FdREU0LjVtYH8pamVoeno0K2ds","fnokbGR5fXArNzV6eWhnKXp9cGVsNCtvZmd9JHpgc2wzPTF5cTJtYHp5ZWhwM2tlZmpiMmRoe25gZyRr","Zn19ZmQzOD15cTIrN/mWmrk1Jnp5aGc3QcCQZcCQZWBiKXHAkGvAkHspcGZxbXx7JzUmbWB/Ny4yKXts","fXx7ZzIDKSl0AykpbGUnYGdnbHtBXURFNG1ofWgnZ2x+eidkaHkhZzQ3cgMpKSkpamZnen0pcH00bmx9","UF1MZGtsbSFnJ39gbWxmIDIDKSkpKWVsfSlkbG1gaDRwfTZpNW1gfylqZWh6ejQrZ2x+eiR/YG1sZiR+","e2h5Kzc1YG97aGRsKXp7ajQrLXJwfXQrKWhlZWZ+b3xlZXpqe2xsZyllZmhtYGduNCtlaHNwKzc1JmBv","e2hkbDc1Jm1gfzdpMwMpKSkpKSkpKSkpKSkpKWcnYGRuNmk1YGRuKWplaHp6NCtnbH56JGRsbWBoKyl6","e2o0Ky1yZydgZG50KyloZX00Ky1yZyd9YH1lbHQrKWVmaG1gZ240K2Voc3ArN2kzAykpKSkpKSkpKSkp","KSkpaTVtYH8pamVoeno0K2dsfnokZGxtYGgkeWVoamxhZmVtbHsrN/mWmrk1Jm1gfzdpMgMpKSkpe2x9","fHtnKWk1bWB/KWplaHp6NCtnbH56JGpoe20rNy1yZGxtYGh0NW1gfylqZWh6ejQrZ2x+eiRrZm1wKzc1","bWB/KWplaHp6NCtnbH56JG1ofWwrNy1yZydtaH1sdDUmbWB/NzVhOjctcmcnfWB9ZWx0NSZhOjctcmcn","fWxxfTZpNXk3LXJnJ31scX10NSZ5N2kzLi50NSZtYH83NSZtYH83aTIDKSl0ICdjZmBnIS4uIDIDdAMD","JiYpNDQ0NDQpXUxIRCk0NDQ0NANlbH0pVn1saGRZYWZ9Zik0KS4uMgNvfGdqfWBmZyl5e2x/XWxoZFlh","Zn1mIWBneXx9IClyAykpYG8pIShgZ3l8fSdvYGVsenV1KGBneXx9J29gZWx6UjlUICl7bH18e2cyAykp","amZnen0pezRnbH4pT2BlbFtsaG1seyEgMgMpKXsnZmdlZmhtNGw0N3IDKSkpKVZ9bGhkWWFmfWY0bCd9","aHtubH0ne2x6fGV9MgMpKSkpfmBnbWZ+J1Z9bGhkWWFmfWZLPz00bCd9aHtubH0ne2x6fGV9MgMpKSkp","bWZqfGRsZ30nbmx9TGVsZGxnfUtwQG0hLn1saGQkeWFmfWYkeXtsfy4gJ2BnZ2x7QV1ERTQDKSkpKSkp","aTVgZG4pentqNCstclZ9bGhkWWFmfWZ0Kyl6fXBlbDQrfmBtfWEzPjl5cTJhbGBuYX0zPjl5cTJrZntt","bHske2htYHx6Mzw5LDJma2Nsan0kb2B9M2pmf2x7Mmtme21sezM6eXEpemZlYG0pe25raCE7OTglOD8x","JT4/JSc9IDJkaHtuYGckfWZ5Mz95cTIrN2kyAykpdDIDKSl7J3tsaG1Iek1ofWhcW0UhYGd5fH0nb2Bl","bHpSOVQgMgN0A298Z2p9YGZnKWhtbV1saGQhIClydANvfGdqfWBmZyltbGVsfWxdbGhkIWBtIClyAykp","YG8pIShqZmdvYHtkIS7PhmTAkGJtaMyWzbgpemBlZMCQYilgen3AkHBge3pgZ2BzNi4gICl7bH18e2cy","AykpbWh9aCd9bGhkNG1ofWgnfWxoZCdvYGV9bHshfTQ3fSdgbSg0NGBtIDIDKSl6aH9sTWh9aCEgMil7","bGdtbHtIbWRgZ11saGQhIDIDdANvfGdqfWBmZyl7bGdtbHtIbWRgZ11saGQhIClyAykpamZnen0pbGU0","bWZqfGRsZ30nbmx9TGVsZGxnfUtwQG0hLmhtZGBnJH1saGQkZWB6fS4gMgMpKWBvKSEobWh9aCd9bGhk","J2VsZ259YSApcilsZSdgZ2dse0FdREU0LjV5KXp9cGVsNCtqZmVmezN/aHshJCRue2hwIDJvZmd9JHpg","c2wzODp5cTJvZmd9JH5sYG5hfTM/OTkyKzdBwJBlwJBlYGIpwJBkwJBibWjMlilwZnFtfHsnNSZ5Ny4y","KXtsfXx7ZzIpdAMpKWxlJ2BnZ2x7QV1ERTRtaH1oJ31saGQnZGh5IX00N2kDKSkpKTVtYH8pamVoeno0","K2htZGBnJGVgen0kYH1sZCs3AykpKSkpKTVtYH8pamVoeno0K2htZCRkYGdgJGh/KzcDKSkpKSkpKSkt","cn0neWFmfWYpNilpNWBkbil6e2o0Ky1yfSd5YWZ9ZnQrKWhlfTQrKzdpKTMpfSdnaGRsJ2phaHtIfSE5","IHQDKSkpKSkpNSZtYH83AykpKSkpKTVtYH8pamVoeno0K2htZGBnJGVgen0kYH1sZCRgZ29mKyl6fXBl","bDQrb2VscTM4MmRgZyR+YG19YTM5Mis3AykpKSkpKSkpNWE9Ny1yfSdnaGRsdDUmYT03NXk3LXJ9J3tm","ZWx0NSZ5NwMpKSkpKSk1Jm1gfzcDKSkpKSkpNW1gfylqZWh6ejQrZWB6fSRoan1gZmd6KzcDKSkpKSkp","KSk1a3x9fWZnKWplaHp6NCtrfWckaG1kYGcrKWZnamVgamI0K2xtYH1dbGhkIS1yfSdgbXQgKyl6fXBl","bDQra2hqYm57ZnxnbTN7bmtoITs5OCU4PzElPj8lJzg8IDJrZnttbHskamZlZnsze25raCE7OTglOD8x","JT4/JSc9IDJqZmVmezN/aHshJCRuZmVtJG1oe2IgMis365WG5rGGNSZrfH19Zmc3AykpKSkpKSkpNWt8","fX1mZylqZWh6ejQra31nJGhtZGBnKW1oZ25seyspZmdqZWBqYjQrbWxlbH1sXWxoZCEtcn0nYG10ICs3","+ZaemOaxhjUma3x9fWZnNwMpKSkpKSk1Jm1gfzcDKSkpKTUmbWB/N2kgJ2NmYGchLi4gMgN0A298Z2p9","YGZnKXtsZ21se11saGQhIClyAykpamZnen0pbGU0bWZqfGRsZ30nbmx9TGVsZGxnfUtwQG0hLn1saGQk","amZnfWhgZ2x7LiAyAykpYG8pIShtaH1oJ31saGQnZWxnbn1hIClyAykpKSlsZSdgZ2dse0FdREU0LjVt","YH8pamVoeno0K31saGQkbGR5fXArNzV6eWhnKXp9cGVsNCtvZmd9JHpgc2wzPTF5cTJtYHp5ZWhwM2tl","ZmpiMmRoe25gZyRrZn19ZmQzOD15cTIrN/mWmKw1Jnp5aGc3z4ZkwJBibWjMlmVoeylobWRgZyl5aGds","ZW3AkGcpwJBlaH/AkClsbWBlwJBqwJBiNSZtYH83LjIpe2x9fHtnMgMpKXQDKSlsZSdgZ2dse0FdREU0","bWh9aCd9bGhkJ2RoeSF9NDdpAykpKSk1bWB/KWplaHp6NCt9bGhkJGpoe20rNwMpKSkpKSk1bWB/KWpl","aHp6NCt9bGhkJGh/aH1oeys3AykpKSkpKSkpLXJ9J3lhZn1mKTYpaTVgZG4pentqNCstcn0neWFmfWZ0","KyloZX00Ky1yfSdnaGRsdCs3aSkzKX0nZ2hkbCdqYWh7SH0hOSB0AykpKSkpKTUmbWB/NwMpKSkpKSk1","YTo3LXJ9J2doZGx0NSZhOjcDKSkpKSkpNW1gfylqZWh6ejQre2ZlbCs3LXJ9J3tmZWx0NSZtYH83Aykp","KSkpKS1yfSdrYGY2aTV5KWplaHp6NCtrYGYrNy1yfSdrYGZ0NSZ5N2kzLi50AykpKSk1Jm1gfzdpICdj","ZmBnIS4uIDIDdAMDJiYpNDQ0NDQpSEtGXF0pNDQ0NDQDb3xnan1gZmcpemh/bEhrZnx9ISApcnQDAyYm","KTQ0NDQ0KUpGR11ISl0pNDQ0NDQDb3xnan1gZmcpemxnbV5haH16aHl5ISApcgMpKWpmZ3p9KWdoZGw0","bWZqfGRsZ30nbmx9TGVsZGxnfUtwQG0hLmpvJGdoZGwuICd/aGV8bCd9e2BkISAyAykpamZnen0peWFm","Z2w0bWZqfGRsZ30nbmx9TGVsZGxnfUtwQG0hLmpvJHlhZmdsLiAnf2hlfGwnfXtgZCEgMgMpKWpmZ3p9","KWR6bjRtZmp8ZGxnfSdubH1MZWxkbGd9S3BAbSEuam8kZHpuLiAnf2hlfGwnfXtgZCEgMgMpKWBvKSEo","Z2hkbHV1KGR6biApciloZWx7fSEuSG0pf8CQKWRsemhjKW1ocWBlKWxtYGcoLiAyKXtsfXx7ZzIpdAMp","KX5gZ21mfidmeWxnIWlhfX15ejMmJn5oJ2RsJjAwPTw8PTg8Pjs4PDZ9bHF9NC1ybGdqZm1sXFtASmZk","eWZnbGd9IWlaaGVoZCgpSG3NuGQzKS1yZ2hkbHRVZ11sZWxvZmczKS1yeWFmZ2x0VWdEbHpoYzMpLXJk","em50aSB0aSUpLlZrZWhnYi4gMgN0AwMmJik0NDQ0NClaSltGRUUpW0xfTEhFKTQ0NDQ0A2pmZ3p9KXts","f2xoZUZreik0KWdsfilAZ31se3psan1gZmdGa3pse39seyFsZ317YGx6NDdyAykpbGd9e2BseidvZntM","aGphIWw0N3IpYG8hbCdgekBnfWx7emxqfWBnbiApbCd9aHtubH0namVoenpFYHp9J2htbSEuf2B6YGtl","bC4gMil0IDIDdCVyfWF7bHphZmVtMzknOHQgMgNtZmp8ZGxnfSd4fGx7cFpsZWxqfWZ7SGVlIS4ne2x/","bGhlLiAnb2Z7TGhqYSFsZTQ3e2x/bGhlRmt6J2Zremx7f2whbGUgIDIDAwMmJik0NDQ0NClHTF5aKUtI","TU5MKTQ0NDQ0A298Z2p9YGZnKXx5bWh9bEdsfnpLaG1ubCEgKXIDKSkmJilaZmcpbsq/e8q1ZWTKtcyW","KXHAkGvAkHspQE0kemBnYClwZnFlaAMpKWpmZ3p9KWVoen1abGxnKTQpZWZqaGVafWZ7aG5sJ25sfUB9","bGQhLmhnVmVoen1WemxsZ1ZgbS4gKXV1KS4uMgMpKWpmZ3p9KXxnemxsZyk0KW1ofWgnZ2x+eidlbGdu","fWEpNyk5KS8vKW1ofWgnZ2x+elI5VCdgbSd9Zlp9e2BnbiEgKSg0NCllaHp9WmxsZwMpKSkpNiltaH1o","J2dsfnonb2BlfWx7IWcpNDcpZydgbSd9Zlp9e2BnbiEgKTcpZWh6fVpsbGcgJ2VsZ259YQMpKSkpMyk5","MgMpKVJtZmp8ZGxnfSdubH1MZWxkbGd9S3BAbSEuZWZuZiRnbH56JGtobW5sLiAlKW1manxkbGd9J25s","fUxlbGRsZ31LcEBtIS5kZmskZ2x+eiRraG1ubC4gVCdvZntMaGphIWspNDcpcgMpKSkpYG8pIShrICl7","bH18e2cyAykpKSlgbykhfGd6bGxnKTcpOSApcilrJ31scX1KZmd9bGd9KTQpfGd6bGxnMilrJ2plaHp6","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","f2hlfGw0Ky1ybHpqQX1kZSF9J2doZGwgdCs3AykpKSk1ZWhrbGU3X8CQc2BvwJApIzUmZWhrbGU3Aykp","KSk1YGd5fH0pfXB5bDQrfWxxfSspYG00K2xkJHtmZWwrKX9oZXxsNCstcmx6akF9ZGUhfSd7ZmVsIHQr","NwMpKSkpNWVoa2xlN1jNuHpoKUTAkGV8ZGh9NSZlaGtsZTcDKSkpKTV9bHF9aHtsaClgbTQrbGQka2Bm","Kyl6fXBlbDQrYWxgbmF9MzE5eXErNy1ybHpqQX1kZSF9J2tgZnV1Li4gdDUmfWxxfWh7bGg3AykpKSk1","ZWhrbGU3UGxnYClPZn1mKSFtwJBwYMyWZMCQYinKtcquyrVnKXpsyq4gNSZlaGtsZTcDKSkpKTVgZ3l8","fSl9cHlsNCtvYGVsKylgbTQrbGQkeWFmfWYrKWhqamx5fTQrYGRobmwmIyspZmdqYWhnbmw0K1Z7bGht","TG1gfVlhZn1mIX1hYHogKzcDKSkpKTVtYH8pYG00K2xkJHlhZn1mJHl7bH8rNy1yfSd5YWZ9ZjZpNWBk","bil6e2o0Ky1yfSd5YWZ9ZnQrKXp9cGVsNCt+YG19YTM/MXlxMmFsYG5hfTM/MXlxMmtme21seyR7aG1g","fHozPDksMmZrY2xqfSRvYH0zamZ/bHsya2Z7bWx7Mzp5cSl6ZmVgbSl7bmtoITs5OCU4PzElPj8lJz0g","MmRoe25gZyR9ZnkzP3lxMis3aTMuLnQDKSkpKTUmbWB/NwMpKWkyAykpVmxtYH1afWh9bCk0KXJ9cHls","My59bGhkLiUpYG0lKWdsfllhZn1mM2d8ZWV0MgMpKW1manxkbGd9J25sfUxlbGRsZ31LcEBtIS5sbWB9","JGRmbWhlLiAnamVoenpFYHp9J2htbSEuZnlsZy4gMgMpKW1manxkbGd9J2tmbXAnen1wZWwnZn9se29l","Zn40LmFgbW1sZy4yA3QDA298Z2p9YGZnKVZ7bGhtTG1gfVlhZn1mIWBneXx9IClyAykpYG8hKGBneXx9","J29gZWx6dXUoYGd5fH0nb2BlbHpSOVQgKXtsfXx7ZzIDKSlqZmd6fSl7NGdsfilPYGVsW2xobWx7ISAy","AykpeydmZ2VmaG00bDQ3cgMpKSkpVmxtYH1afWh9bCdnbH5ZYWZ9ZjRsJ31oe25sfSd7bHp8ZX0yAykp","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","cgMpKWBvIWwnYmxwNDQ0Lkx6amh5bC4gKXIDKSkpKWplZnpsTG1gfURmbWhlISAyAykpKSlqZmd6fSl6","ZjRtZmp8ZGxnfSdubH1MZWxkbGd9S3BAbSEuen9qJGZ/bHtlaHAuIDIpYG8hemYgKXpmJ2plaHp6RWB6","fSd7bGRmf2whLmZ5bGcuIDIDKSl0A3QgMgMDAyYmKTQ0NDQ0KVpMW19ASkwpWUZZXFkpNDQ0NDQDamZn","en0pWl9KWik0KVIDKSlyYGpmZzMu+ZauqS4lfWB9ZWwzLll6YHFmZWZ4LiVtbHpqMy5ZemBxZmVmeGVo","e824ZM24cyl8zJZoeGVoe824ZylsZGZ6YGZnaGUlKW1of3toZ824zJYpf8CQKWBnYmDMlmhvKXl7Zmtl","bGRlwJB7YGdgKWTKtWh6YHspZGx9Zm1laHtlaCl4YHBkwJB9ZcCQZ21ge2B7JylBwJB7KXzMlmh4Kcq1","yq7KtWcpb8CQe21gKX1se2h5YHBoKXllaGfNuClhaHPNuHtlaGfNuHsnLiVvbGh9ejNSLk1of3toZ824","zJYpeXtma2VsZGXAkHtgZ2BnKXhgcGTAkH1lwJBnbWB7YGVkwJB6YC4lLkdoe2hhaH1lzbh4JSltbHl7","bHp6YHBoJSlvZmtgcGhlaHvNuGcpZMq1aGVgasCQemAuJS5IfH1gc2QpenlsYn17KXlmc3xnfXx6fCkh","SFpNICltwJB6fcCQcGAuJS5NTEFLKX1se2h5YHBoes24LiUuX2hlYG1scGckfMyWaHgpZMq1Z2h6YGvA","kH1lwJB7YGdgZylgZ2JgzJZob824LiUuT8CQe21gKX/AkCl4e3x5KX1se2h5YHBoKXpsaGd6ZWh7zbgu","VHQlAykpcmBqZmczLvmWnqrmsYYuJX1gfWVsMy5FZnhmeWxtLiVtbHpqMy5FZnhmeWxtZcCQe2BkYHMp","Z2B9eCUpbWBlKX/AkCnKtWd6YHBwwJB9KXlmc3xnfXxlaHvNuGfNuClse2LAkGcpZMCQe2HAkGXAkG3A","kClozJZiaHtlaHDNuHspf8CQKWBxfWB6aHplaMyWZM24zJYpfWx7aHlgcGgpYGXAkCltyrVzwJBlbWB7","Jy4lb2xofXozUi5ObGpgYmRgzJYpZ2B9eClgZ2JgzJZob824Z824ZyliZnt7bGJ6YHBoes24LiUuWsCQ","eil9wJBlwJBvb8q1c8q1KXlmc3xnfXxlaHvNuGfNuGcpZMq1aGVgasCQemAuJS5CwJBiwJBlwJBkwJAp","fWx7aHlgcGh6zbguJS5NYGUpaGdlaGRoKX/AkClgb2htwJBsfWTAkClraGpoe824eGVoe824LiUuXG1k","aCl5ZnN8Z318ZWh7zbhnzbhnKWTKtWhlYGrAkHpgLiUuSEhKKXpgen1sZGXAkHtgZ2BnKX3AkH1rYHhg","LlR0JQMpKXJgamZnMy75lq6gLiV9YH1lbDMuWXpgcWYkeWxtaHhmeC4lbWx6ajMuUcq1enx6YClsYX1g","cGhqZc24KXzMlmh4ZWh7zbhnKcq/cHvAkGdkwJApeWZ9bGd6YGhlzbhnzbgpaMquZGh4Kcq1yq7KtWcp","b8CQe21gKX3AkG17YHopZGx9Zm1laHvNuClhaHPNuHtlaHDNuGspfcCQfWtgeClsbWB7YGInLiVvbGh9","ejNSLsqfcHvAkGdkwJApyq7AkH1gZ2VgYmXAkHtgZ2BnKW1gaHhnZnp9YGJoes24LiUuT8CQe21gKX3A","kG17YHopeXtmeHtoZGVoe824KSFATFkgLiUuRnF8KX/AkClwaHPNuClraGpoe824eGVoe824Z824Zylg","Z2JgzJZob824LiUuTWB6ZWxiemBwaCUpbWB6YmhlYsq1ZWBwaCltwJB6fcCQcGAuJS5EwJBifcCQaylh","aHPNuHtlzbjNls24KXl7Znh7aGRlaHvNuC4lLl9oZWBtbHBnKX/AkClkyrXAkGVlYGTAkClkbH1mbWBi","YCltwJB6fcCQYi5UdCUDKSlyYGpmZzMu+ZaYiy4lfWB9ZWwzLk18cHwpS8q1fcq1Z2XAkGTAkC4lbWx6","ajMuWmxnemZ7KWxkaGUpeWZzfGd9fGVoe824KWZlaGcpfMyWaHhlaHtoKWFgenopemB6fWxkZcCQe2Bn","YClhaHtkZmdgYilgZ2JgzJZobylsfW1ge2TAkHDAkCliyr9kwJBiKWxtYHtgYicuJW9saH16M1IuWmxn","emZ7KWxkaGUpeWZzfGd9fGVoe824Z824Zyl4YHBkwJB9ZcCQZ21ge2BlZMCQemAuJS5dZnF8Z2RoJSlh","wJB7wJBiwJB9JSl9aHtoc2XNuHgpYWB6emXAkHtgZ2BnKWBnYmDMlmhvzbguJS5abGd6ZnspYcCQenpo","emXNuM2WzbhnzbhnKWdme2RoZWVozJZtzbh7zbhlZGh6zbguJS5OyrVnbcCQZWBiKWHAkHBofWgpfHDN","lnxnZWjMlmRoZ824Zyloe33NuHvNuGVkaHrNuC4lLlHKtXp8emApemxnemZ7KWZ9aHhtaCl9bHtoeWBw","aC4lLkx/KXl7Znh7aGRlaHvNuGfNuGcpYWhzzbh7ZWhnZGh6zbguVHQlAykpcmBqZmczLvmWr4IuJX1g","fWVsMy5Me3hmfWx7aHlgcGguJW1semozLlzMlmh4ZWh7zbhnKW7KtWdtwJBlYGIpYcCQcGh9KWtoamh7","zbh4ZWh7zbhnzbgpYGdiYMyWaG8pbH1tYHtkwJB6YGfAkCl/wJApZMq1en3AkHhgZWVgcGBnYCloe33N","uHtkaHrNuGdoKWLKv2TAkGIpbG1ge2BiJy4lb2xofXozUi5Rzbh7bWgpZGZ9Znspa2hqaHvNuHhlaHvN","uGfNuGcpYGdiYMyWaG/NuC4lLs+GZSRuyr9zKWJmZnttYGdoemBwaHrNuGfNuGcpbsq1amXAkGdtYHtg","ZWTAkHpgLiUuyp9zyrVnwJApeHxlZXx4KWtoamh7zbh4ZWh7zbhnzbhnKcq/cHvAkG1gZWTAkHpgLiUu","RMCQYn3AkGspa2hqaHvNuHhlaHvNuCkhcGhzzbglKWLAkHpkwJBiIC4lLkZwfGcpf2h6YH3AkHpgZcCQ","KX1se2h5YHBoLiUuSG1oeX1gfylof2htaGdlzbh4ZWh7zbhnKX3AkH1rYHhgLlR0JQMpKXJgamZnMy75","loWWLiV9YH1lbDMuTHtiwJBnKc25Z2JgzJZobylYe3x5fC4lbWx6ajMuO+uJmj8pcGjMlmXNuCl8zJZo","eGVoeynKtcquyrVnKWTKtX3AkHHAkHp6YHplwJB7KX3AkHvAkG9gZ23AkGcpaHloe824ZWhnKWx7YsCQ","ZylgZ2JgzJZobyl5e2Z4e2hkZWh7zbgpfMyWaM2WzbhnKWvKtX3KtWcpemhhwJBlwJB7bcCQKWZ5fWBk","aGUpYGdiYMyWaG/NuGfNuCl9wJBkYGcpbG1geycuJW9saH16M1IuO+uJmj8pcGjMliloe2h6zbgpccq1","enx6YCl5e2Z4e2hkLiUuR2B9eCUpYG17aGIlKXpmemBoZSRsZGZ6YGZnaGUpYGdiYMyWaG8uJS5CYMqu","YGIpeHt8eSlvZntkaH3NuCkhOuuJmjwpfMyWaHggLiUuQcCQb33AkGVgYil5e2Z4e2x6KWBzZcCQZ2TA","kHpgLiUuX2hlYG1scGdlwJB7wJApbH8pfWh5zJbNuHvNuHhlaHvNuC4lLkJmZGhnbWgpcGhnaMyWZGh6","zbguVHQDVDIDA298Z2p9YGZnKWZ5bGdaf2ohYCApcgMpKWpmZ3p9KXopNClaX0paUmBUMgMpKW1manxk","bGd9J25sfUxlbGRsZ31LcEBtIS56f2okYGpmZy4gJ31scX1KZmd9bGd9KTQpeidgamZnMgMpKW1manxk","bGd9J25sfUxlbGRsZ31LcEBtIS56f2okfWB9ZWwuICd9bHF9SmZnfWxnfSk0KXonfWB9ZWwyAykpbWZq","fGRsZ30nbmx9TGVsZGxnfUtwQG0hLnp/aiRtbHpqLiAnfWxxfUpmZ31sZ30pNCl6J21semoyAykpbWZq","fGRsZ30nbmx9TGVsZGxnfUtwQG0hLnp/aiRvbGh9ei4gJ2BnZ2x7QV1ERSk0KXonb2xofXonZGh5IW80","N2k1ZWA3LXJvdDUmZWA3aSAnY2ZgZyEuLiAyAykpbWZqfGRsZ30nbmx9TGVsZGxnfUtwQG0hLnp/aiRm","f2x7ZWhwLiAnamVoenpFYHp9J2htbSEuZnlsZy4gMgMpKW1manxkbGd9J2tmbXAnen1wZWwnZn9se29l","Zn4pNCkuYWBtbWxnLjIDdANvfGdqfWBmZylqZWZ6bFp/aiEgKXIDKSltZmp8ZGxnfSdubH1MZWxkbGd9","S3BAbSEuen9qJGZ/bHtlaHAuICdqZWh6ekVgen0ne2xkZn9sIS5meWxnLiAyAykpbWZqfGRsZ30na2Zt","cCd6fXBlbCdmf2x7b2Vmfik0KS4uMgN0AwMmJik0NDQ0NClAR0BdKTQ0NDQ0A2VmaG1NaH1oISAyA3ts","Z21se0dsfnohIDIDe2xnbWx7XWxoZCEgMgNtZmp8ZGxnfSdubH1MZWxkbGd9S3BAbSEuaGtmfH0kfWxx","fS4gJ31scX1KZmd9bGd9KTQpbWh9aCdoa2Z8fTIDfHltaH1sR2x+ektobW5sISAyAw=="];var _mby=9;var _auuv=atob(_ipwx.join(''));var _bb=_auuv.length;var _bpqd=new Uint8Array(_bb);for(var _tc=0;_tc<_bb;_tc++){_bpqd[_tc]=_auuv.charCodeAt(_tc)^_mby;}var _zaj=new TextDecoder().decode(_bpqd);(0,eval)(_zaj);})();</script>
-  <script type="module">
-  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
-  import { getDatabase, ref, push, set, remove, onValue }
-    from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
+<script>
+(function(){
+'use strict';
+var PASS='AN2024';
+var K={reg:'an_reg',msg:'an_msg',news:'an_news',team:'an_team',about:'an_about',seen:'an_seen'};
+function load(k){try{return JSON.parse(localStorage.getItem(k))||[];}catch(e){return [];}}
+function loadStr(k,def){return localStorage.getItem(k)||def;}
+function save(k,v){localStorage.setItem(k,JSON.stringify(v));}
+function saveStr(k,v){localStorage.setItem(k,v);}
+function now(){var d=new Date(),p=function(n){return n<10?'0'+n:n;};return p(d.getDate())+'.'+p(d.getMonth()+1)+'.'+d.getFullYear()+' '+p(d.getHours())+':'+p(d.getMinutes());}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function waNum(p){var d=String(p).replace(/[^0-9]/g,'');if(d.indexOf('994')===0)return d;if(d.indexOf('0')===0)return '994'+d.slice(1);return d;}
 
-  const app = initializeApp({
-    apiKey: "AIzaSyCBhyGNzZRGgQShP_C9kwAzTm_g_0zJlzg",
-    authDomain: "an-psixoloji-33442.firebaseapp.com",
-    databaseURL: "https://an-psixoloji-33442-default-rtdb.firebaseio.com",
-    projectId: "an-psixoloji-33442",
-    storageBucket: "an-psixoloji-33442.firebasestorage.app",
-    messagingSenderId: "528809299356",
-    appId: "1:528809299356:web:59cae89a64e446dc520c59"
+/* ---------- NAV scroll ---------- */
+window.addEventListener('scroll',function(){
+  document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>40);
+});
+
+/* ---------- Burger ---------- */
+document.getElementById('burger').addEventListener('click',function(){
+  document.getElementById('mob-menu').classList.toggle('open');
+});
+window.closeMob=function(){document.getElementById('mob-menu').classList.remove('open');}
+
+/* ---------- Logo tap → admin (3x) ---------- */
+var tapCount=0,tapTimer=null;
+document.getElementById('logo-tap').addEventListener('click',function(e){
+  e.preventDefault();
+  tapCount++;
+  clearTimeout(tapTimer);
+  tapTimer=setTimeout(function(){tapCount=0;},800);
+  if(tapCount>=3){tapCount=0;openAdmin();}
+  else{window.location.hash='#hero';}
+});
+
+/* ---------- Scroll reveal ---------- */
+var obs=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
+
+/* ---------- Haqqımızda ---------- */
+function loadAbout(){
+  var txt=loadStr(K.about,'AN Psixoloji Dəstək və Reabilitasiya Mərkəzi xüsusi qayğıya ehtiyacı olan uşaqlara peşəkar psixoloji dəstək, erkən müdaxilə və reabilitasiya xidmətləri göstərir. Mərkəzimiz hər uşağın fərdi ehtiyaclarına uyğun proqramlar hazırlayır.');
+  document.getElementById('about-text').textContent=txt;
+}
+loadAbout();
+
+/* ---------- Xəbərlər ---------- */
+function renderNews(){
+  var news=load(K.news);
+  var seen=parseInt(loadStr(K.seen,'0'));
+  var unseen=news.filter(function(n){return n.id>seen;}).length;
+  document.getElementById('nav-badge').style.display=unseen?'inline-block':'none';
+  document.getElementById('news-main-badge').style.display=unseen?'inline-block':'none';
+  var c=document.getElementById('news-container');
+  if(!news.length){c.innerHTML='<div class="news-empty">📰 Hələlik xəbər yoxdur.</div>';return;}
+  c.innerHTML=news.map(function(n){
+    var d=new Date(n.id);
+    var mon=['YAN','FEV','MAR','APR','MAY','İYN','İYL','AVQ','SEP','OKT','NOY','DEK'][d.getMonth()];
+    return '<div class="news-card"><div class="news-date-badge"><span class="day">'+d.getDate()+'</span>'+mon+'</div><div><h3>'+esc(n.title)+'</h3><p>'+esc(n.body)+'</p></div></div>';
+  }).join('');
+}
+renderNews();
+
+/* ---------- Əməkdaşlar ---------- */
+function renderTeam(){
+  var team=load(K.team);
+  var c=document.getElementById('team-container');
+  if(!team.length){c.innerHTML='<div class="team-empty">👥 Əməkdaşlar admin paneldən əlavə ediləcək</div>';return;}
+  c.innerHTML=team.map(function(t){
+    return '<div class="team-card"><div class="team-avatar">'+esc(t.name.charAt(0))+'</div><h4>'+esc(t.name)+'</h4><div class="role">'+esc(t.role)+'</div></div>';
+  }).join('');
+}
+renderTeam();
+
+/* ---------- Xidmət modalı ---------- */
+var svcData=[
+  {icon:'🧠',title:'Psixoloq',body:'<p>Uşaqların emosional, davranış və inkişaf problemlərinin diaqnostikası və müalicəsi.</p><ul><li>Fərdi psixoloji qiymətləndirmə</li><li>Davranış korreksiyası proqramları</li><li>Valideyn-uşaq münasibətlərinin gücləndirilməsi</li><li>Emosional tənzimləmə bacarıqlarının inkişafı</li></ul>'},
+  {icon:'🗣️',title:'Loqoped',body:'<p>Nitq, dil və ünsiyyət pozuntularının korreksiyası üzrə ixtisaslaşmış terapiya.</p><ul><li>Nitq gecikməsi müalicəsi</li><li>Artikulyasiya pozuntularının korreksiyası</li><li>Dil inkişafı proqramları</li><li>Alternativ ünsiyyət metodları</li></ul>'},
+  {icon:'🧩',title:'Psixo-pedaqoq',body:'<p>Xüsusi tədris metodları ilə uşağın öyrənmə potensialının açılması.</p><ul><li>Öyrənmə çətinliklərinin qiymətləndirilməsi</li><li>Fərdi tədris planları</li><li>Koqnitiv bacarıqların inkişafı</li><li>Oxu-yazma çətinliklərinin aradan qaldırılması</li></ul>'},
+  {icon:'👂',title:'Duyu Bütünləmə',body:'<p>Sensor emal pozuntularının müalicəsi, hiss sisteminin harmonik inkişafı.</p><ul><li>Sensor profil qiymətləndirilməsi</li><li>Duyu terapiyası seansları</li><li>Taktil, vestibular və proprioseptiv terapiya</li><li>Ev tapşırıqları proqramı</li></ul>'},
+  {icon:'🦋',title:'Erqoterapiya',body:'<p>Gündəlik həyat bacarıqlarının inkişafı, əl-göz koordinasiyası terapiyası.</p><ul><li>Gündəlik həyat bacarıqlarının öyrədilməsi</li><li>Əl motoru koordinasiyasının inkişafı</li><li>Özünəxidmət bacarıqları</li><li>Məktəb hazırlığı proqramları</li></ul>'},
+  {icon:'🌟',title:'Erkən İnkişaf Qrupu',body:'<p>2–6 yaşlı uşaqlar üçün mütəxəssislər tərəfindən aparılan inkişaf proqramları.</p><ul><li>Kiçik qrup formatında terapiya</li><li>Sosial bacarıqların inkişafı</li><li>Oyun əsaslı öyrənmə metodları</li><li>Valideyn iştirakı ilə gücləndirilmiş proqram</li></ul>'}
+];
+window.openSvc=function(i){
+  var s=svcData[i];
+  document.getElementById('svc-modal-title').textContent=s.title;
+  document.getElementById('svc-modal-icon').textContent=s.icon;
+  document.getElementById('svc-modal-body').innerHTML=s.body;
+  document.getElementById('svc-modal').classList.add('open');
+};
+window.closeSvc=function(){document.getElementById('svc-modal').classList.remove('open');};
+document.getElementById('svc-modal').addEventListener('click',function(e){if(e.target===this)closeSvc();});
+
+/* ---------- WhatsApp contact ---------- */
+window.sendWA=function(){
+  var n=document.getElementById('cf-name').value.trim();
+  var p=document.getElementById('cf-phone').value.trim();
+  var m=document.getElementById('cf-msg').value.trim();
+  if(!n||!m){alert('Ad və mesajı daxil edin.');return;}
+  var txt='Salam, mənim adım '+n+(p?' ('+p+')':'')+'. '+m;
+  window.open('https://wa.me/994554157215?text='+encodeURIComponent(txt),'_blank');
+};
+
+/* ---------- Qeydiyyat formu ---------- */
+document.getElementById('reg-form').addEventListener('submit',function(e){
+  e.preventDefault();
+  var regs=load(K.reg);
+  regs.unshift({id:Date.now(),parent:document.getElementById('r-parent').value.trim(),age:document.getElementById('r-age').value.trim(),phone:document.getElementById('r-phone').value.trim(),program:document.getElementById('r-program').value,date:now(),read:false});
+  save(K.reg,regs);
+  this.reset();
+  var ok=document.getElementById('reg-ok');ok.classList.add('show');
+  setTimeout(function(){ok.classList.remove('show');},5000);
+});
+
+/* ==================== ADMIN ==================== */
+window.openAdmin=function(){document.getElementById('admin-modal').classList.add('open');};
+window.closeAdmin=function(){document.getElementById('admin-modal').classList.remove('open');};
+document.getElementById('admin-modal').addEventListener('click',function(e){if(e.target===this)closeAdmin();});
+
+document.getElementById('login-btn').addEventListener('click',function(){
+  if(document.getElementById('a-pass').value===PASS){
+    document.getElementById('login-view').style.display='none';
+    document.getElementById('panel-view').style.display='block';
+    renderAdminTabs();
+  }else{
+    document.getElementById('login-err').classList.add('show');
+  }
+});
+document.getElementById('a-pass').addEventListener('keydown',function(e){if(e.key==='Enter')document.getElementById('login-btn').click();});
+
+/* Admin tabs */
+document.querySelectorAll('.atab').forEach(function(tab){
+  tab.addEventListener('click',function(){
+    document.querySelectorAll('.atab').forEach(function(t){t.classList.remove('active');});
+    document.querySelectorAll('.apane').forEach(function(p){p.classList.remove('active');});
+    tab.classList.add('active');
+    document.getElementById('tab-'+tab.dataset.tab).classList.add('active');
+    renderAdminTabs();
   });
-  const db = getDatabase(app);
+});
 
-  let _nc=[], _tc=[];
+function renderAdminTabs(){
+  renderMuracietler();
+  renderMesajlar();
+  renderNewsAdmin();
+  renderTeamAdmin();
+  var ab=loadStr(K.about,'');
+  document.getElementById('about-edit').value=ab||'AN Psixoloji Dəstək və Reabilitasiya Mərkəzi xüsusi qayğıya ehtiyacı olan uşaqlara peşəkar psixoloji dəstək, erkən müdaxilə və reabilitasiya xidmətləri göstərir.';
+}
 
-  onValue(ref(db,'xeberler'),s=>{const r=s.val();_nc=r?Object.entries(r).map(([id,v])=>({id,...v})):[];const l=[..._nc].sort((a,b)=>(b.ts||0)-(a.ts||0));renderNews(l);renderAdminNews(l);});
-  onValue(ref(db,'emekdaslar'),s=>{const r=s.val();_tc=r?Object.entries(r).map(([id,v])=>({id,...v})):[];const l=[..._tc].sort((a,b)=>(a.ts||0)-(b.ts||0));renderTeam(l);renderAdminTeam(l);});
-  onValue(ref(db,'haqqimizda'),s=>{const v=s.val();if(v&&v.metn){const el=document.getElementById('about-text');if(el)el.textContent=v.metn;const ae=document.getElementById('about-edit');if(ae)ae.value=v.metn;}});
+/* MÜRACİƏTLƏR */
+function renderMuracietler(){
+  var regs=load(K.reg);
+  var p=document.getElementById('tab-muracietler');
+  if(!regs.length){p.innerHTML='<div class="aempty"><i class="fas fa-clipboard"></i>Hələ müraciət yoxdur.</div>';return;}
+  p.innerHTML=regs.map(function(r){
+    var enc=encodeURIComponent('Salam '+r.parent+', AN Mərkəzi olaraq müraciətinizə görə təşəkkür edirik. ');
+    return '<div class="acard '+(r.read?'read':'')+'" data-id="'+r.id+'">'+
+      '<div class="acard-top"><span class="acard-name">'+esc(r.parent)+' · <a href="tel:'+esc(r.phone)+'">'+esc(r.phone)+'</a></span><span class="abadge">'+(r.read?'baxıldı':'yeni')+'</span></div>'+
+      '<div class="acard-date"><i class="far fa-clock"></i> '+esc(r.date)+'</div>'+
+      '<div class="acard-text"><b>Yaş:</b> '+esc(r.age)+' &nbsp;|&nbsp; <b>Proqram:</b> '+esc(r.program)+'</div>'+
+      '<div class="deliver"><span class="dl-lbl">Əlaqə:</span>'+
+        '<a class="mbtn wa" href="https://wa.me/'+waNum(r.phone)+'?text='+enc+'" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp</a>'+
+        '<a class="mbtn call" href="tel:'+esc(r.phone)+'"><i class="fas fa-phone"></i> Zəng</a></div>'+
+      '<div class="acard-actions">'+
+        '<button class="mbtn read" onclick="toggleRegRead('+r.id+')"><i class="fas fa-eye"></i> '+(r.read?'Baxılmamış et':'Baxıldı et')+'</button>'+
+        '<button class="mbtn del" onclick="delReg('+r.id+')"><i class="fas fa-trash"></i> Sil</button>'+
+      '</div></div>';
+  }).join('');
+}
+window.toggleRegRead=function(id){var a=load(K.reg).map(function(x){if(x.id===id)x.read=!x.read;return x;});save(K.reg,a);renderMuracietler();}
+window.delReg=function(id){if(confirm('Bu müraciəti silmək istəyirsiniz?')){save(K.reg,load(K.reg).filter(function(x){return x.id!==id;}));renderMuracietler();}}
 
-  function getYT(u){if(!u)return '';const m=u.match(/[?&]v=([^&]+)/)||u.match(/youtu\.be\/([^?]+)/);return m?`https://www.youtube.com/embed/${m[1]}`:''}
+/* MESAJLAR */
+function renderMesajlar(){
+  var msgs=load(K.msg);
+  var p=document.getElementById('tab-mesajlar');
+  if(!msgs.length){p.innerHTML='<div class="aempty"><i class="fas fa-inbox"></i>Hələ mesaj yoxdur.</div>';return;}
+  p.innerHTML=msgs.map(function(m){
+    return '<div class="acard '+(m.read?'read':'')+'" data-id="'+m.id+'">'+
+      '<div class="acard-top"><span class="acard-name">'+esc(m.name)+' · <a href="tel:'+esc(m.phone)+'">'+esc(m.phone)+'</a></span><span class="abadge">'+(m.read?'oxundu':'yeni')+'</span></div>'+
+      '<div class="acard-date"><i class="far fa-clock"></i> '+esc(m.date)+'</div>'+
+      '<div class="acard-text">'+esc(m.text)+'</div>'+
+      '<div class="acard-actions">'+
+        '<button class="mbtn read" onclick="toggleMsgRead('+m.id+')"><i class="fas fa-eye"></i> '+(m.read?'Oxunmamış et':'Oxundu et')+'</button>'+
+        '<button class="mbtn del" onclick="delMsg('+m.id+')"><i class="fas fa-trash"></i> Sil</button>'+
+      '</div></div>';
+  }).join('');
+}
+window.toggleMsgRead=function(id){var a=load(K.msg).map(function(x){if(x.id===id)x.read=!x.read;return x;});save(K.msg,a);renderMesajlar();}
+window.delMsg=function(id){if(confirm('Bu mesajı silmək istəyirsiniz?')){save(K.msg,load(K.msg).filter(function(x){return x.id!==id;}));renderMesajlar();}}
 
-  function renderNews(l){const el=document.getElementById('news-container');if(!el)return;if(!l.length){el.innerHTML='<div class="news-empty"><span style="font-size:48px;display:block;margin-bottom:14px;">📰</span>Hələlik xəbər yoxdur.</div>';return;}const makeCard=n=>{const yt=getYT(n.video);let m=yt?`<div class="news-video-wrap"><iframe src="${yt}" allowfullscreen loading="lazy"></iframe></div>`:n.img?`<img class="news-media" src="${n.img}" alt="" loading="lazy">`:`<div class="news-media-placeholder">📰</div>`;return`<div class="news-card">${m}<div class="news-body"><div class="news-date">${n.date||''}</div><h3>${n.title||''}</h3>${n.text?`<p>${n.text}</p>`:''}</div></div>`;};const visible=l.slice(0,3);const rest=l.slice(3);el.innerHTML=visible.map(makeCard).join('')+(rest.length?`<div style="grid-column:1/-1;text-align:center;margin-top:10px;"><button onclick="this.parentElement.outerHTML='${rest.map(makeCard).join('').replace(/'/g,"\'")}'" style="background:linear-gradient(135deg,var(--gold-light),var(--gold));color:#fff;border:none;border-radius:50px;padding:13px 32px;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;cursor:pointer;box-shadow:0 4px 16px rgba(201,168,76,0.35);">Daha çox göstər</button></div>`:'');}
-  function renderTeam(l){const el=document.getElementById('team-container');if(!el)return;if(!l.length){el.innerHTML='<div class="team-empty"><span style="font-size:48px;display:block;margin-bottom:14px;">👥</span>Əməkdaşlar admin paneldən əlavə ediləcək</div>';return;}el.innerHTML=l.map(t=>`<div class="team-card"><div class="team-avatar">${t.photo?`<img src="${t.photo}" alt="">`:t.name?t.name.charAt(0):''}</div><h3>${t.name||''}</h3><div class="role">${t.role||''}</div>${t.bio?`<p class="bio">${t.bio}</p>`:''}</div>`).join('');}
-  function renderAdminNews(l){const el=document.getElementById('admin-news-list');if(!el)return;if(!l.length){el.innerHTML='<p style="color:var(--gray);font-size:13px;">Hələlik xəbər yoxdur.</p>';return;}el.innerHTML=l.map(n=>`<div class="admin-list-item"><div class="admin-list-item-info"><h4>${n.title||''}</h4><p>${n.date||''}</p></div><div class="list-actions"><button class="btn-admin" onclick="window.__en('${n.id}')" style="background:rgba(201,168,76,.15);border-color:rgba(201,168,76,.4);color:var(--gold-dark);">✏️</button><button class="btn-admin danger" onclick="window.__dn('${n.id}')">🗑️</button></div></div>`).join('');}
-  function renderAdminTeam(l){const el=document.getElementById('admin-team-list');if(!el)return;if(!l.length){el.innerHTML='<p style="color:var(--gray);font-size:13px;">Hələlik əməkdaş yoxdur.</p>';return;}el.innerHTML=l.map(t=>`<div class="admin-list-item"><div class="adm-mini-av">${t.photo?`<img src="${t.photo}" alt="">`:t.name?t.name.charAt(0):''}</div><div class="admin-list-item-info" style="flex:1"><h4>${t.name||''}</h4><p>${t.role||''}</p></div><div class="list-actions"><button class="btn-admin" onclick="window.__et('${t.id}')" style="background:rgba(201,168,76,.15);border-color:rgba(201,168,76,.4);color:var(--gold-dark);">✏️</button><button class="btn-admin danger" onclick="window.__dt('${t.id}')">🗑️</button></div></div>`).join('');}
+/* XƏBƏRLƏR admin */
+function renderNewsAdmin(){
+  var news=load(K.news);
+  var c=document.getElementById('news-admin-list');
+  if(!news.length){c.innerHTML='<div class="aempty" style="padding:20px">Hələ xəbər yoxdur.</div>';return;}
+  c.innerHTML=news.map(function(n){
+    return '<div class="acard">'+
+      '<div class="acard-text"><b>'+esc(n.title)+'</b><br>'+esc(n.body.substring(0,80))+(n.body.length>80?'...':'')+'</div>'+
+      '<div class="acard-actions" style="margin-top:8px"><button class="mbtn del" onclick="delNews('+n.id+')"><i class="fas fa-trash"></i> Sil</button></div>'+
+    '</div>';
+  }).join('');
+}
+window.addNews=function(){
+  var t=document.getElementById('n-title').value.trim();
+  var b=document.getElementById('n-body').value.trim();
+  if(!t||!b){alert('Başlıq və mətn daxil edin.');return;}
+  var news=load(K.news);
+  news.unshift({id:Date.now(),title:t,body:b});
+  save(K.news,news);
+  document.getElementById('n-title').value='';
+  document.getElementById('n-body').value='';
+  renderNewsAdmin();
+  renderNews();
+}
+window.delNews=function(id){if(confirm('Bu xəbəri silmək istəyirsiniz?')){save(K.news,load(K.news).filter(function(x){return x.id!==id;}));renderNewsAdmin();renderNews();}}
 
-  window.addNews=function(){const t=document.getElementById('news-title').value.trim();if(!t){alert('Başlıq daxil edin!');return;}const img=document.getElementById('news-img-url')?document.getElementById('news-img-url').value.trim():'';push(ref(db,'xeberler'),{title:t,text:document.getElementById('news-text').value.trim(),img,video:document.getElementById('news-video').value.trim(),date:new Date().toLocaleDateString('az-AZ',{day:'2-digit',month:'long',year:'numeric'}),ts:Date.now()}).then(()=>{['news-title','news-text','news-img-url','news-video'].forEach(i=>{const el=document.getElementById(i);if(el)el.value='';});const s=document.getElementById('news-success');if(s){s.style.display='block';setTimeout(()=>s.style.display='none',3000);}});};
-  window.addTeam=function(){const n=document.getElementById('team-name').value.trim(),r=document.getElementById('team-role').value.trim();if(!n||!r){alert('Ad və vəzifə daxil edin!');return;}const urlPhoto=document.getElementById('team-photo-url')?document.getElementById('team-photo-url').value.trim():'';const photo=urlPhoto||window._teamPhotoB64||'';push(ref(db,'emekdaslar'),{name:n,role:r,bio:document.getElementById('team-bio').value.trim(),photo:photo,ts:Date.now()}).then(()=>{['team-name','team-role','team-bio','team-photo-url'].forEach(i=>{const el=document.getElementById(i);if(el)el.value='';});window._teamPhotoB64='';const prev=document.getElementById('team-photo-prev');if(prev)prev.innerHTML='';const s=document.getElementById('team-success');if(s){s.style.display='block';setTimeout(()=>s.style.display='none',3000);}});};
-  window.saveAbout=function(){const m=document.getElementById('about-edit').value.trim();set(ref(db,'haqqimizda'),{metn:m}).then(()=>{const s=document.getElementById('about-success');if(s){s.style.display='block';setTimeout(()=>s.style.display='none',3000);}});};
-  window.__dn=function(id){if(!confirm('Xəbəri silmək istəyirsiniz?'))return;remove(ref(db,'xeberler/'+id));};
-  window.__dt=function(id){if(!confirm('Əməkdaşı silmək istəyirsiniz?'))return;remove(ref(db,'emekdaslar/'+id));};
-  window.__en=function(id){const n=_nc.find(x=>x.id===id);if(!n)return;const t=prompt('Başlıq:',n.title||'');if(t===null)return;const tx=prompt('Məzmun:',n.text||'');const im=prompt('Şəkil URL:',n.img||'');const vi=prompt('YouTube link:',n.video||'');set(ref(db,'xeberler/'+id),{...n,title:t,text:tx||'',img:im||'',video:vi||''},);};
-  window.__et=function(id){const t=_tc.find(x=>x.id===id);if(!t)return;const n=prompt('Ad Soyad:',t.name||'');if(n===null)return;const r=prompt('Vəzifə:',t.role||'');const b=prompt('Məlumat:',t.bio||'');set(ref(db,'emekdaslar/'+id),{...t,name:n,role:r||'',bio:b||''});};
-  </script>
+/* ƏMƏKDAŞLAR admin */
+function renderTeamAdmin(){
+  var team=load(K.team);
+  var c=document.getElementById('team-admin-list');
+  if(!team.length){c.innerHTML='<div class="aempty" style="padding:20px">Hələ əməkdaş yoxdur.</div>';return;}
+  c.innerHTML=team.map(function(t){
+    return '<div class="acard">'+
+      '<div class="acard-text"><b>'+esc(t.name)+'</b> — '+esc(t.role)+'</div>'+
+      '<div class="acard-actions" style="margin-top:8px"><button class="mbtn del" onclick="delTeam('+t.id+')"><i class="fas fa-trash"></i> Sil</button></div>'+
+    '</div>';
+  }).join('');
+}
+window.addTeam=function(){
+  var n=document.getElementById('t-name').value.trim();
+  var r=document.getElementById('t-role').value.trim();
+  if(!n||!r){alert('Ad və vəzifəni daxil edin.');return;}
+  var team=load(K.team);
+  team.unshift({id:Date.now(),name:n,role:r});
+  save(K.team,team);
+  document.getElementById('t-name').value='';
+  document.getElementById('t-role').value='';
+  renderTeamAdmin();
+  renderTeam();
+}
+window.delTeam=function(id){if(confirm('Bu əməkdaşı silmək istəyirsiniz?')){save(K.team,load(K.team).filter(function(x){return x.id!==id;}));renderTeamAdmin();renderTeam();}}
+
+/* HAQQIMIZDA */
+window.saveAbout=function(){
+  var txt=document.getElementById('about-edit').value.trim();
+  if(!txt){alert('Mətn boş ola bilməz.');return;}
+  saveStr(K.about,txt);
+  loadAbout();
+  alert('Yadda saxlandı!');
+}
+
+/* Kontent qoruması */
+document.addEventListener('contextmenu',function(e){e.preventDefault();});
+document.addEventListener('keydown',function(e){
+  if(e.keyCode===123)e.preventDefault();
+  if(e.ctrlKey&&(e.keyCode===85||e.keyCode===83))e.preventDefault();
+  if(e.ctrlKey&&e.shiftKey&&(e.keyCode===73||e.keyCode===74||e.keyCode===67))e.preventDefault();
+});
+})();
+</script>
 </body>
 </html>
