@@ -383,28 +383,16 @@ footer a{color:var(--gold-light)}
 <!-- QEYDİYYAT -->
 <div class="reg-bg" id="register">
   <div class="reg-inner">
-    <span class="eyebrow reveal">İlkin müraciət</span>
-    <h2 class="sec-title reveal">Pulsuz ilkin məsləhət üçün qeydiyyat</h2>
-    <p class="sec-sub reveal">Formu doldurun — ən uyğun proqramı birlikdə seçək.</p>
+    <span class="eyebrow reveal">Müraciət</span>
+    <h2 class="sec-title reveal">Bizimlə əlaqə saxlayın</h2>
+    <p class="sec-sub reveal">Formu doldurun — komandamız ən qısa zamanda sizinlə əlaqə saxlayacaq.</p>
     <div class="form-card reveal">
       <h3>Müraciət Formu</h3>
       <p class="sub">İlk görüş tamamilə pulsuzdur.</p>
       <form id="reg-form">
-        <div class="row2">
-          <div class="field"><label>Valideyn adı</label><input type="text" id="r-parent" placeholder="Ad, soyad" required></div>
-          <div class="field"><label>Uşağın yaşı</label><input type="number" id="r-age" min="0" max="18" placeholder="Məsələn: 6" required></div>
-        </div>
-        <div class="row2">
-          <div class="field"><label>Telefon</label><input type="tel" id="r-phone" placeholder="+994 ..." required></div>
-          <div class="field"><label>Proqram</label>
-            <select id="r-program">
-              <option value="İcma əsaslı">İcma əsaslı inteqrasiya</option>
-              <option value="Uzaqdan dəstək">Uzaqdan dəstək</option>
-              <option value="Hibrid">Hibrid proqram</option>
-              <option value="Bilmirəm">Hələ bilmirəm</option>
-            </select>
-          </div>
-        </div>
+        <div class="field"><label>Ad Soyad</label><input type="text" id="r-parent" placeholder="Adınızı daxil edin" required></div>
+        <div class="field"><label>Telefon</label><input type="tel" id="r-phone" placeholder="+994 ..." required></div>
+        <div class="field"><label>Mesaj (istəyə görə)</label><textarea id="r-msg" placeholder="Qısa məlumat..."></textarea></div>
         <button type="submit" class="btn-submit"><i class="fas fa-check-circle"></i> Müraciəti göndər</button>
         <div class="form-ok" id="reg-ok"><i class="fas fa-circle-check"></i> Müraciətiniz qəbul edildi!</div>
       </form>
@@ -599,7 +587,7 @@ window.sendWA=function(){
 document.getElementById('reg-form').addEventListener('submit',function(e){
   e.preventDefault();
   var regs=load(K.reg);
-  regs.unshift({id:Date.now(),parent:document.getElementById('r-parent').value.trim(),age:document.getElementById('r-age').value.trim(),phone:document.getElementById('r-phone').value.trim(),program:document.getElementById('r-program').value,date:now(),read:false});
+  regs.unshift({id:Date.now(),parent:document.getElementById('r-parent').value.trim(),phone:document.getElementById('r-phone').value.trim(),msg:document.getElementById('r-msg').value.trim(),date:now(),read:false});
   save(K.reg,regs);
   this.reset();
   var ok=document.getElementById('reg-ok');ok.classList.add('show');
@@ -652,7 +640,7 @@ function renderMuracietler(){
     return '<div class="acard '+(r.read?'read':'')+'" data-id="'+r.id+'">'+
       '<div class="acard-top"><span class="acard-name">'+esc(r.parent)+' · <a href="tel:'+esc(r.phone)+'">'+esc(r.phone)+'</a></span><span class="abadge">'+(r.read?'baxıldı':'yeni')+'</span></div>'+
       '<div class="acard-date"><i class="far fa-clock"></i> '+esc(r.date)+'</div>'+
-      '<div class="acard-text"><b>Yaş:</b> '+esc(r.age)+' &nbsp;|&nbsp; <b>Proqram:</b> '+esc(r.program)+'</div>'+
+      '<div class="acard-text"><b>Tel:</b> '+esc(r.phone)+(r.msg?' &nbsp;|&nbsp; <b>Mesaj:</b> '+esc(r.msg.substring(0,60)):'')+'</div>'+
       '<div class="deliver"><span class="dl-lbl">Əlaqə:</span>'+
         '<a class="mbtn wa" href="https://wa.me/'+waNum(r.phone)+'?text='+enc+'" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp</a>'+
         '<a class="mbtn call" href="tel:'+esc(r.phone)+'"><i class="fas fa-phone"></i> Zəng</a></div>'+
