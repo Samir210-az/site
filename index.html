@@ -174,8 +174,9 @@ nav.scrolled{box-shadow:0 4px 20px rgba(106,0,0,0.08)}
 .reg-inner .form-card h3{color:var(--gold-light)}
 .reg-inner .form-card .sub{color:rgba(255,255,255,.5)}
 .reg-inner .field label{color:rgba(255,255,255,.8)}
-.reg-inner .field input,.reg-inner .field select{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15);color:#fff}
-.reg-inner .field input::placeholder{color:rgba(255,255,255,.35)}
+.reg-inner .field input,.reg-inner .field textarea,.reg-inner .field select{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15);color:#fff}
+.reg-inner .field input::placeholder,.reg-inner .field textarea::placeholder{color:rgba(255,255,255,.35)}
+.reg-inner .field select option{background:var(--bordo-deep)}
 .reg-inner .field select option{background:var(--bordo-deep)}
 
 /* FOOTER */
@@ -392,6 +393,17 @@ footer a{color:var(--gold-light)}
       <form id="reg-form">
         <div class="field"><label>Ad Soyad</label><input type="text" id="r-parent" placeholder="Adınızı daxil edin" required></div>
         <div class="field"><label>Telefon</label><input type="tel" id="r-phone" placeholder="+994 ..." required></div>
+        <div class="field"><label>Mütəxəssis seçin</label>
+          <select id="r-program">
+            <option value="Loqoped">Loqoped</option>
+            <option value="Psixoloq">Psixoloq</option>
+            <option value="Erqoterapevt">Erqoterapevt</option>
+            <option value="Neyro Psixoloq">Neyro Psixoloq</option>
+            <option value="Psixopedaqoq">Psixopedaqoq</option>
+            <option value="Sensor İnteqrasiya">Sensor İnteqrasiya</option>
+            <option value="Bilmirəm">Hələ bilmirəm</option>
+          </select>
+        </div>
         <div class="field"><label>Mesaj (istəyə görə)</label><textarea id="r-msg" placeholder="Qısa məlumat..."></textarea></div>
         <button type="submit" class="btn-submit"><i class="fas fa-check-circle"></i> Müraciəti göndər</button>
         <div class="form-ok" id="reg-ok"><i class="fas fa-circle-check"></i> Müraciətiniz qəbul edildi!</div>
@@ -587,7 +599,7 @@ window.sendWA=function(){
 document.getElementById('reg-form').addEventListener('submit',function(e){
   e.preventDefault();
   var regs=load(K.reg);
-  regs.unshift({id:Date.now(),parent:document.getElementById('r-parent').value.trim(),phone:document.getElementById('r-phone').value.trim(),msg:document.getElementById('r-msg').value.trim(),date:now(),read:false});
+  regs.unshift({id:Date.now(),parent:document.getElementById('r-parent').value.trim(),phone:document.getElementById('r-phone').value.trim(),program:document.getElementById('r-program').value,msg:document.getElementById('r-msg').value.trim(),date:now(),read:false});
   save(K.reg,regs);
   this.reset();
   var ok=document.getElementById('reg-ok');ok.classList.add('show');
@@ -640,7 +652,7 @@ function renderMuracietler(){
     return '<div class="acard '+(r.read?'read':'')+'" data-id="'+r.id+'">'+
       '<div class="acard-top"><span class="acard-name">'+esc(r.parent)+' · <a href="tel:'+esc(r.phone)+'">'+esc(r.phone)+'</a></span><span class="abadge">'+(r.read?'baxıldı':'yeni')+'</span></div>'+
       '<div class="acard-date"><i class="far fa-clock"></i> '+esc(r.date)+'</div>'+
-      '<div class="acard-text"><b>Tel:</b> '+esc(r.phone)+(r.msg?' &nbsp;|&nbsp; <b>Mesaj:</b> '+esc(r.msg.substring(0,60)):'')+'</div>'+
+      '<div class="acard-text"><b>Tel:</b> '+esc(r.phone)+' &nbsp;|&nbsp; <b>Mütəxəssis:</b> '+esc(r.program)+(r.msg?' &nbsp;|&nbsp; <b>Mesaj:</b> '+esc(r.msg.substring(0,60)):'')+'</div>'+
       '<div class="deliver"><span class="dl-lbl">Əlaqə:</span>'+
         '<a class="mbtn wa" href="https://wa.me/'+waNum(r.phone)+'?text='+enc+'" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp</a>'+
         '<a class="mbtn call" href="tel:'+esc(r.phone)+'"><i class="fas fa-phone"></i> Zəng</a></div>'+
