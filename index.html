@@ -560,7 +560,7 @@ function renderTeam(){
   if(!team.length){c.innerHTML='<div class="team-empty">👥 Əməkdaşlar admin paneldən əlavə ediləcək</div>';return;}
   c.innerHTML=team.map(function(t){
     var av=t.img
-      ?'<img src="'+esc(t.img)+'" alt="'+esc(t.name)+'" style="width:64px;height:64px;border-radius:50%;object-fit:cover;margin:0 auto 12px;display:block;border:2px solid var(--gold);" onerror="this.outerHTML='<div class=\"team-avatar\">'+t.name.charAt(0)+'</div>'">'
+      ?'<img src="'+esc(t.img)+'" alt="'+esc(t.name)+'" style="width:64px;height:64px;border-radius:50%;object-fit:cover;margin:0 auto 12px;display:block;border:2px solid var(--gold);" onerror="this.style.display='none'">'
       :'<div class="team-avatar">'+esc(t.name.charAt(0))+'</div>';
     return '<div class="team-card">'+av+'<h4>'+esc(t.name)+'</h4><div class="role">'+esc(t.role)+'</div></div>';
   }).join('');
