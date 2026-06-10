@@ -370,14 +370,7 @@ footer a{color:var(--gold-light)}
       <a href="https://wa.me/994554157215" target="_blank" class="ci"><div class="ci-icon" style="background:#e8fef0;color:#25D366"><i class="fab fa-whatsapp"></i></div><div><div class="ci-label">WhatsApp</div><div class="ci-val">+994 55 415 72 15</div></div></a>
       <a href="https://maps.app.goo.gl/FJL5JUdLJrCB17N26" target="_blank" class="maps-btn"><i class="fas fa-map-location-dot"></i> Xəritədə göstər</a>
     </div>
-    <div class="form-card">
-      <h3>Sual Göndərin</h3>
-      <p class="sub">WhatsApp üzərindən birbaşa göndərilir.</p>
-      <div class="field"><label>Adınız</label><input type="text" id="cf-name" placeholder="Adınızı daxil edin"></div>
-      <div class="field"><label>Telefon</label><input type="tel" id="cf-phone" placeholder="+994 xx xxx xx xx"></div>
-      <div class="field"><label>Mesajınız</label><textarea id="cf-msg" placeholder="Sualınızı yazın..."></textarea></div>
-      <button class="btn-submit" onclick="sendWA()"><i class="fab fa-whatsapp"></i> WhatsApp ilə Göndər</button>
-    </div>
+
   </div>
 </section>
 
@@ -521,7 +514,7 @@ document.getElementById('logo-tap').addEventListener('click',function(e){
   tapCount++;
   clearTimeout(tapTimer);
   tapTimer=setTimeout(function(){tapCount=0;},800);
-  if(tapCount>=3){tapCount=0;openAdmin();}
+  if(tapCount>=5){tapCount=0;openAdmin();}
   else{window.location.hash='#hero';}
 });
 
