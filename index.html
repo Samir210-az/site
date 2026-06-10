@@ -454,6 +454,8 @@ footer a{color:var(--gold-light)}
           <div class="asep">Yeni Xəbər Əlavə Et</div>
           <div class="field"><label>Başlıq</label><input type="text" id="n-title" placeholder="Xəbər başlığı"></div>
           <div class="field"><label>Mətn</label><textarea id="n-body" placeholder="Xəbər mətni..."></textarea></div>
+          <div class="field"><label>Şəkil URL <span style="font-weight:400;color:var(--muted)">(istəyə görə)</span></label><input type="url" id="n-img" placeholder="https://i.imgur.com/xxx.jpg"></div>
+          <div style="font-size:11px;color:var(--muted);margin:-8px 0 10px;line-height:1.5">💡 Şəkli <a href="https://imgur.com/upload" target="_blank" style="color:var(--teal)">imgur.com</a>-a yükləyin → linki yapışdırın</div>
           <button class="btn-teal" onclick="addNews()"><i class="fas fa-plus"></i> Əlavə et</button>
           <div class="asep" style="margin-top:20px">Mövcud Xəbərlər</div>
           <div id="news-admin-list"></div>
@@ -466,6 +468,8 @@ footer a{color:var(--gold-light)}
             <div class="field"><label>Ad Soyad</label><input type="text" id="t-name" placeholder="Ad Soyad"></div>
             <div class="field"><label>Vəzifə</label><input type="text" id="t-role" placeholder="Məsələn: Psixoloq"></div>
           </div>
+          <div class="field"><label>Şəkil URL <span style="font-weight:400;color:var(--muted)">(istəyə görə)</span></label><input type="url" id="t-img" placeholder="https://i.imgur.com/xxx.jpg"></div>
+          <div style="font-size:11px;color:var(--muted);margin:-8px 0 10px;line-height:1.5">💡 Şəkli <a href="https://imgur.com/upload" target="_blank" style="color:var(--teal)">imgur.com</a>-a yükləyin → linki yapışdırın</div>
           <button class="btn-teal" onclick="addTeam()"><i class="fas fa-plus"></i> Əlavə et</button>
           <div class="asep" style="margin-top:20px">Mövcud Əməkdaşlar</div>
           <div id="team-admin-list"></div>
@@ -543,7 +547,8 @@ function renderNews(){
   c.innerHTML=news.map(function(n){
     var d=new Date(n.id);
     var mon=['YAN','FEV','MAR','APR','MAY','İYN','İYL','AVQ','SEP','OKT','NOY','DEK'][d.getMonth()];
-    return '<div class="news-card"><div class="news-date-badge"><span class="day">'+d.getDate()+'</span>'+mon+'</div><div><h3>'+esc(n.title)+'</h3><p>'+esc(n.body)+'</p></div></div>';
+    var imgHtml=n.img?'<img src="'+esc(n.img)+'" alt="'+esc(n.title)+'" style="width:100%;border-radius:12px;margin-top:10px;object-fit:cover;max-height:180px;" onerror="this.style.display='none'">':'';
+    return '<div class="news-card"><div class="news-date-badge"><span class="day">'+d.getDate()+'</span>'+mon+'</div><div style="flex:1"><h3>'+esc(n.title)+'</h3><p>'+esc(n.body)+'</p>'+imgHtml+'</div></div>';
   }).join('');
 }
 renderNews();
@@ -554,7 +559,10 @@ function renderTeam(){
   var c=document.getElementById('team-container');
   if(!team.length){c.innerHTML='<div class="team-empty">👥 Əməkdaşlar admin paneldən əlavə ediləcək</div>';return;}
   c.innerHTML=team.map(function(t){
-    return '<div class="team-card"><div class="team-avatar">'+esc(t.name.charAt(0))+'</div><h4>'+esc(t.name)+'</h4><div class="role">'+esc(t.role)+'</div></div>';
+    var av=t.img
+      ?'<img src="'+esc(t.img)+'" alt="'+esc(t.name)+'" style="width:64px;height:64px;border-radius:50%;object-fit:cover;margin:0 auto 12px;display:block;border:2px solid var(--gold);" onerror="this.outerHTML='<div class=\"team-avatar\">'+t.name.charAt(0)+'</div>'">'
+      :'<div class="team-avatar">'+esc(t.name.charAt(0))+'</div>';
+    return '<div class="team-card">'+av+'<h4>'+esc(t.name)+'</h4><div class="role">'+esc(t.role)+'</div></div>';
   }).join('');
 }
 renderTeam();
@@ -692,12 +700,14 @@ function renderNewsAdmin(){
 window.addNews=function(){
   var t=document.getElementById('n-title').value.trim();
   var b=document.getElementById('n-body').value.trim();
+  var img=document.getElementById('n-img').value.trim();
   if(!t||!b){alert('Başlıq və mətn daxil edin.');return;}
   var news=load(K.news);
-  news.unshift({id:Date.now(),title:t,body:b});
+  news.unshift({id:Date.now(),title:t,body:b,img:img});
   save(K.news,news);
   document.getElementById('n-title').value='';
   document.getElementById('n-body').value='';
+  document.getElementById('n-img').value='';
   renderNewsAdmin();
   renderNews();
 }
@@ -718,12 +728,14 @@ function renderTeamAdmin(){
 window.addTeam=function(){
   var n=document.getElementById('t-name').value.trim();
   var r=document.getElementById('t-role').value.trim();
+  var img=document.getElementById('t-img').value.trim();
   if(!n||!r){alert('Ad və vəzifəni daxil edin.');return;}
   var team=load(K.team);
-  team.unshift({id:Date.now(),name:n,role:r});
+  team.unshift({id:Date.now(),name:n,role:r,img:img});
   save(K.team,team);
   document.getElementById('t-name').value='';
   document.getElementById('t-role').value='';
+  document.getElementById('t-img').value='';
   renderTeamAdmin();
   renderTeam();
 }
