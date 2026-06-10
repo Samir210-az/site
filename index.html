@@ -22,50 +22,25 @@ html{scroll-behavior:smooth}
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.6}
 a{text-decoration:none;color:inherit}
 img{max-width:100%}
-
-/* NAV */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:200;
-  background:rgba(255,251,248,0.96);backdrop-filter:blur(12px);
-  border-bottom:1px solid rgba(210,165,93,0.2);
-  padding:0 20px;height:64px;
-  display:flex;align-items:center;justify-content:space-between;
-  transition:box-shadow .3s;
-}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,251,248,0.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(210,165,93,0.2);padding:0 20px;height:64px;display:flex;align-items:center;justify-content:space-between;}
 nav.scrolled{box-shadow:0 4px 20px rgba(106,0,0,0.08)}
 .brand{display:flex;align-items:center;gap:10px;cursor:pointer}
 .brand img{width:42px;height:42px;object-fit:contain}
 .brand-name{font-family:'Playfair Display',serif;font-size:13px;color:var(--bordo);font-weight:700;line-height:1.3;max-width:160px}
 .nav-links{display:none}
-@media(min-width:700px){
-  .nav-links{display:flex;gap:22px}
-  .nav-links a{font-size:13px;font-weight:500;color:var(--muted);transition:color .2s}
-  .nav-links a:hover{color:var(--bordo)}
-}
+@media(min-width:700px){.nav-links{display:flex;gap:22px}.nav-links a{font-size:13px;font-weight:500;color:var(--muted);transition:color .2s}.nav-links a:hover{color:var(--bordo)}}
 .nav-right{display:flex;align-items:center;gap:10px}
 .nav-phone{display:none}
 @media(min-width:520px){.nav-phone{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--bordo)}}
 .nav-ig{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px}
 .burger{background:none;border:none;cursor:pointer;display:flex;flex-direction:column;gap:5px;padding:4px}
-.burger span{display:block;width:22px;height:2px;background:var(--bordo);border-radius:2px;transition:all .3s}
+.burger span{display:block;width:22px;height:2px;background:var(--bordo);border-radius:2px}
 @media(min-width:700px){.burger{display:none}}
-.mob-menu{
-  display:none;position:fixed;top:64px;left:0;right:0;
-  background:rgba(255,251,248,0.98);backdrop-filter:blur(12px);
-  padding:20px;border-bottom:1px solid var(--line);z-index:199;
-  flex-direction:column;gap:4px;
-}
+.mob-menu{display:none;position:fixed;top:64px;left:0;right:0;background:rgba(255,251,248,0.98);backdrop-filter:blur(12px);padding:20px;border-bottom:1px solid var(--line);z-index:199;flex-direction:column;gap:4px;}
 .mob-menu.open{display:flex}
 .mob-menu a{padding:12px 16px;font-size:15px;font-weight:500;color:var(--text);border-radius:12px;transition:background .2s}
 .mob-menu a:hover{background:var(--card)}
-
-/* HERO */
-.hero{
-  min-height:100vh;
-  background:linear-gradient(155deg,var(--bordo) 0%,var(--bordo-deep) 55%,#100000 100%);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  text-align:center;padding:96px 24px 60px;position:relative;overflow:hidden;
-}
+.hero{min-height:100vh;background:linear-gradient(155deg,var(--bordo) 0%,var(--bordo-deep) 55%,#100000 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:96px 24px 60px;position:relative;overflow:hidden;}
 .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 65% 35%,rgba(210,165,93,.12) 0%,transparent 65%);pointer-events:none}
 .hero-badge{background:rgba(210,165,93,.15);border:1px solid rgba(210,165,93,.4);color:var(--gold-light);padding:5px 16px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:20px;display:inline-block}
 .hero-logo{width:90px;height:90px;object-fit:contain;margin-bottom:18px;filter:drop-shadow(0 4px 20px rgba(210,165,93,.35))}
@@ -83,16 +58,11 @@ nav.scrolled{box-shadow:0 4px 20px rgba(106,0,0,0.08)}
 .hstat-lbl{font-size:11px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
 .hero-scroll{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.35);font-size:18px;animation:bounce 2s infinite}
 @keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
-
-/* SECTION BASE */
 .sec{padding:60px 24px;max-width:740px;margin:0 auto}
-.sec-full{padding:60px 24px}
 .eyebrow{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin-bottom:10px;display:block}
 .sec-title{font-family:'Playfair Display',serif;font-size:clamp(22px,5vw,32px);color:var(--bordo);line-height:1.3;margin-bottom:12px}
 .sec-sub{color:var(--muted);font-size:15px;line-height:1.75;margin-bottom:28px}
 .gold-line{width:48px;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-light));border-radius:2px;margin-bottom:20px}
-
-/* ABOUT */
 .about-grid{display:flex;flex-direction:column;gap:32px}
 @media(min-width:640px){.about-grid{flex-direction:row;align-items:flex-start}}
 .about-visual{display:flex;justify-content:center}
@@ -106,8 +76,6 @@ nav.scrolled{box-shadow:0 4px 20px rgba(106,0,0,0.08)}
 .director-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--bordo));display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;font-weight:700;flex-shrink:0}
 .director-info h4{font-size:14px;font-weight:700;color:var(--bordo)}
 .director-info span{font-size:12px;color:var(--muted)}
-
-/* SERVICES */
 .services-bg{background:#fff}
 .services-inner{max-width:740px;margin:0 auto;padding:60px 24px}
 .services-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px}
@@ -117,29 +85,26 @@ nav.scrolled{box-shadow:0 4px 20px rgba(106,0,0,0.08)}
 .svc-icon{font-size:32px;margin-bottom:10px;display:block}
 .svc-card h3{font-size:14px;font-weight:700;color:var(--bordo);margin-bottom:6px}
 .svc-card p{font-size:12px;color:var(--muted);line-height:1.6}
-
-/* TEAM */
 .team-bg{background:var(--card)}
 .team-inner{max-width:740px;margin:0 auto;padding:60px 24px}
 .team-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px}
 @media(min-width:600px){.team-grid{grid-template-columns:repeat(3,1fr)}}
 .team-card{background:#fff;border-radius:20px;padding:24px 16px;text-align:center;box-shadow:var(--shadow)}
 .team-avatar{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--bordo));display:flex;align-items:center;justify-content:center;color:#fff;font-size:24px;font-weight:700;margin:0 auto 12px}
+.team-photo{width:64px;height:64px;border-radius:50%;object-fit:cover;margin:0 auto 12px;display:block;border:2px solid var(--gold)}
 .team-card h4{font-size:14px;font-weight:700;color:var(--bordo);margin-bottom:4px}
 .team-card .role{font-size:12px;color:var(--muted)}
 .team-empty{grid-column:1/-1;text-align:center;padding:40px;color:var(--muted);font-size:14px}
-
-/* NEWS */
 .news-grid{display:flex;flex-direction:column;gap:16px;margin-top:28px}
-.news-card{background:#fff;border-radius:18px;padding:22px 20px;box-shadow:var(--shadow);display:flex;gap:16px;align-items:flex-start}
+.news-card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}
+.news-card-img{width:100%;height:160px;object-fit:cover;display:block}
+.news-card-body{padding:18px 20px;display:flex;gap:14px;align-items:flex-start}
 .news-date-badge{min-width:48px;height:48px;background:linear-gradient(135deg,var(--bordo),var(--bordo-bright));border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;font-size:10px;font-weight:700;text-transform:uppercase;line-height:1.2;flex-shrink:0}
 .news-date-badge .day{font-size:18px;font-family:'Playfair Display',serif}
 .news-card h3{font-size:15px;font-weight:700;color:var(--bordo);margin-bottom:5px}
 .news-card p{font-size:13px;color:var(--muted);line-height:1.6}
 .news-badge{display:inline-block;width:8px;height:8px;background:var(--bordo-bright);border-radius:50%;margin-left:4px;vertical-align:middle}
 .news-empty{text-align:center;padding:40px;color:var(--muted);font-size:14px}
-
-/* CONTACT */
 .contact-grid{display:flex;flex-direction:column;gap:24px}
 @media(min-width:640px){.contact-grid{flex-direction:row}}
 .contact-items{display:flex;flex-direction:column;gap:12px}
@@ -150,7 +115,15 @@ nav.scrolled{box-shadow:0 4px 20px rgba(106,0,0,0.08)}
 .ci-val{font-size:14px;font-weight:600}
 .maps-btn{background:var(--teal);color:#fff;border-radius:14px;padding:13px 18px;display:flex;align-items:center;gap:10px;font-weight:700;font-size:14px;box-shadow:0 4px 14px rgba(42,157,143,.3);transition:transform .2s}
 .maps-btn:hover{transform:translateY(-2px)}
-.form-card{background:#fff;border-radius:20px;padding:28px 22px;box-shadow:var(--shadow);flex:1}
+.reg-bg{background:linear-gradient(155deg,var(--bordo),var(--bordo-deep))}
+.reg-inner{max-width:560px;margin:0 auto;padding:60px 24px}
+.reg-inner .eyebrow{color:var(--gold-light)}
+.reg-inner .sec-title{color:#fff}
+.reg-inner .sec-sub{color:rgba(255,255,255,.65)}
+.form-card{background:#fff;border-radius:20px;padding:28px 22px;box-shadow:var(--shadow)}
+.reg-inner .form-card{background:rgba(255,255,255,.07);border:1px solid rgba(210,165,93,.25)}
+.reg-inner .form-card h3{color:var(--gold-light)}
+.reg-inner .form-card .sub{color:rgba(255,255,255,.5)}
 .form-card h3{font-family:'Playfair Display',serif;font-size:18px;color:var(--bordo);margin-bottom:6px}
 .form-card .sub{font-size:13px;color:var(--muted);margin-bottom:18px}
 .field{margin-bottom:14px}
@@ -158,33 +131,18 @@ nav.scrolled{box-shadow:0 4px 20px rgba(106,0,0,0.08)}
 .field input,.field textarea,.field select{width:100%;border:1.5px solid #ece4d8;border-radius:12px;padding:11px 14px;font-size:14px;font-family:'Inter',sans-serif;color:var(--text);background:var(--bg);outline:none;transition:border .2s}
 .field input:focus,.field textarea:focus,.field select:focus{border-color:var(--gold)}
 .field textarea{resize:vertical;min-height:80px}
+.reg-inner .field label{color:rgba(255,255,255,.8)}
+.reg-inner .field input,.reg-inner .field textarea,.reg-inner .field select{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15);color:#fff}
+.reg-inner .field input::placeholder,.reg-inner .field textarea::placeholder{color:rgba(255,255,255,.35)}
+.reg-inner .field select option{background:var(--bordo-deep)}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .btn-submit{background:var(--bordo);color:#fff;border:none;border-radius:12px;padding:13px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:background .2s;width:100%;display:flex;align-items:center;justify-content:center;gap:8px}
 .btn-submit:hover{background:var(--bordo-bright)}
 .form-ok{display:none;background:#e8f7f6;border-radius:10px;padding:10px 14px;font-size:13px;color:var(--teal);font-weight:600;margin-top:10px;align-items:center;gap:8px}
 .form-ok.show{display:flex}
-
-/* REGISTER */
-.reg-bg{background:linear-gradient(155deg,var(--bordo),var(--bordo-deep))}
-.reg-inner{max-width:560px;margin:0 auto;padding:60px 24px}
-.reg-inner .eyebrow{color:var(--gold-light)}
-.reg-inner .sec-title{color:#fff}
-.reg-inner .sec-sub{color:rgba(255,255,255,.65)}
-.reg-inner .form-card{background:rgba(255,255,255,.07);border:1px solid rgba(210,165,93,.25)}
-.reg-inner .form-card h3{color:var(--gold-light)}
-.reg-inner .form-card .sub{color:rgba(255,255,255,.5)}
-.reg-inner .field label{color:rgba(255,255,255,.8)}
-.reg-inner .field input,.reg-inner .field textarea,.reg-inner .field select{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15);color:#fff}
-.reg-inner .field input::placeholder,.reg-inner .field textarea::placeholder{color:rgba(255,255,255,.35)}
-.reg-inner .field select option{background:var(--bordo-deep)}
-.reg-inner .field select option{background:var(--bordo-deep)}
-
-/* FOOTER */
 footer{background:#1a0000;color:rgba(255,255,255,.5);text-align:center;padding:28px 24px;font-size:13px}
 footer a{color:var(--gold-light)}
 .footer-logo{width:44px;margin-bottom:12px;opacity:.75}
-
-/* MODAL BASE */
 .modal-ov{display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.65);backdrop-filter:blur(5px);align-items:center;justify-content:center;padding:16px}
 .modal-ov.open{display:flex}
 .modal-box{background:var(--bg);border-radius:24px;width:100%;max-width:660px;box-shadow:0 30px 80px rgba(0,0,0,.35);animation:popIn .28s cubic-bezier(.34,1.56,.64,1);max-height:92vh;overflow:hidden;display:flex;flex-direction:column}
@@ -193,14 +151,10 @@ footer a{color:var(--gold-light)}
 .modal-head h3{font-family:'Playfair Display',serif;font-size:18px;color:var(--bordo)}
 .modal-close{background:var(--card);border:none;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:14px;color:var(--muted);display:flex;align-items:center;justify-content:center}
 .modal-body{padding:22px;overflow-y:auto;flex:1}
-
-/* SVC MODAL */
 .svc-modal-icon{font-size:48px;text-align:center;margin-bottom:12px}
 .svc-modal-body{font-size:14px;color:var(--text);line-height:1.8}
 .svc-modal-body ul{margin-top:12px;padding-left:18px}
 .svc-modal-body ul li{margin-bottom:6px}
-
-/* ADMIN */
 .admin-tabs{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap}
 .atab{border:none;cursor:pointer;background:#fff;color:var(--muted);padding:7px 14px;border-radius:20px;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;box-shadow:0 2px 8px rgba(0,0,0,.05);transition:all .2s}
 .atab.active{background:var(--bordo);color:#fff}
@@ -222,29 +176,26 @@ footer a{color:var(--gold-light)}
 .mbtn:hover{transform:translateY(-1px)}
 .mbtn.wa{background:#25D366;color:#fff}
 .mbtn.call{background:var(--bordo);color:#fff}
-.mbtn.read{background:#e8f7f6;color:var(--teal)}
+.mbtn.mread{background:#e8f7f6;color:var(--teal)}
 .mbtn.del{background:#ffe0e0;color:#c0392b}
-.mbtn.edit{background:var(--card);color:var(--bordo)}
 .aempty{text-align:center;padding:40px;color:var(--muted);font-size:14px}
 .aempty i{font-size:32px;display:block;margin-bottom:10px;opacity:.4}
 .asep{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin:18px 0 10px}
 .login-err{color:#c0392b;font-size:13px;margin-bottom:10px;display:none}
 .login-err.show{display:block}
-.afooter{display:flex;justify-content:flex-end;margin-top:14px}
 .btn-teal{background:var(--teal);color:#fff;border:none;border-radius:12px;padding:11px 20px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;display:inline-flex;align-items:center;gap:8px;transition:background .2s}
 .btn-teal:hover{background:var(--teal-light)}
-
-/* REVEAL */
+.hint{font-size:11px;color:var(--muted);margin:-8px 0 10px;line-height:1.5}
+.hint a{color:var(--teal)}
 .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s,transform .6s}
 .reveal.visible{opacity:1;transform:translateY(0)}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav id="navbar">
   <a class="brand" href="#hero" id="logo-tap">
-    <img src="logo.png" alt="AN Logo" onerror="this.style.display='none'">
+    <img src="logo.png" alt="AN Logo">
     <span class="brand-name">AN Psixoloji Dəstək və Reabilitasiya Mərkəzi</span>
   </a>
   <div class="nav-links">
@@ -261,17 +212,15 @@ footer a{color:var(--gold-light)}
   </div>
 </nav>
 
-<!-- MOBILE MENU -->
 <div class="mob-menu" id="mob-menu">
-  <a href="#haqqimizda" onclick="closeMob()">Haqqımızda</a>
-  <a href="#xidmetler" onclick="closeMob()">Xidmətlər</a>
-  <a href="#emekdaslar" onclick="closeMob()">Əməkdaşlar</a>
-  <a href="#xeberler" onclick="closeMob()">Xəbərlər</a>
-  <a href="#elaqe" onclick="closeMob()">Əlaqə</a>
-  <a href="#register" onclick="closeMob()">Qeydiyyat</a>
+  <a href="#haqqimizda" onclick="document.getElementById('mob-menu').classList.remove('open')">Haqqımızda</a>
+  <a href="#xidmetler" onclick="document.getElementById('mob-menu').classList.remove('open')">Xidmətlər</a>
+  <a href="#emekdaslar" onclick="document.getElementById('mob-menu').classList.remove('open')">Əməkdaşlar</a>
+  <a href="#xeberler" onclick="document.getElementById('mob-menu').classList.remove('open')">Xəbərlər</a>
+  <a href="#elaqe" onclick="document.getElementById('mob-menu').classList.remove('open')">Əlaqə</a>
+  <a href="#register" onclick="document.getElementById('mob-menu').classList.remove('open')">Qeydiyyat</a>
 </div>
 
-<!-- HERO -->
 <section class="hero" id="hero">
   <div class="hero-badge"><i class="fas fa-star"></i> &nbsp;Sübuta əsaslanan metodologiya</div>
   <img class="hero-logo" src="logo.png" alt="AN Logo">
@@ -289,25 +238,21 @@ footer a{color:var(--gold-light)}
   <div class="hero-scroll"><i class="fas fa-chevron-down"></i></div>
 </section>
 
-<!-- HAQQIMIZDA -->
 <section class="sec" id="haqqimizda">
   <div class="about-grid reveal">
     <div class="about-visual">
-      <div class="about-logo-wrap">
-        <img src="logo.png" alt="AN Logo">
-      </div>
+      <div class="about-logo-wrap"><img src="logo.png" alt="AN Logo"></div>
     </div>
     <div>
       <span class="eyebrow">Haqqımızda</span>
-      <h2 class="sec-title">Hər Uşaq<br>Xüsusi Qayğı Layiqdir</h2>
+      <h2 class="sec-title">Hər Uşaq Xüsusi Qayğı Layiqdir</h2>
       <div class="gold-line"></div>
-      <p class="about-text" id="about-text">AN Psixoloji Dəstək və Reabilitasiya Mərkəzi xüsusi qayğıya ehtiyacı olan uşaqlara peşəkar psixoloji dəstək, erkən müdaxilə və reabilitasiya xidmətləri göstərir. Mərkəzimiz hər uşağın fərdi ehtiyaclarına uyğun proqramlar hazırlayır.</p>
+      <p class="about-text" id="about-text">AN Psixoloji Dəstək və Reabilitasiya Mərkəzi xüsusi qayğıya ehtiyacı olan uşaqlara peşəkar psixoloji dəstək, erkən müdaxilə və reabilitasiya xidmətləri göstərir.</p>
       <ul class="about-list">
         <li><span class="icon">🎯</span>Fərdi qiymətləndirmə və inkişaf planları</li>
         <li><span class="icon">🌱</span>Erkən müdaxilə proqramları (2–6 yaş)</li>
         <li><span class="icon">👨‍👩‍👧</span>Ailə məsləhəti və valideyn dəstəyi</li>
         <li><span class="icon">🤝</span>Multidissiplinar komanda yanaşması</li>
-        <li><span class="icon">✨</span>Müasir terapevtik metodologiyalar</li>
       </ul>
       <div class="director-card">
         <div class="director-avatar">N</div>
@@ -317,46 +262,42 @@ footer a{color:var(--gold-light)}
   </div>
 </section>
 
-<!-- XİDMƏTLƏR -->
 <div class="services-bg">
   <div class="services-inner" id="xidmetler">
     <span class="eyebrow reveal">Xidmətlərimiz</span>
     <h2 class="sec-title reveal">Peşəkar Dəstək Xidmətləri</h2>
     <div class="gold-line reveal"></div>
     <div class="services-grid reveal">
-      <div class="svc-card" onclick="openSvc(0)"><span class="svc-icon">🧠</span><h3>Psixoloq</h3><p>Uşaqların emosional, davranış və inkişaf problemlərinin diaqnostikası.</p></div>
-      <div class="svc-card" onclick="openSvc(1)"><span class="svc-icon">🗣️</span><h3>Loqoped</h3><p>Nitq, dil və ünsiyyət pozuntularının korreksiyası üzrə ixtisaslaşmış terapiya.</p></div>
-      <div class="svc-card" onclick="openSvc(2)"><span class="svc-icon">🧩</span><h3>Psixo-pedaqoq</h3><p>Xüsusi tədris metodları ilə uşağın öyrənmə potensialının açılması.</p></div>
-      <div class="svc-card" onclick="openSvc(3)"><span class="svc-icon">👂</span><h3>Duyu Bütünləmə</h3><p>Sensor emal pozuntularının müalicəsi, hiss sisteminin harmonik inkişafı.</p></div>
-      <div class="svc-card" onclick="openSvc(4)"><span class="svc-icon">🦋</span><h3>Erqoterapiya</h3><p>Gündəlik həyat bacarıqlarının inkişafı, əl-göz koordinasiyası terapiyası.</p></div>
-      <div class="svc-card" onclick="openSvc(5)"><span class="svc-icon">🌟</span><h3>Erkən İnkişaf Qrupu</h3><p>2–6 yaşlı uşaqlar üçün mütəxəssislər tərəfindən aparılan inkişaf proqramları.</p></div>
+      <div class="svc-card" onclick="openSvc(0)"><span class="svc-icon">🧠</span><h3>Psixoloq</h3><p>Emosional, davranış və inkişaf problemlərinin diaqnostikası.</p></div>
+      <div class="svc-card" onclick="openSvc(1)"><span class="svc-icon">🗣️</span><h3>Loqoped</h3><p>Nitq, dil və ünsiyyət pozuntularının korreksiyası.</p></div>
+      <div class="svc-card" onclick="openSvc(2)"><span class="svc-icon">🧩</span><h3>Psixo-pedaqoq</h3><p>Xüsusi tədris metodları ilə öyrənmə potensialının açılması.</p></div>
+      <div class="svc-card" onclick="openSvc(3)"><span class="svc-icon">👂</span><h3>Sensor İnteqrasiya</h3><p>Sensor emal pozuntularının müalicəsi.</p></div>
+      <div class="svc-card" onclick="openSvc(4)"><span class="svc-icon">🦋</span><h3>Erqoterapiya</h3><p>Gündəlik həyat bacarıqlarının inkişafı.</p></div>
+      <div class="svc-card" onclick="openSvc(5)"><span class="svc-icon">🌟</span><h3>Erkən İnkişaf</h3><p>2–6 yaşlı uşaqlar üçün inkişaf proqramları.</p></div>
     </div>
   </div>
 </div>
 
-<!-- ƏMƏKDAŞLAR -->
 <div class="team-bg">
   <div class="team-inner" id="emekdaslar">
     <span class="eyebrow reveal">Komandamız</span>
     <h2 class="sec-title reveal">Peşəkar Əməkdaşlarımız</h2>
     <div class="gold-line reveal"></div>
     <div class="team-grid reveal" id="team-container">
-      <div class="team-empty">👥 Əməkdaşlar admin paneldən əlavə ediləcək</div>
+      <div class="team-empty">Əməkdaşlar admin paneldən əlavə ediləcək</div>
     </div>
   </div>
 </div>
 
-<!-- XƏBƏRLƏR -->
 <section class="sec" id="xeberler">
-  <span class="eyebrow reveal">Xəbərlər &amp; Yeniliklər</span>
+  <span class="eyebrow reveal">Xəbərlər</span>
   <h2 class="sec-title reveal">Gündəlik Yeniliklər <span class="news-badge" id="news-main-badge" style="display:none"></span></h2>
   <div class="gold-line reveal"></div>
   <div class="news-grid reveal" id="news-container">
-    <div class="news-empty">📰 Hələlik xəbər yoxdur.</div>
+    <div class="news-empty">Hələlik xəbər yoxdur.</div>
   </div>
 </section>
 
-<!-- ƏLAQƏ -->
 <section class="sec" id="elaqe">
   <span class="eyebrow reveal">Bizimlə əlaqə</span>
   <h2 class="sec-title reveal">Əlaqə Saxlayın</h2>
@@ -365,26 +306,23 @@ footer a{color:var(--gold-light)}
     <div class="contact-items">
       <div class="ci"><div class="ci-icon"><i class="fas fa-location-dot"></i></div><div><div class="ci-label">Ünvan</div><div class="ci-val">Bakı, Nizami r., Rizvan Teymurov 59</div></div></div>
       <a href="tel:+994554157215" class="ci"><div class="ci-icon"><i class="fas fa-phone"></i></div><div><div class="ci-label">Telefon</div><div class="ci-val">+994 55 415 72 15</div></div></a>
-      <a href="mailto:anpsixologiya@gmail.com" class="ci"><div class="ci-icon" style="background:#fff0e8;color:#e67e22"><i class="fas fa-envelope"></i></div><div><div class="ci-label">E-poçt</div><div class="ci-val">anpsixologiya@gmail.com</div></div></a>
       <a href="https://instagram.com/an_psixologiyamerkezi" target="_blank" class="ci"><div class="ci-icon" style="background:#fff0e8;color:#E1306C"><i class="fab fa-instagram"></i></div><div><div class="ci-label">Instagram</div><div class="ci-val">@an_psixologiyamerkezi</div></div></a>
       <a href="https://wa.me/994554157215" target="_blank" class="ci"><div class="ci-icon" style="background:#e8fef0;color:#25D366"><i class="fab fa-whatsapp"></i></div><div><div class="ci-label">WhatsApp</div><div class="ci-val">+994 55 415 72 15</div></div></a>
       <a href="https://maps.app.goo.gl/FJL5JUdLJrCB17N26" target="_blank" class="maps-btn"><i class="fas fa-map-location-dot"></i> Xəritədə göstər</a>
     </div>
-
   </div>
 </section>
 
-<!-- QEYDİYYAT -->
 <div class="reg-bg" id="register">
   <div class="reg-inner">
     <span class="eyebrow reveal">Müraciət</span>
     <h2 class="sec-title reveal">Bizimlə əlaqə saxlayın</h2>
-    <p class="sec-sub reveal">Formu doldurun — komandamız ən qısa zamanda sizinlə əlaqə saxlayacaq.</p>
+    <p class="sec-sub reveal">Formu doldurun — komandamız tezliklə sizinlə əlaqə saxlayacaq.</p>
     <div class="form-card reveal">
       <h3>Müraciət Formu</h3>
       <p class="sub">İlk görüş tamamilə pulsuzdur.</p>
       <form id="reg-form">
-        <div class="field"><label>Ad Soyad</label><input type="text" id="r-parent" placeholder="Adınızı daxil edin" required></div>
+        <div class="field"><label>Ad Soyad</label><input type="text" id="r-name" placeholder="Adınızı daxil edin" required></div>
         <div class="field"><label>Telefon</label><input type="tel" id="r-phone" placeholder="+994 ..." required></div>
         <div class="field"><label>Mütəxəssis seçin</label>
           <select id="r-program">
@@ -405,7 +343,6 @@ footer a{color:var(--gold-light)}
   </div>
 </div>
 
-<!-- FOOTER -->
 <footer>
   <img class="footer-logo" src="logo.png" alt="AN Logo">
   <div style="margin-bottom:6px;color:rgba(255,255,255,.7)">AN Psixoloji Dəstək və Reabilitasiya Mərkəzi</div>
@@ -415,7 +352,7 @@ footer a{color:var(--gold-light)}
 <!-- SVC MODAL -->
 <div class="modal-ov" id="svc-modal">
   <div class="modal-box" style="max-width:440px">
-    <div class="modal-head"><h3 id="svc-modal-title">Xidmət</h3><button class="modal-close" onclick="closeSvc()">✕</button></div>
+    <div class="modal-head"><h3 id="svc-modal-title">Xidmət</h3><button class="modal-close" onclick="document.getElementById('svc-modal').classList.remove('open')">✕</button></div>
     <div class="modal-body"><div class="svc-modal-icon" id="svc-modal-icon"></div><div class="svc-modal-body" id="svc-modal-body"></div></div>
   </div>
 </div>
@@ -425,64 +362,47 @@ footer a{color:var(--gold-light)}
   <div class="modal-box">
     <div class="modal-head"><h3><i class="fas fa-shield-halved"></i> Admin Paneli</h3><button class="modal-close" onclick="closeAdmin()">✕</button></div>
     <div class="modal-body">
-
-      <!-- LOGIN -->
       <div id="login-view">
         <div class="login-err" id="login-err"><i class="fas fa-triangle-exclamation"></i> Şifrə yanlışdır.</div>
         <div class="field"><label>Şifrə</label><input type="password" id="a-pass" placeholder="••••••••"></div>
         <button class="btn-submit" id="login-btn"><i class="fas fa-right-to-bracket"></i> Daxil ol</button>
       </div>
-
-      <!-- PANEL -->
       <div id="panel-view" style="display:none">
         <div class="admin-tabs">
           <button class="atab active" data-tab="muracietler"><i class="fas fa-clipboard-list"></i> Müraciətlər</button>
-          <button class="atab" data-tab="mesajlar"><i class="fas fa-envelope"></i> Mesajlar</button>
           <button class="atab" data-tab="xeberler"><i class="fas fa-newspaper"></i> Xəbərlər</button>
           <button class="atab" data-tab="emekdaslar"><i class="fas fa-users"></i> Əməkdaşlar</button>
           <button class="atab" data-tab="haqqimizda"><i class="fas fa-pen"></i> Haqqımızda</button>
         </div>
-
-        <!-- MÜRACİƏTLƏR -->
         <div class="apane active" id="tab-muracietler"></div>
-
-        <!-- MESAJLAR -->
-        <div class="apane" id="tab-mesajlar"></div>
-
-        <!-- XƏBƏRLƏR -->
         <div class="apane" id="tab-xeberler">
-          <div class="asep">Yeni Xəbər Əlavə Et</div>
+          <div class="asep">Yeni Xəbər</div>
           <div class="field"><label>Başlıq</label><input type="text" id="n-title" placeholder="Xəbər başlığı"></div>
           <div class="field"><label>Mətn</label><textarea id="n-body" placeholder="Xəbər mətni..."></textarea></div>
-          <div class="field"><label>Şəkil URL <span style="font-weight:400;color:var(--muted)">(istəyə görə)</span></label><input type="url" id="n-img" placeholder="https://i.imgur.com/xxx.jpg"></div>
-          <div style="font-size:11px;color:var(--muted);margin:-8px 0 10px;line-height:1.5">💡 Şəkli <a href="https://imgur.com/upload" target="_blank" style="color:var(--teal)">imgur.com</a>-a yükləyin → linki yapışdırın</div>
+          <div class="field"><label>Şəkil URL <span style="font-weight:400;color:var(--muted)">(istəyə görə)</span></label><input type="url" id="n-img" placeholder="https://i.imgur.com/abc.jpg"></div>
+          <p class="hint">💡 Şəkli <a href="https://imgur.com/upload" target="_blank">imgur.com</a>-a yükləyin, linki yapışdırın</p>
           <button class="btn-teal" onclick="addNews()"><i class="fas fa-plus"></i> Əlavə et</button>
           <div class="asep" style="margin-top:20px">Mövcud Xəbərlər</div>
           <div id="news-admin-list"></div>
         </div>
-
-        <!-- ƏMƏKDAŞLAR -->
         <div class="apane" id="tab-emekdaslar">
-          <div class="asep">Yeni Əməkdaş Əlavə Et</div>
+          <div class="asep">Yeni Əməkdaş</div>
           <div class="row2">
             <div class="field"><label>Ad Soyad</label><input type="text" id="t-name" placeholder="Ad Soyad"></div>
-            <div class="field"><label>Vəzifə</label><input type="text" id="t-role" placeholder="Məsələn: Psixoloq"></div>
+            <div class="field"><label>Vəzifə</label><input type="text" id="t-role" placeholder="Psixoloq"></div>
           </div>
-          <div class="field"><label>Şəkil URL <span style="font-weight:400;color:var(--muted)">(istəyə görə)</span></label><input type="url" id="t-img" placeholder="https://i.imgur.com/xxx.jpg"></div>
-          <div style="font-size:11px;color:var(--muted);margin:-8px 0 10px;line-height:1.5">💡 Şəkli <a href="https://imgur.com/upload" target="_blank" style="color:var(--teal)">imgur.com</a>-a yükləyin → linki yapışdırın</div>
+          <div class="field"><label>Şəkil URL <span style="font-weight:400;color:var(--muted)">(istəyə görə)</span></label><input type="url" id="t-img" placeholder="https://i.imgur.com/abc.jpg"></div>
+          <p class="hint">💡 Şəkli <a href="https://imgur.com/upload" target="_blank">imgur.com</a>-a yükləyin, linki yapışdırın</p>
           <button class="btn-teal" onclick="addTeam()"><i class="fas fa-plus"></i> Əlavə et</button>
           <div class="asep" style="margin-top:20px">Mövcud Əməkdaşlar</div>
           <div id="team-admin-list"></div>
         </div>
-
-        <!-- HAQQIMIZDA -->
         <div class="apane" id="tab-haqqimizda">
-          <div class="asep">Haqqımızda Mətni Redaktə Et</div>
-          <div class="field"><textarea id="about-edit" style="min-height:140px;"></textarea></div>
-          <div class="afooter"><button class="btn-teal" onclick="saveAbout()"><i class="fas fa-save"></i> Yadda saxla</button></div>
+          <div class="asep">Haqqımızda Mətni</div>
+          <div class="field"><textarea id="about-edit" style="min-height:140px"></textarea></div>
+          <button class="btn-teal" onclick="saveAbout()"><i class="fas fa-save"></i> Yadda saxla</button>
         </div>
       </div>
-
     </div>
   </div>
 </div>
@@ -491,90 +411,85 @@ footer a{color:var(--gold-light)}
 (function(){
 'use strict';
 var PASS='AN2024';
-var K={reg:'an_reg',msg:'an_msg',news:'an_news',team:'an_team',about:'an_about',seen:'an_seen'};
-function load(k){try{return JSON.parse(localStorage.getItem(k))||[];}catch(e){return [];}}
-function loadStr(k,def){return localStorage.getItem(k)||def;}
+var K={reg:'an_reg',news:'an_news',team:'an_team',about:'an_about'};
+
+function load(k){try{return JSON.parse(localStorage.getItem(k))||[];}catch(e){return[];}}
+function loadStr(k,d){return localStorage.getItem(k)||d;}
 function save(k,v){localStorage.setItem(k,JSON.stringify(v));}
 function saveStr(k,v){localStorage.setItem(k,v);}
-function now(){var d=new Date(),p=function(n){return n<10?'0'+n:n;};return p(d.getDate())+'.'+p(d.getMonth()+1)+'.'+d.getFullYear()+' '+p(d.getHours())+':'+p(d.getMinutes());}
-function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-function waNum(p){var d=String(p).replace(/[^0-9]/g,'');if(d.indexOf('994')===0)return d;if(d.indexOf('0')===0)return '994'+d.slice(1);return d;}
+function ts(){var d=new Date(),p=function(n){return n<10?'0'+n:n;};return p(d.getDate())+'.'+p(d.getMonth()+1)+'.'+d.getFullYear()+' '+p(d.getHours())+':'+p(d.getMinutes());}
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function waNum(p){var d=String(p).replace(/[^0-9]/g,'');return d.indexOf('994')===0?d:d.indexOf('0')===0?'994'+d.slice(1):d;}
 
-/* ---------- NAV scroll ---------- */
 window.addEventListener('scroll',function(){
   document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>40);
 });
-
-/* ---------- Burger ---------- */
 document.getElementById('burger').addEventListener('click',function(){
   document.getElementById('mob-menu').classList.toggle('open');
 });
-window.closeMob=function(){document.getElementById('mob-menu').classList.remove('open');}
 
-/* ---------- Logo tap → admin (3x) ---------- */
-var tapCount=0,tapTimer=null;
+/* Logo 5 tap → admin */
+var tapC=0,tapT=null;
 document.getElementById('logo-tap').addEventListener('click',function(e){
   e.preventDefault();
-  tapCount++;
-  clearTimeout(tapTimer);
-  tapTimer=setTimeout(function(){tapCount=0;},800);
-  if(tapCount>=5){tapCount=0;openAdmin();}
+  tapC++;
+  clearTimeout(tapT);
+  tapT=setTimeout(function(){tapC=0;},800);
+  if(tapC>=5){tapC=0;document.getElementById('admin-modal').classList.add('open');}
   else{window.location.hash='#hero';}
 });
 
-/* ---------- Scroll reveal ---------- */
-var obs=new IntersectionObserver(function(entries){
-  entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible');});
+/* Scroll reveal */
+var obs=new IntersectionObserver(function(en){
+  en.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible');});
 },{threshold:0.1});
 document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
 
-/* ---------- Haqqımızda ---------- */
+/* Haqqımızda */
 function loadAbout(){
-  var txt=loadStr(K.about,'AN Psixoloji Dəstək və Reabilitasiya Mərkəzi xüsusi qayğıya ehtiyacı olan uşaqlara peşəkar psixoloji dəstək, erkən müdaxilə və reabilitasiya xidmətləri göstərir. Mərkəzimiz hər uşağın fərdi ehtiyaclarına uyğun proqramlar hazırlayır.');
-  document.getElementById('about-text').textContent=txt;
+  var t=loadStr(K.about,'AN Psixoloji Dəstək və Reabilitasiya Mərkəzi xüsusi qayğıya ehtiyacı olan uşaqlara peşəkar psixoloji dəstək, erkən müdaxilə və reabilitasiya xidmətləri göstərir.');
+  document.getElementById('about-text').textContent=t;
 }
 loadAbout();
 
-/* ---------- Xəbərlər ---------- */
+/* Xəbərlər */
 function renderNews(){
   var news=load(K.news);
-  var seen=parseInt(loadStr(K.seen,'0'));
-  var unseen=news.filter(function(n){return n.id>seen;}).length;
-  document.getElementById('nav-badge').style.display=unseen?'inline-block':'none';
-  document.getElementById('news-main-badge').style.display=unseen?'inline-block':'none';
+  document.getElementById('nav-badge').style.display=news.length?'inline-block':'none';
+  document.getElementById('news-main-badge').style.display=news.length?'inline-block':'none';
   var c=document.getElementById('news-container');
-  if(!news.length){c.innerHTML='<div class="news-empty">📰 Hələlik xəbər yoxdur.</div>';return;}
+  if(!news.length){c.innerHTML='<div class="news-empty">Hələlik xəbər yoxdur.</div>';return;}
   c.innerHTML=news.map(function(n){
     var d=new Date(n.id);
     var mon=['YAN','FEV','MAR','APR','MAY','İYN','İYL','AVQ','SEP','OKT','NOY','DEK'][d.getMonth()];
-    var imgHtml=n.img?'<img src="'+esc(n.img)+'" alt="'+esc(n.title)+'" style="width:100%;border-radius:12px;margin-top:10px;object-fit:cover;max-height:180px;" onerror="this.style.display='none'">':'';
-    return '<div class="news-card"><div class="news-date-badge"><span class="day">'+d.getDate()+'</span>'+mon+'</div><div style="flex:1"><h3>'+esc(n.title)+'</h3><p>'+esc(n.body)+'</p>'+imgHtml+'</div></div>';
+    var imgHtml=n.img?'<img src="'+esc(n.img)+'" class="news-card-img" alt="'+esc(n.title)+'" onerror="this.style.display=\'none\'">':'';
+    return '<div class="news-card">'+imgHtml+'<div class="news-card-body"><div class="news-date-badge"><span class="day">'+d.getDate()+'</span>'+mon+'</div><div><h3>'+esc(n.title)+'</h3><p>'+esc(n.body)+'</p></div></div></div>';
   }).join('');
 }
 renderNews();
 
-/* ---------- Əməkdaşlar ---------- */
+/* Əməkdaşlar */
 function renderTeam(){
   var team=load(K.team);
   var c=document.getElementById('team-container');
-  if(!team.length){c.innerHTML='<div class="team-empty">👥 Əməkdaşlar admin paneldən əlavə ediləcək</div>';return;}
+  if(!team.length){c.innerHTML='<div class="team-empty">Əməkdaşlar admin paneldən əlavə ediləcək</div>';return;}
   c.innerHTML=team.map(function(t){
     var av=t.img
-      ?'<img src="'+esc(t.img)+'" alt="'+esc(t.name)+'" style="width:64px;height:64px;border-radius:50%;object-fit:cover;margin:0 auto 12px;display:block;border:2px solid var(--gold);" onerror="this.style.display='none'">'
+      ?'<img src="'+esc(t.img)+'" class="team-photo" alt="'+esc(t.name)+'" onerror="this.style.display=\'none\'">'
       :'<div class="team-avatar">'+esc(t.name.charAt(0))+'</div>';
     return '<div class="team-card">'+av+'<h4>'+esc(t.name)+'</h4><div class="role">'+esc(t.role)+'</div></div>';
   }).join('');
 }
 renderTeam();
 
-/* ---------- Xidmət modalı ---------- */
+/* Xidmət modalı */
 var svcData=[
   {icon:'🧠',title:'Psixoloq',body:'<p>Uşaqların emosional, davranış və inkişaf problemlərinin diaqnostikası və müalicəsi.</p><ul><li>Fərdi psixoloji qiymətləndirmə</li><li>Davranış korreksiyası proqramları</li><li>Valideyn-uşaq münasibətlərinin gücləndirilməsi</li><li>Emosional tənzimləmə bacarıqlarının inkişafı</li></ul>'},
-  {icon:'🗣️',title:'Loqoped',body:'<p>Nitq, dil və ünsiyyət pozuntularının korreksiyası üzrə ixtisaslaşmış terapiya.</p><ul><li>Nitq gecikməsi müalicəsi</li><li>Artikulyasiya pozuntularının korreksiyası</li><li>Dil inkişafı proqramları</li><li>Alternativ ünsiyyət metodları</li></ul>'},
-  {icon:'🧩',title:'Psixo-pedaqoq',body:'<p>Xüsusi tədris metodları ilə uşağın öyrənmə potensialının açılması.</p><ul><li>Öyrənmə çətinliklərinin qiymətləndirilməsi</li><li>Fərdi tədris planları</li><li>Koqnitiv bacarıqların inkişafı</li><li>Oxu-yazma çətinliklərinin aradan qaldırılması</li></ul>'},
-  {icon:'👂',title:'Duyu Bütünləmə',body:'<p>Sensor emal pozuntularının müalicəsi, hiss sisteminin harmonik inkişafı.</p><ul><li>Sensor profil qiymətləndirilməsi</li><li>Duyu terapiyası seansları</li><li>Taktil, vestibular və proprioseptiv terapiya</li><li>Ev tapşırıqları proqramı</li></ul>'},
-  {icon:'🦋',title:'Erqoterapiya',body:'<p>Gündəlik həyat bacarıqlarının inkişafı, əl-göz koordinasiyası terapiyası.</p><ul><li>Gündəlik həyat bacarıqlarının öyrədilməsi</li><li>Əl motoru koordinasiyasının inkişafı</li><li>Özünəxidmət bacarıqları</li><li>Məktəb hazırlığı proqramları</li></ul>'},
-  {icon:'🌟',title:'Erkən İnkişaf Qrupu',body:'<p>2–6 yaşlı uşaqlar üçün mütəxəssislər tərəfindən aparılan inkişaf proqramları.</p><ul><li>Kiçik qrup formatında terapiya</li><li>Sosial bacarıqların inkişafı</li><li>Oyun əsaslı öyrənmə metodları</li><li>Valideyn iştirakı ilə gücləndirilmiş proqram</li></ul>'}
+  {icon:'🗣️',title:'Loqoped',body:'<p>Nitq, dil və ünsiyyət pozuntularının korreksiyası.</p><ul><li>Nitq gecikməsi müalicəsi</li><li>Artikulyasiya pozuntularının korreksiyası</li><li>Dil inkişafı proqramları</li><li>Alternativ ünsiyyət metodları</li></ul>'},
+  {icon:'🧩',title:'Psixo-pedaqoq',body:'<p>Xüsusi tədris metodları ilə öyrənmə potensialının açılması.</p><ul><li>Öyrənmə çətinliklərinin qiymətləndirilməsi</li><li>Fərdi tədris planları</li><li>Koqnitiv bacarıqların inkişafı</li><li>Oxu-yazma çətinliklərinin aradan qaldırılması</li></ul>'},
+  {icon:'👂',title:'Sensor İnteqrasiya',body:'<p>Sensor emal pozuntularının müalicəsi.</p><ul><li>Sensor profil qiymətləndirilməsi</li><li>Duyu terapiyası seansları</li><li>Taktil, vestibular və proprioseptiv terapiya</li><li>Ev proqramı</li></ul>'},
+  {icon:'🦋',title:'Erqoterapiya',body:'<p>Gündəlik həyat bacarıqlarının inkişafı.</p><ul><li>Gündəlik həyat bacarıqlarının öyrədilməsi</li><li>Əl motoru koordinasiyasının inkişafı</li><li>Özünəxidmət bacarıqları</li><li>Məktəb hazırlığı proqramları</li></ul>'},
+  {icon:'🌟',title:'Erkən İnkişaf Qrupu',body:'<p>2–6 yaşlı uşaqlar üçün inkişaf proqramları.</p><ul><li>Kiçik qrup formatında terapiya</li><li>Sosial bacarıqların inkişafı</li><li>Oyun əsaslı öyrənmə metodları</li><li>Valideyn iştirakı ilə gücləndirilmiş proqram</li></ul>'}
 ];
 window.openSvc=function(i){
   var s=svcData[i];
@@ -583,118 +498,96 @@ window.openSvc=function(i){
   document.getElementById('svc-modal-body').innerHTML=s.body;
   document.getElementById('svc-modal').classList.add('open');
 };
-window.closeSvc=function(){document.getElementById('svc-modal').classList.remove('open');};
-document.getElementById('svc-modal').addEventListener('click',function(e){if(e.target===this)closeSvc();});
+document.getElementById('svc-modal').addEventListener('click',function(e){if(e.target===this)this.classList.remove('open');});
 
-/* ---------- WhatsApp contact ---------- */
-window.sendWA=function(){
-  var n=document.getElementById('cf-name').value.trim();
-  var p=document.getElementById('cf-phone').value.trim();
-  var m=document.getElementById('cf-msg').value.trim();
-  if(!n||!m){alert('Ad və mesajı daxil edin.');return;}
-  var txt='Salam, mənim adım '+n+(p?' ('+p+')':'')+'. '+m;
-  window.open('https://wa.me/994554157215?text='+encodeURIComponent(txt),'_blank');
-};
-
-/* ---------- Qeydiyyat formu ---------- */
+/* Qeydiyyat formu */
 document.getElementById('reg-form').addEventListener('submit',function(e){
   e.preventDefault();
   var regs=load(K.reg);
-  regs.unshift({id:Date.now(),parent:document.getElementById('r-parent').value.trim(),phone:document.getElementById('r-phone').value.trim(),program:document.getElementById('r-program').value,msg:document.getElementById('r-msg').value.trim(),date:now(),read:false});
+  regs.unshift({
+    id:Date.now(),
+    name:document.getElementById('r-name').value.trim(),
+    phone:document.getElementById('r-phone').value.trim(),
+    program:document.getElementById('r-program').value,
+    msg:document.getElementById('r-msg').value.trim(),
+    date:ts(),read:false
+  });
   save(K.reg,regs);
   this.reset();
-  var ok=document.getElementById('reg-ok');ok.classList.add('show');
+  var ok=document.getElementById('reg-ok');
+  ok.classList.add('show');
   setTimeout(function(){ok.classList.remove('show');},5000);
 });
 
-/* ==================== ADMIN ==================== */
-window.openAdmin=function(){document.getElementById('admin-modal').classList.add('open');};
-window.closeAdmin=function(){document.getElementById('admin-modal').classList.remove('open');};
+/* ADMIN */
+function closeAdmin(){
+  document.getElementById('admin-modal').classList.remove('open');
+  document.getElementById('login-view').style.display='block';
+  document.getElementById('panel-view').style.display='none';
+  document.getElementById('a-pass').value='';
+  document.getElementById('login-err').classList.remove('show');
+}
+window.closeAdmin=closeAdmin;
 document.getElementById('admin-modal').addEventListener('click',function(e){if(e.target===this)closeAdmin();});
 
 document.getElementById('login-btn').addEventListener('click',function(){
   if(document.getElementById('a-pass').value===PASS){
     document.getElementById('login-view').style.display='none';
     document.getElementById('panel-view').style.display='block';
-    renderAdminTabs();
-  }else{
+    renderAll();
+  } else {
     document.getElementById('login-err').classList.add('show');
   }
 });
-document.getElementById('a-pass').addEventListener('keydown',function(e){if(e.key==='Enter')document.getElementById('login-btn').click();});
+document.getElementById('a-pass').addEventListener('keydown',function(e){
+  if(e.key==='Enter')document.getElementById('login-btn').click();
+});
 
-/* Admin tabs */
 document.querySelectorAll('.atab').forEach(function(tab){
   tab.addEventListener('click',function(){
     document.querySelectorAll('.atab').forEach(function(t){t.classList.remove('active');});
     document.querySelectorAll('.apane').forEach(function(p){p.classList.remove('active');});
     tab.classList.add('active');
     document.getElementById('tab-'+tab.dataset.tab).classList.add('active');
-    renderAdminTabs();
   });
 });
 
-function renderAdminTabs(){
-  renderMuracietler();
-  renderMesajlar();
-  renderNewsAdmin();
-  renderTeamAdmin();
-  var ab=loadStr(K.about,'');
-  document.getElementById('about-edit').value=ab||'AN Psixoloji Dəstək və Reabilitasiya Mərkəzi xüsusi qayğıya ehtiyacı olan uşaqlara peşəkar psixoloji dəstək, erkən müdaxilə və reabilitasiya xidmətləri göstərir.';
-}
+function renderAll(){renderMuracietler();renderNewsAdmin();renderTeamAdmin();document.getElementById('about-edit').value=loadStr(K.about,'');}
 
-/* MÜRACİƏTLƏR */
+/* Müraciətlər */
 function renderMuracietler(){
   var regs=load(K.reg);
   var p=document.getElementById('tab-muracietler');
   if(!regs.length){p.innerHTML='<div class="aempty"><i class="fas fa-clipboard"></i>Hələ müraciət yoxdur.</div>';return;}
   p.innerHTML=regs.map(function(r){
-    var enc=encodeURIComponent('Salam '+r.parent+', AN Mərkəzi olaraq müraciətinizə görə təşəkkür edirik. ');
-    return '<div class="acard '+(r.read?'read':'')+'" data-id="'+r.id+'">'+
-      '<div class="acard-top"><span class="acard-name">'+esc(r.parent)+' · <a href="tel:'+esc(r.phone)+'">'+esc(r.phone)+'</a></span><span class="abadge">'+(r.read?'baxıldı':'yeni')+'</span></div>'+
-      '<div class="acard-date"><i class="far fa-clock"></i> '+esc(r.date)+'</div>'+
-      '<div class="acard-text"><b>Tel:</b> '+esc(r.phone)+' &nbsp;|&nbsp; <b>Mütəxəssis:</b> '+esc(r.program)+(r.msg?' &nbsp;|&nbsp; <b>Mesaj:</b> '+esc(r.msg.substring(0,60)):'')+'</div>'+
-      '<div class="deliver"><span class="dl-lbl">Əlaqə:</span>'+
-        '<a class="mbtn wa" href="https://wa.me/'+waNum(r.phone)+'?text='+enc+'" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp</a>'+
-        '<a class="mbtn call" href="tel:'+esc(r.phone)+'"><i class="fas fa-phone"></i> Zəng</a></div>'+
-      '<div class="acard-actions">'+
-        '<button class="mbtn read" onclick="toggleRegRead('+r.id+')"><i class="fas fa-eye"></i> '+(r.read?'Baxılmamış et':'Baxıldı et')+'</button>'+
-        '<button class="mbtn del" onclick="delReg('+r.id+')"><i class="fas fa-trash"></i> Sil</button>'+
-      '</div></div>';
+    var enc=encodeURIComponent('Salam '+r.name+', AN Mərkəzindən əlaqə saxlayırıq. ');
+    return '<div class="acard '+(r.read?'read':'')+'">'
+      +'<div class="acard-top"><span class="acard-name">'+esc(r.name)+' · <a href="tel:'+esc(r.phone)+'">'+esc(r.phone)+'</a></span><span class="abadge">'+(r.read?'baxıldı':'yeni')+'</span></div>'
+      +'<div class="acard-date"><i class="far fa-clock"></i> '+esc(r.date)+'</div>'
+      +'<div class="acard-text"><b>Mütəxəssis:</b> '+esc(r.program)+(r.msg?' · '+esc(r.msg.substring(0,60)):'')+'</div>'
+      +'<div class="deliver"><span class="dl-lbl">Əlaqə:</span>'
+        +'<a class="mbtn wa" href="https://wa.me/'+waNum(r.phone)+'?text='+enc+'" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>'
+        +'<a class="mbtn call" href="tel:'+esc(r.phone)+'"><i class="fas fa-phone"></i> Zəng</a>'
+      +'</div>'
+      +'<div class="acard-actions">'
+        +'<button class="mbtn mread" onclick="toggleReg('+r.id+')"><i class="fas fa-eye"></i> '+(r.read?'Baxılmamış et':'Baxıldı et')+'</button>'
+        +'<button class="mbtn del" onclick="delReg('+r.id+')"><i class="fas fa-trash"></i> Sil</button>'
+      +'</div></div>';
   }).join('');
 }
-window.toggleRegRead=function(id){var a=load(K.reg).map(function(x){if(x.id===id)x.read=!x.read;return x;});save(K.reg,a);renderMuracietler();}
-window.delReg=function(id){if(confirm('Bu müraciəti silmək istəyirsiniz?')){save(K.reg,load(K.reg).filter(function(x){return x.id!==id;}));renderMuracietler();}}
+window.toggleReg=function(id){var a=load(K.reg).map(function(x){if(x.id===id)x.read=!x.read;return x;});save(K.reg,a);renderMuracietler();}
+window.delReg=function(id){if(confirm('Silinsin?')){save(K.reg,load(K.reg).filter(function(x){return x.id!==id;}));renderMuracietler();}}
 
-/* MESAJLAR */
-function renderMesajlar(){
-  var msgs=load(K.msg);
-  var p=document.getElementById('tab-mesajlar');
-  if(!msgs.length){p.innerHTML='<div class="aempty"><i class="fas fa-inbox"></i>Hələ mesaj yoxdur.</div>';return;}
-  p.innerHTML=msgs.map(function(m){
-    return '<div class="acard '+(m.read?'read':'')+'" data-id="'+m.id+'">'+
-      '<div class="acard-top"><span class="acard-name">'+esc(m.name)+' · <a href="tel:'+esc(m.phone)+'">'+esc(m.phone)+'</a></span><span class="abadge">'+(m.read?'oxundu':'yeni')+'</span></div>'+
-      '<div class="acard-date"><i class="far fa-clock"></i> '+esc(m.date)+'</div>'+
-      '<div class="acard-text">'+esc(m.text)+'</div>'+
-      '<div class="acard-actions">'+
-        '<button class="mbtn read" onclick="toggleMsgRead('+m.id+')"><i class="fas fa-eye"></i> '+(m.read?'Oxunmamış et':'Oxundu et')+'</button>'+
-        '<button class="mbtn del" onclick="delMsg('+m.id+')"><i class="fas fa-trash"></i> Sil</button>'+
-      '</div></div>';
-  }).join('');
-}
-window.toggleMsgRead=function(id){var a=load(K.msg).map(function(x){if(x.id===id)x.read=!x.read;return x;});save(K.msg,a);renderMesajlar();}
-window.delMsg=function(id){if(confirm('Bu mesajı silmək istəyirsiniz?')){save(K.msg,load(K.msg).filter(function(x){return x.id!==id;}));renderMesajlar();}}
-
-/* XƏBƏRLƏR admin */
+/* Xəbərlər admin */
 function renderNewsAdmin(){
   var news=load(K.news);
   var c=document.getElementById('news-admin-list');
-  if(!news.length){c.innerHTML='<div class="aempty" style="padding:20px">Hələ xəbər yoxdur.</div>';return;}
+  if(!news.length){c.innerHTML='<div class="aempty" style="padding:16px">Hələ xəbər yoxdur.</div>';return;}
   c.innerHTML=news.map(function(n){
-    return '<div class="acard">'+
-      '<div class="acard-text"><b>'+esc(n.title)+'</b><br>'+esc(n.body.substring(0,80))+(n.body.length>80?'...':'')+'</div>'+
-      '<div class="acard-actions" style="margin-top:8px"><button class="mbtn del" onclick="delNews('+n.id+')"><i class="fas fa-trash"></i> Sil</button></div>'+
-    '</div>';
+    return '<div class="acard">'
+      +'<div class="acard-text"><b>'+esc(n.title)+'</b><br>'+esc(n.body.substring(0,80))+(n.body.length>80?'...':'')+(n.img?'<br><small style="color:var(--teal)"><i class="fas fa-image"></i> Şəkil var</small>':'')+'</div>'
+      +'<div class="acard-actions" style="margin-top:8px"><button class="mbtn del" onclick="delNews('+n.id+')"><i class="fas fa-trash"></i> Sil</button></div>'
+      +'</div>';
   }).join('');
 }
 window.addNews=function(){
@@ -708,21 +601,20 @@ window.addNews=function(){
   document.getElementById('n-title').value='';
   document.getElementById('n-body').value='';
   document.getElementById('n-img').value='';
-  renderNewsAdmin();
-  renderNews();
-}
-window.delNews=function(id){if(confirm('Bu xəbəri silmək istəyirsiniz?')){save(K.news,load(K.news).filter(function(x){return x.id!==id;}));renderNewsAdmin();renderNews();}}
+  renderNewsAdmin();renderNews();
+};
+window.delNews=function(id){if(confirm('Silinsin?')){save(K.news,load(K.news).filter(function(x){return x.id!==id;}));renderNewsAdmin();renderNews();}}
 
-/* ƏMƏKDAŞLAR admin */
+/* Əməkdaşlar admin */
 function renderTeamAdmin(){
   var team=load(K.team);
   var c=document.getElementById('team-admin-list');
-  if(!team.length){c.innerHTML='<div class="aempty" style="padding:20px">Hələ əməkdaş yoxdur.</div>';return;}
+  if(!team.length){c.innerHTML='<div class="aempty" style="padding:16px">Hələ əməkdaş yoxdur.</div>';return;}
   c.innerHTML=team.map(function(t){
-    return '<div class="acard">'+
-      '<div class="acard-text"><b>'+esc(t.name)+'</b> — '+esc(t.role)+'</div>'+
-      '<div class="acard-actions" style="margin-top:8px"><button class="mbtn del" onclick="delTeam('+t.id+')"><i class="fas fa-trash"></i> Sil</button></div>'+
-    '</div>';
+    return '<div class="acard">'
+      +'<div class="acard-text"><b>'+esc(t.name)+'</b> — '+esc(t.role)+(t.img?'<br><small style="color:var(--teal)"><i class="fas fa-image"></i> Şəkil var</small>':'')+'</div>'
+      +'<div class="acard-actions" style="margin-top:8px"><button class="mbtn del" onclick="delTeam('+t.id+')"><i class="fas fa-trash"></i> Sil</button></div>'
+      +'</div>';
   }).join('');
 }
 window.addTeam=function(){
@@ -736,26 +628,22 @@ window.addTeam=function(){
   document.getElementById('t-name').value='';
   document.getElementById('t-role').value='';
   document.getElementById('t-img').value='';
-  renderTeamAdmin();
-  renderTeam();
-}
-window.delTeam=function(id){if(confirm('Bu əməkdaşı silmək istəyirsiniz?')){save(K.team,load(K.team).filter(function(x){return x.id!==id;}));renderTeamAdmin();renderTeam();}}
+  renderTeamAdmin();renderTeam();
+};
+window.delTeam=function(id){if(confirm('Silinsin?')){save(K.team,load(K.team).filter(function(x){return x.id!==id;}));renderTeamAdmin();renderTeam();}}
 
-/* HAQQIMIZDA */
+/* Haqqımızda */
 window.saveAbout=function(){
-  var txt=document.getElementById('about-edit').value.trim();
-  if(!txt){alert('Mətn boş ola bilməz.');return;}
-  saveStr(K.about,txt);
-  loadAbout();
-  alert('Yadda saxlandı!');
-}
+  var t=document.getElementById('about-edit').value.trim();
+  if(!t){alert('Mətn boş ola bilməz.');return;}
+  saveStr(K.about,t);loadAbout();alert('Yadda saxlandı!');
+};
 
-/* Kontent qoruması */
 document.addEventListener('contextmenu',function(e){e.preventDefault();});
 document.addEventListener('keydown',function(e){
   if(e.keyCode===123)e.preventDefault();
   if(e.ctrlKey&&(e.keyCode===85||e.keyCode===83))e.preventDefault();
-  if(e.ctrlKey&&e.shiftKey&&(e.keyCode===73||e.keyCode===74||e.keyCode===67))e.preventDefault();
+  if(e.ctrlKey&&e.shiftKey&&[73,74,67].indexOf(e.keyCode)>-1)e.preventDefault();
 });
 })();
 </script>
