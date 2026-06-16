@@ -262,7 +262,7 @@ footer::before{content:'';position:absolute;inset:0;background:radial-gradient(e
 <!-- NAV -->
 <nav id="navbar" class="top">
   <div class="brand" onclick="document.getElementById('hero').scrollIntoView({behavior:'smooth'})">
-    <img src="logo.png" alt="AN Logo" id="logo-tap">
+    <img src="logo.png" alt="AN Logo" id="logo-tap" onclick="handleLogoTap()">
     <div class="brand-name">AN Psixoloji Dəstək və Reabilitasiya Mərkəzi</div>
   </div>
   <div class="nav-links">
@@ -873,6 +873,15 @@ document.addEventListener('keydown',function(e){
   if(e.ctrlKey&&e.shiftKey&&[73,74,67].indexOf(e.keyCode)>-1)e.preventDefault();
 });
 
+/* ===== LOGO TAP → ADMIN ===== */
+window._ltc=0;window._ltt=0;
+window.handleLogoTap=function(){
+  var now=Date.now();
+  if(now-window._ltt>1800){window._ltc=0;}
+  window._ltt=now;
+  window._ltc++;
+  if(window._ltc>=5){window._ltc=0;openAdmin();}
+};
 })();
 </script>
 </body>
