@@ -71,7 +71,8 @@ nav.scrolled .burger span{background:var(--bordo)}
 .hero-badge{background:rgba(210,165,93,0.15);border:1px solid rgba(210,165,93,0.4);color:var(--gold-light);padding:6px 18px;border-radius:30px;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:22px;display:inline-block;animation:fadeInDown .8s ease both}
 .hero-logo{width:96px;height:96px;object-fit:contain;margin-bottom:20px;filter:drop-shadow(0 8px 30px rgba(210,165,93,0.4));animation:fadeInDown .8s .1s ease both}
 .hero h1{font-family:'Playfair Display',serif;font-size:clamp(26px,6.5vw,52px);color:#fff;line-height:1.18;margin-bottom:16px;max-width:580px;animation:fadeInUp .8s .2s ease both}
-.hero h1 span{color:var(--gold-light);font-style:italic}
+.hero h1 span{font-style:italic}
+.hero h1 span:not(.grad-text){color:var(--gold-light)}
 .hero .lead{color:rgba(255,255,255,0.72);font-size:clamp(14px,3.5vw,18px);max-width:480px;line-height:1.8;margin-bottom:36px;animation:fadeInUp .8s .3s ease both}
 .hero-btns{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-bottom:56px;animation:fadeInUp .8s .4s ease both}
 .btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--bordo-deep);padding:14px 28px;border-radius:50px;font-size:14px;font-weight:700;display:inline-flex;align-items:center;gap:8px;box-shadow:0 6px 24px rgba(210,165,93,0.5);transition:transform .2s,box-shadow .2s;border:none;cursor:pointer;font-family:'Inter',sans-serif}
@@ -239,8 +240,40 @@ footer::before{content:'';position:absolute;inset:0;background:radial-gradient(e
 .footer-by a:hover{color:var(--gold)}
 
 /* ===== SCROLL REVEAL ===== */
-.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
 .reveal.visible{opacity:1;transform:translateY(0)}
+.reveal.visible ~ .reveal.visible{transition-delay:.05s}
+.reveal-left{transform:translateX(-40px)}
+.reveal-left.visible{transform:translateX(0)}
+.reveal-right{transform:translateX(40px)}
+.reveal-right.visible{transform:translateX(0)}
+.reveal-scale{transform:scale(.92)}
+.reveal-scale.visible{transform:scale(1)}
+
+/* ===== SCROLL PROGRESS BAR ===== */
+.scroll-progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--bordo),var(--gold),var(--teal));z-index:400;width:0%;transition:width .1s linear;box-shadow:0 0 8px rgba(210,165,93,0.6)}
+
+/* ===== GRADIENT TEXT FLOW ===== */
+.grad-text{background:linear-gradient(90deg,var(--bordo) 0%,var(--gold) 35%,var(--teal) 65%,var(--bordo) 100%);background-size:300% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:gradFlow 8s linear infinite}
+@keyframes gradFlow{0%{background-position:0% 50%}100%{background-position:300% 50%}}
+
+/* ===== MAGNETIC / RIPPLE BUTTONS ===== */
+.btn-gold,.btn-ghost{position:relative;overflow:hidden}
+.btn-gold .ripple,.btn-ghost .ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,0.5);transform:scale(0);animation:rippleAnim .6s ease-out;pointer-events:none}
+@keyframes rippleAnim{to{transform:scale(3);opacity:0}}
+
+/* ===== CARD TILT + GLOW ===== */
+.tilt-card{transition:transform .25s cubic-bezier(.22,1,.36,1),box-shadow .25s ease;transform-style:preserve-3d;will-change:transform}
+.tilt-card:hover{box-shadow:0 16px 40px rgba(106,0,0,0.18),0 0 0 1px rgba(210,165,93,0.25)}
+
+/* ===== HERO CURSOR GLOW ===== */
+.cursor-glow{position:absolute;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(210,165,93,0.18),transparent 70%);pointer-events:none;transform:translate(-50%,-50%);z-index:1;transition:opacity .3s ease;opacity:0}
+.hero:hover .cursor-glow{opacity:1}
+
+@media(prefers-reduced-motion:reduce){
+  .reveal,.reveal-left,.reveal-right,.reveal-scale{transition:none!important;opacity:1!important;transform:none!important}
+  .grad-text{animation:none}
+}
 
 /* ===== FLOATING BTN ===== */
 .fab{position:fixed;bottom:24px;right:20px;z-index:200;display:flex;flex-direction:column;gap:10px;align-items:flex-end}
@@ -258,6 +291,7 @@ footer::before{content:'';position:absolute;inset:0;background:radial-gradient(e
 </style>
 </head>
 <body>
+<div class="scroll-progress" id="scroll-progress"></div>
 
 <!-- NAV -->
 <nav id="navbar" class="top">
@@ -293,6 +327,7 @@ footer::before{content:'';position:absolute;inset:0;background:radial-gradient(e
 
 <!-- HERO -->
 <section class="hero" id="hero">
+  <div class="cursor-glow" id="cursor-glow"></div>
   <div class="hero-bg" id="hero-bg"></div>
   <div class="hero-orb1" id="orb1"></div>
   <div class="hero-orb2" id="orb2"></div>
@@ -300,7 +335,7 @@ footer::before{content:'';position:absolute;inset:0;background:radial-gradient(e
   <div class="hero-content">
     <div class="hero-badge" id="nav-badge">Bakı • Nizami rayonu</div>
     <img src="logo.png" alt="AN Logo" class="hero-logo">
-    <h1>Uşağınızın <span>inkişafı</span> üçün peşəkar dəstək</h1>
+    <h1>Uşağınızın <span class="grad-text">inkişafı</span> üçün peşəkar dəstək</h1>
     <p class="lead">Xüsusi qayğıya ehtiyacı olan uşaqlara erkən müdaxilə, psixoloji dəstək və reabilitasiya xidmətləri göstəririk.</p>
     <div class="hero-btns">
       <button class="btn-gold" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})"><i class="fas fa-calendar-plus"></i> Qeydiyyat</button>
@@ -359,12 +394,12 @@ footer::before{content:'';position:absolute;inset:0;background:radial-gradient(e
     <h2 class="sec-title reveal">Peşəkar Dəstək Xidmətləri</h2>
     <div class="gold-line reveal"></div>
     <div class="services-grid reveal">
-      <div class="svc-card" onclick="openSvc(0)"><span class="svc-icon">🧠</span><h3>Psixoloq</h3><p>Emosional, davranış və inkişaf problemlərinin diaqnostikası.</p></div>
-      <div class="svc-card" onclick="openSvc(1)"><span class="svc-icon">🗣️</span><h3>Loqoped</h3><p>Nitq, dil və ünsiyyət pozuntularının korreksiyası.</p></div>
-      <div class="svc-card" onclick="openSvc(2)"><span class="svc-icon">🧩</span><h3>Psixo-pedaqoq</h3><p>Xüsusi tədris metodları ilə öyrənmə potensialının açılması.</p></div>
-      <div class="svc-card" onclick="openSvc(3)"><span class="svc-icon">👂</span><h3>Sensor İnteqrasiya</h3><p>Sensor emal pozuntularının müalicəsi.</p></div>
-      <div class="svc-card" onclick="openSvc(4)"><span class="svc-icon">🦋</span><h3>Erqoterapiya</h3><p>Gündəlik həyat bacarıqlarının inkişafı.</p></div>
-      <div class="svc-card" onclick="openSvc(5)"><span class="svc-icon">🌟</span><h3>Erkən İnkişaf</h3><p>2–6 yaşlı uşaqlar üçün inkişaf proqramları.</p></div>
+      <div class="svc-card tilt-card" onclick="openSvc(0)"><span class="svc-icon">🧠</span><h3>Psixoloq</h3><p>Emosional, davranış və inkişaf problemlərinin diaqnostikası.</p></div>
+      <div class="svc-card tilt-card" onclick="openSvc(1)"><span class="svc-icon">🗣️</span><h3>Loqoped</h3><p>Nitq, dil və ünsiyyət pozuntularının korreksiyası.</p></div>
+      <div class="svc-card tilt-card" onclick="openSvc(2)"><span class="svc-icon">🧩</span><h3>Psixo-pedaqoq</h3><p>Xüsusi tədris metodları ilə öyrənmə potensialının açılması.</p></div>
+      <div class="svc-card tilt-card" onclick="openSvc(3)"><span class="svc-icon">👂</span><h3>Sensor İnteqrasiya</h3><p>Sensor emal pozuntularının müalicəsi.</p></div>
+      <div class="svc-card tilt-card" onclick="openSvc(4)"><span class="svc-icon">🦋</span><h3>Erqoterapiya</h3><p>Gündəlik həyat bacarıqlarının inkişafı.</p></div>
+      <div class="svc-card tilt-card" onclick="openSvc(5)"><span class="svc-icon">🌟</span><h3>Erkən İnkişaf</h3><p>2–6 yaşlı uşaqlar üçün inkişaf proqramları.</p></div>
     </div>
   </div>
 </div>
@@ -626,10 +661,44 @@ function onScroll(){
     var r=el.getBoundingClientRect();
     if(r.top<window.innerHeight-60) el.classList.add('visible');
   });
+
+  // Scroll progress bar
+  var prog=document.getElementById('scroll-progress');
+  if(prog){
+    var docH=document.documentElement.scrollHeight-window.innerHeight;
+    var pct=docH>0?(sy/docH)*100:0;
+    prog.style.width=pct+'%';
+  }
 }
 
 window.addEventListener('scroll',onScroll,{passive:true});
 setTimeout(onScroll,100);
+
+/* ===== HERO CURSOR GLOW ===== */
+var heroEl=document.getElementById('hero');
+var glowEl=document.getElementById('cursor-glow');
+if(heroEl && glowEl){
+  heroEl.addEventListener('mousemove',function(e){
+    var rect=heroEl.getBoundingClientRect();
+    glowEl.style.left=(e.clientX-rect.left)+'px';
+    glowEl.style.top=(e.clientY-rect.top)+'px';
+  });
+}
+
+/* ===== BUTTON RIPPLE ===== */
+document.querySelectorAll('.btn-gold,.btn-ghost').forEach(function(btn){
+  btn.addEventListener('click',function(e){
+    var rect=btn.getBoundingClientRect();
+    var ripple=document.createElement('span');
+    ripple.className='ripple';
+    var size=Math.max(rect.width,rect.height);
+    ripple.style.width=ripple.style.height=size+'px';
+    ripple.style.left=(e.clientX-rect.left-size/2)+'px';
+    ripple.style.top=(e.clientY-rect.top-size/2)+'px';
+    btn.appendChild(ripple);
+    setTimeout(function(){ripple.remove();},650);
+  });
+});
 
 /* ===== PARTICLES ===== */
 var pc=document.getElementById('particles');
@@ -716,7 +785,7 @@ function renderTeam(){
   if(!team.length){c.innerHTML='<div class="team-empty">Əməkdaşlar admin paneldən əlavə ediləcək</div>';return;}
   c.innerHTML=team.map(function(t){
     var initials=t.name.split(' ').map(function(w){return w[0]||'';}).join('').toUpperCase().slice(0,2);
-    return '<div class="team-card">'
+    return '<div class="team-card tilt-card">'
       +(t.img?'<img class="team-avatar" src="'+esc(t.img)+'" alt="'+esc(t.name)+'" onerror="this.style.display=\'none\'">':'<div class="team-avatar-placeholder">'+esc(initials)+'</div>')
       +'<h3>'+esc(t.name)+'</h3>'
       +'<p>'+esc(t.role)+'</p>'
