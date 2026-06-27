@@ -500,7 +500,7 @@ footer::before{content:'';position:absolute;inset:0;background:radial-gradient(e
 
 <!-- FOOTER -->
 <footer>
-  <img class="footer-logo" src="logo.png" alt="AN Logo">
+  <img class="footer-logo" src="logo.png" alt="AN Logo" id="footer-logo-tap" onclick="handleLogoTap()" style="cursor:pointer">
   <div class="footer-name">AN Psixoloji Dəstək və Reabilitasiya Mərkəzi</div>
   <div class="footer-tagline">Uşağınızın gələcəyi üçün birlikdə</div>
   <div class="footer-links">
@@ -606,7 +606,6 @@ footer::before{content:'';position:absolute;inset:0;background:radial-gradient(e
 <div class="fab">
   <button class="fab-btn fab-top" id="fab-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Yuxarı"><i class="fas fa-chevron-up"></i></button>
   <a class="fab-btn fab-wa" href="https://wa.me/994554157215" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-  <button class="fab-btn fab-admin" onclick="openAdmin()" title="Admin"><i class="fas fa-lock"></i></button>
 </div>
 
 <script>
