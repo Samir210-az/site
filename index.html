@@ -649,6 +649,9 @@ footer::before{content:'';position:absolute;inset:0;background:radial-gradient(e
   <a class="fab-btn fab-wa" href="https://wa.me/994554157215" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
 </div>
 
+<script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-database-compat.js"></script>
 <script>
 if('serviceWorker' in navigator){
   window.addEventListener('load',function(){
@@ -766,13 +769,41 @@ window.closeMenu=function(){
   document.getElementById('burger').classList.remove('open');
 };
 
+/* ===== FIREBASE (bütün ziyarətçilər üçün ortaq baza) ===== */
+var fbConfig={
+  apiKey: "AIzaSyCBhyGNzZRGgQShP_C9kwAzTm_g_0zJlzg",
+  authDomain: "an-psixoloji-33442.firebaseapp.com",
+  databaseURL: "https://an-psixoloji-33442-default-rtdb.firebaseio.com",
+  projectId: "an-psixoloji-33442",
+  storageBucket: "an-psixoloji-33442.firebasestorage.app",
+  messagingSenderId: "528809299356",
+  appId: "1:528809299356:web:59cae89a64e446dc520c59"
+};
+if(!firebase.apps.length) firebase.initializeApp(fbConfig);
+firebase.auth().signInAnonymously().catch(function(e){console.error('Firebase auth xətası:',e);});
+var db=firebase.database();
+
 /* ===== DATA ===== */
-var K={reg:'an_reg',news:'an_news',team:'an_team',about:'an_about'};
-function load(k){try{return JSON.parse(localStorage.getItem(k)||'[]');}catch(e){return[];}}
-function save(k,v){localStorage.setItem(k,JSON.stringify(v));}
-function loadStr(k){return localStorage.getItem(k)||'';}
-function saveStr(k,v){localStorage.setItem(k,v);}
+var K={reg:'an_site/reg',news:'an_site/news',team:'an_site/team',about:'an_site/about'};
+var cache={reg:[],news:[],team:[],about:''};
 function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+function toArr(obj){
+  if(!obj) return [];
+  return Object.keys(obj).map(function(k){return obj[k];}).sort(function(a,b){return (b.id||0)-(a.id||0);});
+}
+function load(k){
+  if(k===K.news||k===K.team||k===K.reg){
+    var key=k===K.news?'news':(k===K.team?'team':'reg');
+    return cache[key];
+  }
+  return [];
+}
+function loadStr(k){return cache.about||'';}
+
+db.ref(K.news).on('value',function(snap){cache.news=toArr(snap.val());renderNews();renderNewsAdmin();});
+db.ref(K.team).on('value',function(snap){cache.team=toArr(snap.val());renderTeam();renderTeamAdmin();});
+db.ref(K.about).on('value',function(snap){cache.about=snap.val()||'';loadAbout();});
+db.ref(K.reg).on('value',function(snap){cache.reg=toArr(snap.val());renderRegAdmin();});
 
 /* ===== SVC DATA ===== */
 var svcData=[
@@ -850,9 +881,8 @@ window.submitReg=function(){
   var pr=document.getElementById('r-program').value;
   var m=document.getElementById('r-msg').value.trim();
   if(!n||!p||!pr){alert('Ad, telefon və xidmət daxil edin.');return;}
-  var regs=load(K.reg);
-  regs.unshift({id:Date.now(),name:n,phone:p,program:pr,msg:m});
-  save(K.reg,regs);
+  var rid=Date.now();
+  db.ref(K.reg+'/'+rid).set({id:rid,name:n,phone:p,program:pr,msg:m});
   document.getElementById('r-name').value='';
   document.getElementById('r-phone').value='';
   document.getElementById('r-program').value='';
@@ -911,7 +941,7 @@ function renderRegAdmin(){
       +'</div>';
   }).join('');
 }
-window.delReg=function(id){if(confirm('Silinsin?')){save(K.reg,load(K.reg).filter(function(x){return x.id!==id;}));renderRegAdmin();}};
+window.delReg=function(id){if(confirm('Silinsin?')){db.ref(K.reg+'/'+id).remove();}};
 
 /* ===== NEWS ADMIN ===== */
 function renderNewsAdmin(){
@@ -930,15 +960,13 @@ window.addNews=function(){
   var b=document.getElementById('n-body').value.trim();
   var img=document.getElementById('n-img').value.trim();
   if(!t||!b){alert('Başlıq və mətn daxil edin.');return;}
-  var news=load(K.news);
-  news.unshift({id:Date.now(),title:t,body:b,img:img});
-  save(K.news,news);
+  var nid=Date.now();
+  db.ref(K.news+'/'+nid).set({id:nid,title:t,body:b,img:img});
   document.getElementById('n-title').value='';
   document.getElementById('n-body').value='';
   document.getElementById('n-img').value='';
-  renderNewsAdmin();renderNews();
 };
-window.delNews=function(id){if(confirm('Silinsin?')){save(K.news,load(K.news).filter(function(x){return x.id!==id;}));renderNewsAdmin();renderNews();}};
+window.delNews=function(id){if(confirm('Silinsin?')){db.ref(K.news+'/'+id).remove();}};
 
 /* ===== TEAM ADMIN ===== */
 function renderTeamAdmin(){
@@ -957,21 +985,19 @@ window.addTeam=function(){
   var r=document.getElementById('t-role').value.trim();
   var img=document.getElementById('t-img').value.trim();
   if(!n||!r){alert('Ad və vəzifəni daxil edin.');return;}
-  var team=load(K.team);
-  team.unshift({id:Date.now(),name:n,role:r,img:img});
-  save(K.team,team);
+  var tid=Date.now();
+  db.ref(K.team+'/'+tid).set({id:tid,name:n,role:r,img:img});
   document.getElementById('t-name').value='';
   document.getElementById('t-role').value='';
   document.getElementById('t-img').value='';
-  renderTeamAdmin();renderTeam();
 };
-window.delTeam=function(id){if(confirm('Silinsin?')){save(K.team,load(K.team).filter(function(x){return x.id!==id;}));renderTeamAdmin();renderTeam();}};
+window.delTeam=function(id){if(confirm('Silinsin?')){db.ref(K.team+'/'+id).remove();}};
 
 /* ===== ABOUT ADMIN ===== */
 window.saveAbout=function(){
   var t=document.getElementById('about-edit').value.trim();
   if(!t){alert('Mətn boş ola bilməz.');return;}
-  saveStr(K.about,t);loadAbout();alert('Yadda saxlandı!');
+  db.ref(K.about).set(t);alert('Yadda saxlandı!');
 };
 
 /* ===== PREVENT DEV TOOLS ===== */
