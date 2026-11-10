@@ -577,11 +577,9 @@ footer::before{content:'';position:absolute;inset:0;background:radial-gradient(e
       <!-- Login -->
       <div id="login-view" class="login-box">
         <h4>Daxil olun</h4>
-        <div class="login-err" id="login-err">Şifrə yanlışdır!</div>
-        <label class="form-label">Şifrə</label>
-        <input class="inp" type="password" id="a-pass" placeholder="Şifrəni daxil edin" onkeydown="if(event.key==='Enter')doLogin()">
-        <br><br>
-        <button class="btn-teal" style="width:100%;justify-content:center" id="login-btn" onclick="doLogin()"><i class="fas fa-sign-in-alt"></i> Daxil ol</button>
+        <div class="login-err" id="login-err">Bu hesabın admin icazəsi yoxdur.</div>
+        <p style="margin:0 0 14px;font-size:.9rem">Admin paneli üçün Google hesabınızla daxil olun.</p>
+        <button class="btn-teal" style="width:100%;justify-content:center" id="login-btn" onclick="doLogin()"><i class="fab fa-google"></i> Google ilə daxil ol</button>
       </div>
 
       <!-- Panel -->
@@ -780,8 +778,18 @@ var fbConfig={
   appId: "1:528809299356:web:59cae89a64e446dc520c59"
 };
 if(!firebase.apps.length) firebase.initializeApp(fbConfig);
-firebase.auth().signInAnonymously().catch(function(e){console.error('Firebase auth xətası:',e);});
+// Ziyarətçi: bu cihazın anonim hesabı (əvvəlki saxlanmışı gözləyir, hər açılışda yenisini yaratmır).
+var authOff=firebase.auth().onAuthStateChanged(function(u){
+  authOff();
+  if(!u) firebase.auth().signInAnonymously().catch(function(e){console.error('Firebase auth xətası:',e);});
+});
 var db=firebase.database();
+// Admin girişi ayrıca və yaddaşsızdır: hər açılışda yenidən Google ilə soruşulur.
+var ADMIN_EMAIL='samir.akhundoff@gmail.com';
+var adminApp=firebase.initializeApp(fbConfig,'admin');
+var adminAuth=adminApp.auth();
+var adminPersist=adminAuth.setPersistence(firebase.auth.Auth.Persistence.NONE);
+var adb=null;
 
 /* ===== DATA ===== */
 var K={reg:'an_site/reg',news:'an_site/news',team:'an_site/team',about:'an_site/about'};
@@ -803,7 +811,6 @@ function loadStr(k){return cache.about||'';}
 db.ref(K.news).on('value',function(snap){cache.news=toArr(snap.val());renderNews();renderNewsAdmin();});
 db.ref(K.team).on('value',function(snap){cache.team=toArr(snap.val());renderTeam();renderTeamAdmin();});
 db.ref(K.about).on('value',function(snap){cache.about=snap.val()||'';loadAbout();});
-db.ref(K.reg).on('value',function(snap){cache.reg=toArr(snap.val());renderRegAdmin();});
 
 /* ===== SVC DATA ===== */
 var svcData=[
@@ -897,7 +904,7 @@ window.submitReg=function(){
 window.openAdmin=function(){
   document.getElementById('admin-modal').classList.add('open');
   document.body.style.overflow='hidden';
-  setTimeout(function(){document.getElementById('a-pass').focus();},200);
+  
 };
 window.closeAdmin=function(){
   document.getElementById('admin-modal').classList.remove('open');
@@ -905,16 +912,22 @@ window.closeAdmin=function(){
 };
 
 window.doLogin=function(){
-  var pw=document.getElementById('a-pass').value;
-  if(pw==='AN2024'){
+  var err=document.getElementById('login-err');
+  var provider=new firebase.auth.GoogleAuthProvider();
+  provider.setCustomParameters({prompt:'select_account'});
+  adminPersist.then(function(){ return adminAuth.signInWithPopup(provider); }).then(function(res){
+    if(!(res.user && res.user.email===ADMIN_EMAIL && res.user.emailVerified)){
+      adminAuth.signOut(); err.classList.add('show'); setTimeout(function(){err.classList.remove('show');},3000); return;
+    }
+    adb=adminApp.database();
+    adb.ref(K.reg).on('value',function(snap){cache.reg=toArr(snap.val());renderRegAdmin();});
     document.getElementById('login-view').style.display='none';
     document.getElementById('panel-view').style.display='block';
     renderRegAdmin();renderNewsAdmin();renderTeamAdmin();loadAbout();
-  } else {
-    var err=document.getElementById('login-err');
-    err.classList.add('show');
-    setTimeout(function(){err.classList.remove('show');},2000);
-  }
+  }).catch(function(e){
+    if(e&&(e.code==='auth/popup-closed-by-user'||e.code==='auth/cancelled-popup-request')) return;
+    alert('Admin girişi alınmadı. Yenidən cəhd edin.');
+  });
 };
 
 window.switchTab=function(name,btn){
@@ -941,7 +954,7 @@ function renderRegAdmin(){
       +'</div>';
   }).join('');
 }
-window.delReg=function(id){if(confirm('Silinsin?')){db.ref(K.reg+'/'+id).remove();}};
+window.delReg=function(id){if(confirm('Silinsin?')){adb.ref(K.reg+'/'+id).remove();}};
 
 /* ===== NEWS ADMIN ===== */
 function renderNewsAdmin(){
@@ -961,12 +974,12 @@ window.addNews=function(){
   var img=document.getElementById('n-img').value.trim();
   if(!t||!b){alert('Başlıq və mətn daxil edin.');return;}
   var nid=Date.now();
-  db.ref(K.news+'/'+nid).set({id:nid,title:t,body:b,img:img});
+  adb.ref(K.news+'/'+nid).set({id:nid,title:t,body:b,img:img});
   document.getElementById('n-title').value='';
   document.getElementById('n-body').value='';
   document.getElementById('n-img').value='';
 };
-window.delNews=function(id){if(confirm('Silinsin?')){db.ref(K.news+'/'+id).remove();}};
+window.delNews=function(id){if(confirm('Silinsin?')){adb.ref(K.news+'/'+id).remove();}};
 
 /* ===== TEAM ADMIN ===== */
 function renderTeamAdmin(){
@@ -986,18 +999,18 @@ window.addTeam=function(){
   var img=document.getElementById('t-img').value.trim();
   if(!n||!r){alert('Ad və vəzifəni daxil edin.');return;}
   var tid=Date.now();
-  db.ref(K.team+'/'+tid).set({id:tid,name:n,role:r,img:img});
+  adb.ref(K.team+'/'+tid).set({id:tid,name:n,role:r,img:img});
   document.getElementById('t-name').value='';
   document.getElementById('t-role').value='';
   document.getElementById('t-img').value='';
 };
-window.delTeam=function(id){if(confirm('Silinsin?')){db.ref(K.team+'/'+id).remove();}};
+window.delTeam=function(id){if(confirm('Silinsin?')){adb.ref(K.team+'/'+id).remove();}};
 
 /* ===== ABOUT ADMIN ===== */
 window.saveAbout=function(){
   var t=document.getElementById('about-edit').value.trim();
   if(!t){alert('Mətn boş ola bilməz.');return;}
-  db.ref(K.about).set(t);alert('Yadda saxlandı!');
+  adb.ref(K.about).set(t);alert('Yadda saxlandı!');
 };
 
 /* ===== PREVENT DEV TOOLS ===== */
